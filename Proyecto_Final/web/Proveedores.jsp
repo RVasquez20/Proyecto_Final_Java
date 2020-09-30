@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 29/09/2020, 10:02:16 PM
-    Author     : rodri
+    Document   : Proveedores
+    Created on : 29/09/2020, 11:49:52 PM
+    Author     : josef
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,8 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bienvenido</h1>
-        <a href="Proveedores.jsp">Proveedores</a>
-        
+        <h1>Proveedores</h1>
+                <a href="Compras.jsp">Compras</a>
+                <a href="index.jsp">Regresar</a>
+
     </body>
 </html>
