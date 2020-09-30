@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 29/09/2020, 10:22:24 PM
+    Document   : clientes
+    Created on : 29/09/2020, 10:32:32 PM
     Author     : Willy Valle
 --%>
 
@@ -12,9 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <a href="clientes.jsp">Ventana Clientes</a>
-        <br>
-        <a href="ventas.jsp">Ventana Ventas</a>
+        
+        <h1>Ventana Clientes</h1>
+        <a href="index.jsp">Regresar</a>
     </body>
 </html>
