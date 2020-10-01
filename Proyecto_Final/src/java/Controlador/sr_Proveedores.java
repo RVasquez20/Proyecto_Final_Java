@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.Proveedores;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author rodri
+ * @author josef
  */
-public class sr_Empresa extends HttpServlet {
+public class sr_Proveedores extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,6 +28,7 @@ public class sr_Empresa extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    Proveedores proveedor;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,10 +37,40 @@ public class sr_Empresa extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet sr_Empresa</title>");            
+            out.println("<title>Proveedores sr</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet sr_Empresa at " + request.getContextPath() + "</h1>");
+           
+             proveedor = new Proveedores(Integer.parseInt(request.getParameter("txt_id_Proveedores")),request.getParameter("txt_NIT"),request.getParameter("txt_Proveedor"),request.getParameter("txt_Direccion"),request.getParameter("txt_Telefono"));
+            // Boton agregar 
+            if ("agregar".equals(request.getParameter("btn_agregar"))){
+             if (proveedor.agregar()>0){
+             response.sendRedirect("Proveedores.jsp");
+             
+             }else{
+             out.println("<h1> xxxxxxx No se Ingreso xxxxxxxxxxxx </h1>");
+             out.println("<a href='index.jsp'>Regresar...</a>");
+             }
+             }
+            if ("modificar".equals(request.getParameter("btn_modificar"))){
+             if (proveedor.Modificar()>0){
+             response.sendRedirect("Proveedores.jsp");
+             
+             }else{
+             out.println("<h1> xxxxxxx No se Ingreso xxxxxxxxxxxx </h1>");
+             out.println("<a href='Proveedores.jsp'>Regresar...</a>");
+             }
+             }
+            if ("eliminar".equals(request.getParameter("btn_eliminar"))){
+             if (proveedor.Eliminar()>0){
+             response.sendRedirect("Proveedores.jsp");
+             
+             }else{
+             out.println("<h1> xxxxxxx No se Ingreso xxxxxxxxxxxx </h1>");
+             out.println("<a href='Proveedores.jsp'>Regresar...</a>");
+             }
+             }
+            
             out.println("</body>");
             out.println("</html>");
         }
