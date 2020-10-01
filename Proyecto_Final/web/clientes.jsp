@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="Modelo.Clientes" %>
+<%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="java.util.HashMap" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -37,14 +38,47 @@
                 <label for="lbl_fecha">Fecha:</label>
                 <input type="date" name="txt_fecha" id="txt_fecha" class="form-control" required>
                 <label for="lbl_genero">Genero:</label>
-                <input type="text" name="txt_genero" id="txt_genero" class="form-control" placeholder="Masculino" required>
-               
+                <input type="number" name="txt_genero" id="txt_genero" class="form-control" required>
+
                 <br>
                 <button name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-success">Agregar</button>
                 <button name="btn_modificar" id="btn_modificar" value="modificar" class="btn btn-primary">Modificar</button>
                 <button name="btn_eliminar" id="btn_eliminar" value="eliminar" class="btn btn-danger">Eliminar</button>
 
             </form>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Nit</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Fecha Ingreso</th>
+                        <th>Genero</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_clientes">
+                    <%
+                    Clientes clientes = new Clientes();
+                    DefaultTableModel tabla = new DefaultTableModel();
+                    tabla = clientes.leer();
+                    for (int t=0;t<tabla.getRowCount();t++){
+                        out.println("<tr data-id="+ tabla.getValueAt(t, 0) +">");
+                        out.println("<td>"+ tabla.getValueAt(t, 1) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 2) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 3) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 4) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 5) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 6) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 7) +"</td>");
+                        out.println("</tr>");
+                        
+                        
+                    }
+                    %>
+                </tbody>
+            </table>
 
         </div>
 
@@ -53,7 +87,29 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
         <script type="text/javascript">
-            $('#')
+            $('#tbl_clientes').on('click','tr td',function(evt){
+                var target, id,nombres,apellidos,nit,telefono,correo,fechaingreso,genero;
+                target = $(evt.target);
+                id = target.parent().data('id');
+                nombres = target.parent("tr").find("td").eq(0).html();
+                apellidos = target.parent("tr").find("td").eq(1).html();
+                nit = target.parent("tr").find("td").eq(2).html();
+                telefono = target.parent("tr").find("td").eq(3).html();
+                correo = target.parent("tr").find("td").eq(4).html();
+                fechaingreso = target.parent("tr").find("td").eq(5).html();
+                genero = target.parent("tr").find("td").eq(6).html();
+                
+                $("#txt_id").val(id);
+                $("#txt_nombres").val(nombres);
+                $("#txt_apellidos").val(apellidos);
+                $("#txt_nit").val(nit);
+                $("#txt_telefono").val(telefono);
+                $("#txt_correo").val(correo);
+                $("#txt_fecha").val(fechaingreso);
+                $("#txt_genero").val(genero);
+                
+            }
+                    );
 
         </script>
 

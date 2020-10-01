@@ -28,8 +28,8 @@ public class sr_venta extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     Ventas ventas;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,42 +38,42 @@ public class sr_venta extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet sr_venta</title>");            
+            out.println("<title>Servlet sr_venta</title>");
             out.println("</head>");
             out.println("<body>");
-            
-             ventas = new Ventas(Integer.valueOf(request.getParameter("txt_id")),Integer.valueOf(request.getParameter("txt_nofactura")), request.getParameter("txt_serie"), request.getParameter("txt_fechafactura"));
-                
+
+            ventas = new Ventas(Integer.valueOf(request.getParameter("txt_id")), Integer.valueOf(request.getParameter("txt_nofactura")), Integer.valueOf(request.getParameter("txt_idcliente")), Integer.valueOf(request.getParameter("txt_idempleado")), request.getParameter("txt_serie"),request.getParameter("txt_fechafactura"), request.getParameter("txt_fechaingreso"));
+
             //Boton Agregar
             if ("agregar".equals(request.getParameter("btn_agregar"))) {
                 if (ventas.agregar() > 0) {
-                 response.sendRedirect("clientes.jsp");
+                    response.sendRedirect("ventas.jsp");
                 } else {
                     out.println("<h1>Error..........................</h1>");
-                    out.println("<a href ='clientes.jsp'>Regresar<a>");
+                    out.println("<a href ='ventas.jsp'>Regresar<a>");
                 }
             }
-            
-             //Boton Modificar
+
+            //Boton Modificar
             if ("modificar".equals(request.getParameter("btn_modificar"))) {
                 if (ventas.modificar() > 0) {
-                 response.sendRedirect("clientes.jsp");
+                    response.sendRedirect("ventas.jsp");
                 } else {
                     out.println("<h1>Error..........................</h1>");
-                    out.println("<a href ='clientes.jsp'>Regresar<a>");
+                    out.println("<a href ='ventas.jsp'>Regresar<a>");
                 }
             }
-            
+
             //Boton Eliminar
-             if ("eliminar".equals(request.getParameter("btn_eliminar"))) {
+            if ("eliminar".equals(request.getParameter("btn_eliminar"))) {
                 if (ventas.eliminar() > 0) {
-                 response.sendRedirect("clientes.jsp");
+                    response.sendRedirect("ventas.jsp");
                 } else {
                     out.println("<h1>Error..........................</h1>");
-                    out.println("<a href ='clientes.jsp'>Regresar<a>");
+                    out.println("<a href ='ventas.jsp'>Regresar<a>");
                 }
             }
-            
+
             out.println("</body>");
             out.println("</html>");
         }

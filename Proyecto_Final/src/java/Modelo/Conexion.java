@@ -18,8 +18,8 @@ public class Conexion {
     private final String puerto= "3306";
     private final String bd= "dbempresa";
     private final String urlConexion = String.format("jdbc:mysql://localhost:%s/%s?serverTimezone=UTC",puerto, bd);
-    private final String usuario = "User_Root";
-    private final String contra = "Final@2020";
+    private final String usuario = "root";
+    private final String contra = "admin";
     private final String jdbc ="com.mysql.cj.jdbc.Driver";
     
     public void abrir_conexion(){

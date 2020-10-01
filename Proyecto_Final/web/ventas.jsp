@@ -4,6 +4,8 @@
     Author     : Willy Valle
 --%>
 
+<%@page import="Modelo.Ventas" %>
+<%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,14 +29,51 @@
                 <input type="text" name="txt_serie" id="txt_serie" class="form-control" required>
                 <label for="lbl_fechafactura">Fecha Factura:</label>
                 <input type="date" name="txt_fechafactura" id="txt_fechafactura" class="form-control" required>
-          
-                
+                <label for="lbl_idcliente">ID Cliente:</label>
+                <input type="number" name="txt_idcliente" id="txt_idcliente" class="form-control" required>
+                <label for="lbl_idempleado">ID Empleado:</label>
+                <input type="number" name="txt_idempleado" id="txt_idempleado" class="form-control" required>
+                <label for="lbl_fechaingreso">Fecha Ingreso:</label>
+                <input type="date" name="txt_fechaingreso" id="txt_fechaingreso" class="form-control" required>
+
+
                 <br>
                 <button name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-success">Agregar</button>
                 <button name="btn_modificar" id="btn_modificar" value="modificar" class="btn btn-primary">Modificar</button>
                 <button name="btn_eliminar" id="btn_eliminar" value="eliminar" class="btn btn-danger">Eliminar</button>
 
             </form>
+             <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No. Factura</th>
+                        <th>Serie</th>
+                        <th>Fecha Factura</th>
+                        <th>Id Cliente</th>
+                        <th>Id Empleado</th>
+                        <th>Fecha Ingreso</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_ventas">
+                    <%
+                    Ventas ventas = new Ventas();
+                    DefaultTableModel tabla = new DefaultTableModel();
+                    tabla = ventas.leer();
+                    for (int t=0;t<tabla.getRowCount();t++){
+                        out.println("<tr data-id="+ tabla.getValueAt(t, 0) +">");
+                        out.println("<td>"+ tabla.getValueAt(t, 1) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 2) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 3) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 4) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 5) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 6) +"</td>");
+                        out.println("</tr>");
+                        
+                        
+                    }
+                    %>
+                </tbody>
+            </table>
 
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

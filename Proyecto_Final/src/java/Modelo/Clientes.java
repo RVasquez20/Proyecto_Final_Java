@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.sql.PreparedStatement;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,25 +17,25 @@ import java.sql.PreparedStatement;
  */
 public class Clientes {
 
-    private int id;
-    private String nombres, apellidos, nit, telefono, correo, fecha_ingreso, genero;
+    private int id, genero;
+    private String nombres, apellidos, nit, telefono, correo, fecha_ingreso;
     private Conexion cn;
 
     public Clientes() {
     }
 
-    public Clientes(int id, String nombres, String apellidos, String nit, String telefono, String correo, String fecha_ingreso, String genero) {
+    public Clientes(int id, int genero, String nombres, String apellidos, String nit, String telefono, String correo, String fecha_ingreso) {
         this.id = id;
+        this.genero = genero;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.nit = nit;
         this.telefono = telefono;
         this.correo = correo;
         this.fecha_ingreso = fecha_ingreso;
-        this.genero = genero;
     }
-    
-     public int getId() {
+
+    public int getId() {
         return id;
     }
 
@@ -90,14 +91,45 @@ public class Clientes {
         this.fecha_ingreso = fecha_ingreso;
     }
 
-    public String getGenero() {
+    public int getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(int genero) {
         this.genero = genero;
     }
-    
+
+    public DefaultTableModel leer() {
+        DefaultTableModel tabla = new DefaultTableModel();
+        try {
+            cn = new Conexion();
+            cn.abrir_conexion();
+            String query = "SELECT e.idClientes as id, e.nombres, e.apellidos, e.NIT, e.telefono, e.correo_electronico, e.fechaingreso, e.genero FROM dbempresa.clientes as e;";
+            ResultSet consulta = cn.conexionBD.createStatement().executeQuery(query);
+            String encabezado[] = {"id", "nombres", "apellidos", "nit", "genero", "telefono", "correo_electronico", "fechaingreso"};
+            tabla.setColumnIdentifiers(encabezado);
+            String datos[] = new String[8];
+            while (consulta.next()) {
+                datos[0] = consulta.getString("id");
+                datos[1] = consulta.getString("nombres");
+                datos[2] = consulta.getString("apellidos");
+                datos[3] = consulta.getString("NIT");
+                datos[4] = consulta.getString("telefono");
+                datos[5] = consulta.getString("correo_electronico");
+                datos[6] = consulta.getString("fechaingreso");
+                datos[7] = consulta.getString("genero");
+                tabla.addRow(datos);
+                
+            }
+
+            cn.cerrar_conexion();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return tabla;
+    }
+
     //////////////////////////////////////////////////////////////////////
     public int agregar() {
         int retorno = 0;
@@ -113,8 +145,7 @@ public class Clientes {
             parametro.setString(4, getTelefono());
             parametro.setString(5, getCorreo());
             parametro.setString(6, getFecha_ingreso());
-             parametro.setString(7, getGenero());
-            
+            parametro.setInt(7, getGenero());
 
             retorno = parametro.executeUpdate();
             parametro.executeUpdate();
@@ -133,7 +164,7 @@ public class Clientes {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "UPDATE clientes set nombres=?,apellidos=?,NIT=?,telefono=?,correo_electronico=?,fechaingreso=?,genero=?) WHERE idClientes = ?;";
+            String query = "UPDATE clientes SET nombres=?,apellidos=?,NIT=?,telefono=?,correo_electronico=?,fechaingreso=?,genero=? WHERE idClientes = ?;";
             cn.abrir_conexion();
             parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
             parametro.setString(1, getNombres());
@@ -142,7 +173,7 @@ public class Clientes {
             parametro.setString(4, getTelefono());
             parametro.setString(5, getCorreo());
             parametro.setString(6, getFecha_ingreso());
-            parametro.setString(7, getGenero());
+            parametro.setInt(7, getGenero());
             parametro.setInt(8, getId());
 
             retorno = parametro.executeUpdate();
@@ -176,5 +207,4 @@ public class Clientes {
     }
 ///////////////////////////////////////////////////////////////////////////
 
-   
 }
