@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.Empleado;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,11 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
- * @author rodri
+ * @author paiz2
  */
-public class sr_Empresa extends HttpServlet {
+public class sr_empleados extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,6 +29,7 @@ public class sr_Empresa extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    Empleado empleado;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,10 +38,44 @@ public class sr_Empresa extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet sr_Empresa</title>");            
+            out.println("<title>Servlet Empleado</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet sr_Empresa at " + request.getContextPath() + "</h1>");
+            empleado = new Empleado(request.getParameter("txt_codigo"),Integer.valueOf(request.getParameter("drop_puesto")),Integer.valueOf(request.getParameter("txt_id")),request.getParameter("txt_nombres"),request.getParameter("txt_apellidos"),request.getParameter("txt_direccion"),request.getParameter("txt_telefono"),request.getParameter("txt_fn"));
+            // Boton agregar 
+            if ("agregar".equals(request.getParameter("btn_agregar"))){
+             if (empleado.agregar()>0){
+             response.sendRedirect("index.jsp");
+             
+             }else{
+             out.println("<h1> xxxxxxx No se Ingreso xxxxxxxxxxxx </h1>");
+             out.println("<a href='index.jsp'>Regresar...</a>");
+             }
+             }
+            
+            // Boton modificar 
+            if ("modificar".equals(request.getParameter("btn_modificar"))){
+             if (empleado.modificar()>0){
+             response.sendRedirect("index.jsp");
+             
+             }else{
+             out.println("<h1> xxxxxxx No se Modifico xxxxxxxxxxxx </h1>");
+             out.println("<a href='index.jsp'>Regresar...</a>");
+             }
+             }
+            
+            // Boton eliminar 
+            if ("eliminar".equals(request.getParameter("btn_eliminar"))){
+             if (empleado.eliminar()>0){
+             response.sendRedirect("index.jsp");
+             
+             }else{
+             out.println("<h1> xxxxxxx No se Elimino xxxxxxxxxxxx </h1>");
+             out.println("<a href='index.jsp'>Regresar...</a>");
+             }
+             }
+            
+            
             out.println("</body>");
             out.println("</html>");
         }
