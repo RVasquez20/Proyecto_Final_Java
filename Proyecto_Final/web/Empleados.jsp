@@ -24,9 +24,9 @@
         <h1>Empleados</h1>
           <h1>Formulario Empleados</h1>
         <div class="container">
-            <form action="sr_empleados" method="post" class="form-group">
+            <form action="sr_empleado" method="post" class="form-group">
                <label for="lbl_id" ><b>ID</b></label>
-                <input type="text" name="txt_id" id="txt_id" class="form-control" value="0"  readonly> 
+                <input type="text" name="txt_id" id="txt_id" class="form-control" value="0" readonly> 
                 <label for="lbl_nombres" ><b>Nombres</b></label>
                 <input type="text" name="txt_nombres" id="txt_nombres" class="form-control" placeholder="Ejemplo: Nombre1 Nombre2" required>
                 <label for="lbl_apellidos" ><b>Apellidos</b></label>

@@ -11,15 +11,14 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Empleado{
-    private String codigo;
+
     private int id_puesto;
-        private int id;
-    private String nombres,apellidos,direccion,telefono,fecha_nacimiento;
+        private int id,Genero;
+    private String nombres,apellidos,direccion,telefono,fecha_nacimiento,DPI,FechaDeIngreso,FechaInicio;
     private Conexion cn;
     public Empleado() {}
 
-    public Empleado(String codigo, int id_puesto, int id, String nombres, String apellidos, String direccion, String telefono, String fecha_nacimiento, Conexion cn) {
-        this.codigo = codigo;
+    public Empleado(int id_puesto, int id, String nombres, String apellidos, String direccion, String telefono, String fecha_nacimiento, String DPI, String FechaDeIngreso, String FechaInicio, int Genero) {
         this.id_puesto = id_puesto;
         this.id = id;
         this.nombres = nombres;
@@ -27,20 +26,20 @@ public class Empleado{
         this.direccion = direccion;
         this.telefono = telefono;
         this.fecha_nacimiento = fecha_nacimiento;
-        this.cn = cn;
+        this.DPI = DPI;
+        this.FechaDeIngreso = FechaDeIngreso;
+        this.FechaInicio = FechaInicio;
+        this.Genero = Genero;
     }
+
+   
+
+  
 
   
 
     
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
 
     public int getId_puesto() {
         return id_puesto;
@@ -88,16 +87,19 @@ public class Empleado{
         try{
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "insert into empleados(codigo,nombres,apellidos,direccion,telefono,fecha_nacimiento,id_puesto) values(?,?,?,?,?,?,?);";
+            String query = "insert into empleados(nombres,apellidos,direccion,telefono,DPI,idPuesto,fecha_nacimiento,fecha_inicio_labores,fechaingreso,genero) values(?,?,?,?,?,?,?,?,?,?);";
             cn.abrirconexion();
             parametro = (PreparedStatement)cn.conexionbd.prepareStatement(query);
-            parametro.setString(1,getCodigo());
-            parametro.setString(2,getNombres());
-            parametro.setString(3,getApellidos());
-            parametro.setString(4,getDireccion());
-            parametro.setString(5,getTelefono());
-            parametro.setString(6,getFecha_nacimiento());
-            parametro.setInt(7, getId_puesto());
+            parametro.setString(1,getNombres());
+            parametro.setString(2,getApellidos());
+            parametro.setString(3,getDireccion());
+            parametro.setString(4,getTelefono());
+            parametro.setString(5,getDPI());
+            parametro.setInt(6,getId_puesto());
+            parametro.setString(7, getFecha_nacimiento());
+            parametro.setString(8, getFechaInicio());
+            parametro.setString(9, getFechaDeIngreso());
+            parametro.setInt(10, getGenero());
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }catch(SQLException ex){
@@ -112,17 +114,20 @@ public class Empleado{
         try{
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "update empleados set codigo = ?,nombres= ?,apellidos= ?,direccion= ?,telefono= ?,fecha_nacimiento= ?,id_puesto= ? where id_empleados = ?;";
+            String query = "update empleados set nombres= ?,apellidos= ?,direccion= ?,telefono= ?,DPI= ?,idPuesto= ?,fecha_nacimiento= ?,fecha_inicio_labores= ?,fechaingreso= ?,genero= ? where idEmpleado = ?;";
             cn.abrirconexion();
             parametro = (PreparedStatement)cn.conexionbd.prepareStatement(query);
-            parametro.setString(1,getCodigo());
-            parametro.setString(2,getNombres());
-            parametro.setString(3,getApellidos());
-            parametro.setString(4,getDireccion());
-            parametro.setString(5,getTelefono());
-            parametro.setString(6,getFecha_nacimiento());
-            parametro.setInt(7, getId_puesto());
-            parametro.setInt(8, getId());
+            parametro.setString(1,getNombres());
+            parametro.setString(2,getApellidos());
+            parametro.setString(3,getDireccion());
+            parametro.setString(4,getTelefono());
+            parametro.setString(5,getDPI());
+            parametro.setInt(6,getId_puesto());
+            parametro.setString(7, getFecha_nacimiento());
+            parametro.setString(8, getFechaInicio());
+            parametro.setString(9, getFechaDeIngreso());
+            parametro.setInt(10, getGenero());
+            parametro.setInt(11, getId());
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }catch(SQLException ex){
@@ -136,7 +141,7 @@ public class Empleado{
         try{
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "delete from empleados  where id_empleados = ?;";
+            String query = "delete from empleados  where idEmpleado = ?;";
             cn.abrirconexion();
             parametro = (PreparedStatement)cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getId());
@@ -148,14 +153,7 @@ public class Empleado{
     return retorno;
     }
 
-    public Conexion getCn() {
-        return cn;
-    }
-
-    public void setCn(Conexion cn) {
-        this.cn = cn;
-    }
-
+   
     public int getId() {
         return id;
     }
@@ -203,5 +201,39 @@ public class Empleado{
     public void setFecha_nacimiento(String fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
+
+    public String getDPI() {
+        return DPI;
+    }
+
+    public void setDPI(String DPI) {
+        this.DPI = DPI;
+    }
+
+    public String getFechaDeIngreso() {
+        return FechaDeIngreso;
+    }
+
+    public void setFechaDeIngreso(String FechaDeIngreso) {
+        this.FechaDeIngreso = FechaDeIngreso;
+    }
+
+    public String getFechaInicio() {
+        return FechaInicio;
+    }
+
+    public void setFechaInicio(String FechaInicio) {
+        this.FechaInicio = FechaInicio;
+    }
+
+    public int getGenero() {
+        return Genero;
+    }
+
+    public void setGenero(int Genero) {
+        this.Genero = Genero;
+    }
+
+
    
 }

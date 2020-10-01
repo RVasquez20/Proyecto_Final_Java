@@ -1,4 +1,4 @@
-$(document).ready(function LimpiarEmpleados(){
+function LimpiarEmpleados(){
   $("#txt_id").val('');
        $("#txt_nombres").val('');
        $("#txt_apellidos").val('');
@@ -10,6 +10,6 @@ $(document).ready(function LimpiarEmpleados(){
        $("#txt_fechaInicio").val('');
        $("#txt_fechaIngreso").val('');       
        $("#drop_puesto").val('0');
-});
+};
 
 

@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
- * @author paiz2
+ * @author eriki
  */
-public class sr_empleados extends HttpServlet {
+public class sr_empleado extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,7 +28,7 @@ public class sr_empleados extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    Empleado empleado;
+        Empleado empleado;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,11 +37,28 @@ public class sr_empleados extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Empleado</title>");            
+            out.println("<title>Servlet sr_empleado</title>");            
             out.println("</head>");
             out.println("<body>");
-            empleado = new Empleado(request.getParameter("txt_codigo"),Integer.valueOf(request.getParameter("drop_puesto")),Integer.valueOf(request.getParameter("txt_id")),request.getParameter("txt_nombres"),request.getParameter("txt_apellidos"),request.getParameter("txt_direccion"),request.getParameter("txt_telefono"),request.getParameter("txt_fn"));
+            /*out.println("<h1>"+Integer.parseInt(request.getParameter("drop_puesto"))+"</h1><br>");
+            out.println("<h1>"+Integer.parseInt(request.getParameter("txt_id"))+"</h1><br>");
+            out.println("<h1>"+request.getParameter("txt_nombres")+"</h1><br>");
+            out.println("<h1>"+request.getParameter("txt_apellidos")+"</h1<br>>");
+            out.println("<h1>"+request.getParameter("txt_direccion")+"</h1><br>");
+            out.println("<h1>"+request.getParameter("txt_telefono")+"</h1><br>");
+            out.println("<h1>"+request.getParameter("txt_fn")+"</h1><br>");
+            out.println("<h1>"+request.getParameter("txt_DPI")+"</h1>");
+            out.println("<h1>"+request.getParameter("txt_fechaIngreso")+"</h1><br><br>");
+            out.println("<h1>"+request.getParameter("txt_fechaInicio")+"</h1><br>");
+            out.println("<h1>"+Integer.parseInt(request.getParameter("txt_genero"))+"</h1><br>");
+*/
+            
+            
+            empleado = new Empleado(Integer.parseInt(request.getParameter("drop_puesto")),Integer.parseInt(request.getParameter("txt_id")),
+            request.getParameter("txt_nombres"),request.getParameter("txt_apellidos"),request.getParameter("txt_direccion"),request.getParameter("txt_telefono"),
+            request.getParameter("txt_fn"),request.getParameter("txt_DPI"),request.getParameter("txt_fechaIngreso"),request.getParameter("txt_fechaInicio"),Integer.parseInt(request.getParameter("txt_genero")));
             // Boton agregar 
+             
             if ("agregar".equals(request.getParameter("btn_agregar"))){
              if (empleado.agregar()>0){
              response.sendRedirect("index.jsp");
@@ -74,7 +90,6 @@ public class sr_empleados extends HttpServlet {
              out.println("<a href='index.jsp'>Regresar...</a>");
              }
              }
-            
             
             out.println("</body>");
             out.println("</html>");
