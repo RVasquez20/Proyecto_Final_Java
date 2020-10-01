@@ -93,9 +93,9 @@ public class Ventas {
         DefaultTableModel tabla = new DefaultTableModel();
         try {
             cn = new Conexion();
-            cn.abrir_conexion();
+            cn.abrirconexion();
             String query = "SELECT e.idVentas as id, e.nofactura, e.serie, e.fechafactura, e.idcliente, e.idempleado, e.fechaingreso FROM dbempresa.ventas as e;";
-            ResultSet consulta = cn.conexionBD.createStatement().executeQuery(query);
+            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
             String encabezado[] = {"id", "nombres", "apellidos", "nit", "genero", "telefono", "correo_electronico", "fechaingreso"};
             tabla.setColumnIdentifiers(encabezado);
             String datos[] = new String[8];
@@ -112,7 +112,7 @@ public class Ventas {
                 
             }
 
-            cn.cerrar_conexion();
+            cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -127,8 +127,8 @@ public class Ventas {
             PreparedStatement parametro;
             cn = new Conexion();
             String query = "INSERT INTO ventas(nofactura,serie,fechafactura,idcliente,idempleado,fechaingreso) VALUES (?,?,?,?,?,?);";
-            cn.abrir_conexion();
-            parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
+            cn.abrirconexion();
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getNofactura());
             parametro.setString(2, getSerie());
             parametro.setString(3, getFechafactura());
@@ -139,7 +139,7 @@ public class Ventas {
 
             retorno = parametro.executeUpdate();
             parametro.executeUpdate();
-            cn.cerrar_conexion();
+            cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             retorno = 0;
@@ -155,8 +155,8 @@ public class Ventas {
             PreparedStatement parametro;
             cn = new Conexion();
             String query = "UPDATE ventas SET nofactura=?,serie=?,fechafactura=?,idcliente=?,idempleado=?,fechaingreso=? WHERE idVentas=?;";
-            cn.abrir_conexion();
-            parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
+            cn.abrirconexion();
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getNofactura());
             parametro.setString(2, getSerie());
             parametro.setString(3, getFechafactura());
@@ -167,7 +167,7 @@ public class Ventas {
 
             retorno = parametro.executeUpdate();
             parametro.executeUpdate();
-            cn.cerrar_conexion();
+            cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             retorno = 0;
@@ -182,12 +182,12 @@ public class Ventas {
             PreparedStatement parametro;
             cn = new Conexion();
             String query = "DELETE FROM ventas WHERE idVentas = ?;";
-            cn.abrir_conexion();
-            parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
+            cn.abrirconexion();
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getId_venta());
             retorno = parametro.executeUpdate();
             parametro.executeUpdate();
-            cn.cerrar_conexion();
+            cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             retorno = 0;

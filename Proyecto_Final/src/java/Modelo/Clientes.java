@@ -7,7 +7,6 @@ package Modelo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.sql.PreparedStatement;
 import javax.swing.table.DefaultTableModel;
 
@@ -103,9 +102,9 @@ public class Clientes {
         DefaultTableModel tabla = new DefaultTableModel();
         try {
             cn = new Conexion();
-            cn.abrir_conexion();
+            cn.abrirconexion();
             String query = "SELECT e.idClientes as id, e.nombres, e.apellidos, e.NIT, e.telefono, e.correo_electronico, e.fechaingreso, e.genero FROM dbempresa.clientes as e;";
-            ResultSet consulta = cn.conexionBD.createStatement().executeQuery(query);
+            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
             String encabezado[] = {"id", "nombres", "apellidos", "nit", "genero", "telefono", "correo_electronico", "fechaingreso"};
             tabla.setColumnIdentifiers(encabezado);
             String datos[] = new String[8];
@@ -122,7 +121,7 @@ public class Clientes {
                 
             }
 
-            cn.cerrar_conexion();
+            cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -137,8 +136,8 @@ public class Clientes {
             PreparedStatement parametro;
             cn = new Conexion();
             String query = "INSERT INTO clientes(nombres,apellidos,NIT,telefono,correo_electronico,fechaingreso,genero) VALUES (?,?,?,?,?,?,?);";
-            cn.abrir_conexion();
-            parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
+            cn.abrirconexion();
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setString(1, getNombres());
             parametro.setString(2, getApellidos());
             parametro.setString(3, getNit());
@@ -149,7 +148,7 @@ public class Clientes {
 
             retorno = parametro.executeUpdate();
             parametro.executeUpdate();
-            cn.cerrar_conexion();
+            cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             retorno = 0;
@@ -165,8 +164,8 @@ public class Clientes {
             PreparedStatement parametro;
             cn = new Conexion();
             String query = "UPDATE clientes SET nombres=?,apellidos=?,NIT=?,telefono=?,correo_electronico=?,fechaingreso=?,genero=? WHERE idClientes = ?;";
-            cn.abrir_conexion();
-            parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
+            cn.abrirconexion();
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setString(1, getNombres());
             parametro.setString(2, getApellidos());
             parametro.setString(3, getNit());
@@ -178,7 +177,7 @@ public class Clientes {
 
             retorno = parametro.executeUpdate();
             parametro.executeUpdate();
-            cn.cerrar_conexion();
+            cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             retorno = 0;
@@ -193,12 +192,12 @@ public class Clientes {
             PreparedStatement parametro;
             cn = new Conexion();
             String query = "DELETE FROM clientes WHERE idClientes = ?;";
-            cn.abrir_conexion();
-            parametro = (PreparedStatement) cn.conexionBD.prepareStatement(query);
+            cn.abrirconexion();
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getId());
             retorno = parametro.executeUpdate();
             parametro.executeUpdate();
-            cn.cerrar_conexion();
+            cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             retorno = 0;

@@ -42,7 +42,7 @@ public class sr_cliente extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
 
-            clientes = new Clientes(Integer.valueOf(request.getParameter("txt_id")), Integer.valueOf(request.getParameter("txt_genero")) ,request.getParameter("txt_nombres"), request.getParameter("txt_apellidos"), request.getParameter("txt_nit"), request.getParameter("txt_telefono"), request.getParameter("txt_correo"), request.getParameter("txt_fecha"));
+            clientes = new Clientes(Integer.parseInt(request.getParameter("txt_id")), Integer.parseInt(request.getParameter("txt_genero")) ,request.getParameter("txt_nombres"), request.getParameter("txt_apellidos"), request.getParameter("txt_nit"), request.getParameter("txt_telefono"), request.getParameter("txt_correo"), request.getParameter("txt_fecha"));
                 
             //Boton Agregar
             if ("agregar".equals(request.getParameter("btn_agregar"))) {

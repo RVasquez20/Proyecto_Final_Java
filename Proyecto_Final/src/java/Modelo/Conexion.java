@@ -4,40 +4,39 @@
  * and open the template in the editor.
  */
 package Modelo;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.awt.HeadlessException;
+import java.sql.*;
+
 
 /**
  *
  * @author paiz2
  */
+
 public class Conexion {
-    public Connection conexionBD;
-    //jdbc:mysql://localhost:3306/db_empresa
-    private final String puerto= "3306";
-    private final String bd= "dbempresa";
-    private final String urlConexion = String.format("jdbc:mysql://localhost:%s/%s?serverTimezone=UTC",puerto, bd);
-    private final String usuario = "root";
-    private final String contra = "admin";
-    private final String jdbc ="com.mysql.cj.jdbc.Driver";
     
-    public void abrir_conexion(){
-            try{
-                Class.forName(jdbc);
-                conexionBD = DriverManager.getConnection(urlConexion,usuario,contra);               
-               // System.out.println("Conexion Exitosa");
-            }catch(ClassNotFoundException | SQLException ex){
-                    System.out.println("Error: " + ex.getMessage());
-            }
-    }
-    
-    public void cerrar_conexion(){
+    public Connection conexionbd;
+    public final String nombre="dbempresa";
+    public final String url=String.format("jdbc:mysql://localhost:3306/%s?useTimezone=true&serverTimezone=UTC",nombre);
+    public final String usuario="User_Root";
+    public final String contraseña="Final@2020";
+    public final String jdbc="com.mysql.cj.jdbc.Driver";
+    public void abrirconexion(){
         try{
-            conexionBD.close();
-        }catch(SQLException ex){
-            System.out.println("Error: " + ex.getMessage());
+            Class.forName(jdbc);
+            conexionbd=DriverManager.getConnection(url,usuario,contraseña);
+            System.out.println("Exito");
+        }catch(HeadlessException|ClassNotFoundException|SQLException ex){
+            System.out.println("Error->"+ex.getMessage());
         }
-    
     }
+    public void cerrarconexion(){
+        try{
+            conexionbd.close();
+        }catch(SQLException ex){
+                System.out.println("Error->"+ex.getMessage());
+        }
+    }
+ 
+   
 }
