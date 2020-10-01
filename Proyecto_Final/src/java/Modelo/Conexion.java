@@ -10,7 +10,7 @@ import java.sql.*;
 
 /**
  *
- * @author paiz2
+ * @author rodri
  */
 
 public class Conexion {
