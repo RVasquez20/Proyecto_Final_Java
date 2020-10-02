@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Modelo;
-<<<<<<< HEAD
+
 import java.awt.HeadlessException;
 import java.sql.*;
 
@@ -14,7 +14,7 @@ import java.sql.*;
  * @author rodri
  */
 
-=======
+
 
 import java.awt.HeadlessException;
 import java.sql.*;
@@ -23,7 +23,7 @@ import java.sql.*;
  *
  * @author Miguel
  */
->>>>>>> master
+
 public class Conexion {
     
     public Connection conexionbd;
