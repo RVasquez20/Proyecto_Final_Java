@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import javax.swing.table.DefaultTableModel;
+import java.util.HashMap;
 
 /**
  *
@@ -97,6 +98,9 @@ public class Clientes {
     public void setGenero(int genero) {
         this.genero = genero;
     }
+    
+    
+
 
     public DefaultTableModel leer() {
         DefaultTableModel tabla = new DefaultTableModel();

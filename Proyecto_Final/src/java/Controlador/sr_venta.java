@@ -41,8 +41,16 @@ public class sr_venta extends HttpServlet {
             out.println("<title>Servlet sr_venta</title>");
             out.println("</head>");
             out.println("<body>");
+            
+            /*out.println("<h1>" + Integer.parseInt(request.getParameter("txt_id")) + "</h1>");
+            out.println("<h1>" + Integer.valueOf(request.getParameter("txt_nofactura")) + "</h1>");
+            out.println("<h1>" + Integer.parseInt(request.getParameter("txt_idcliente")) + "</h1>");
+            out.println("<h1>" + Integer.parseInt(request.getParameter("txt_idempleado")) + "</h1>");
+            out.println("<h1>" + request.getParameter("txt_serie") + "</h1>");
+            out.println("<h1>" + request.getParameter("txt_fechafactura") + "</h1>");
+            out.println("<h1>" + request.getParameter("txt_fechaingreso") + "</h1>");*/
 
-            ventas = new Ventas(Integer.valueOf(request.getParameter("txt_id")), Integer.valueOf(request.getParameter("txt_nofactura")), Integer.valueOf(request.getParameter("txt_idcliente")), Integer.valueOf(request.getParameter("txt_idempleado")), request.getParameter("txt_serie"),request.getParameter("txt_fechafactura"), request.getParameter("txt_fechaingreso"));
+            ventas = new Ventas(Integer.parseInt(request.getParameter("txt_id")), Integer.parseInt(request.getParameter("txt_nofactura")), Integer.parseInt(request.getParameter("txt_idcliente")), Integer.parseInt(request.getParameter("txt_idempleado")), request.getParameter("txt_serie"),request.getParameter("txt_fechafactura"), request.getParameter("txt_fechaingreso"));
 
             //Boton Agregar
             if ("agregar".equals(request.getParameter("btn_agregar"))) {
@@ -73,7 +81,7 @@ public class sr_venta extends HttpServlet {
                     out.println("<a href ='ventas.jsp'>Regresar<a>");
                 }
             }
-
+             
             out.println("</body>");
             out.println("</html>");
         }

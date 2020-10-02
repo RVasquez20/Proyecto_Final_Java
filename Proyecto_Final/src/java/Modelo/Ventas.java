@@ -8,6 +8,7 @@ package Modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -94,20 +95,21 @@ public class Ventas {
         try {
             cn = new Conexion();
             cn.abrirconexion();
-            String query = "SELECT e.idVentas as id, e.nofactura, e.serie, e.fechafactura, e.idcliente, e.idempleado, e.fechaingreso FROM dbempresa.ventas as e;";
+            String query = "SELECT e.idVentas as id, e.nofactura, e.serie, e.fechafactura, c.idClientes, c.nombres,c.nit, e.idempleado, e.fechaingreso FROM ventas as e inner join clientes as c on e.idcliente=c.idClientes;";
             ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-            String encabezado[] = {"id", "nombres", "apellidos", "nit", "genero", "telefono", "correo_electronico", "fechaingreso"};
+            String encabezado[] = {"ID", "No.Factura", "Serie", "Fecha", "ID Clientes", "Nombre Cliente", "NIT", "ID Empleado", "fechaingreso"};
             tabla.setColumnIdentifiers(encabezado);
-            String datos[] = new String[8];
+            String datos[] = new String[9];
             while (consulta.next()) {
                 datos[0] = consulta.getString("id");
-                datos[1] = consulta.getString("nombres");
-                datos[2] = consulta.getString("apellidos");
-                datos[3] = consulta.getString("NIT");
-                datos[4] = consulta.getString("telefono");
-                datos[5] = consulta.getString("correo_electronico");
-                datos[6] = consulta.getString("fechaingreso");
-                datos[7] = consulta.getString("genero");
+                datos[1] = consulta.getString("nofactura");
+                datos[2] = consulta.getString("serie");
+                datos[3] = consulta.getString("fechafactura");
+                datos[4] = consulta.getString("idClientes");
+                datos[5] = consulta.getString("nombres");
+                datos[6] = consulta.getString("nit");
+                datos[7] = consulta.getString("idempleado");
+                datos[8] = consulta.getString("fechaingreso");
                 tabla.addRow(datos);
                 
             }
@@ -119,7 +121,38 @@ public class Ventas {
 
         return tabla;
     }
-    
+    public HashMap ListaC(){
+    HashMap<String,String> drop = new HashMap();
+    try{
+        String query ="select IdClientes as Id,nombres from clientes;";
+         cn = new Conexion();
+         cn.abrirconexion();
+            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+            while (consulta.next()){
+            drop.put(consulta.getString("Id"),consulta.getString("nombres") );
+            }
+         cn.cerrarconexion();
+    }catch(SQLException ex){
+        System.out.println(ex.getMessage());
+    }
+    return drop;
+    }
+       public HashMap ListaC2(){
+    HashMap<String,String> drop = new HashMap();
+    try{
+        String query ="select IdClientes as Id,Nit from clientes;";
+         cn = new Conexion();
+         cn.abrirconexion();
+            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+            while (consulta.next()){
+            drop.put(consulta.getString("Id"),consulta.getString("Nit") );
+            }
+         cn.cerrarconexion();
+    }catch(SQLException ex){
+        System.out.println(ex.getMessage());
+    }
+    return drop;
+    }
      //////////////////////////////////////////////////////////////////////
     public int agregar() {
         int retorno = 0;
@@ -138,7 +171,7 @@ public class Ventas {
             
 
             retorno = parametro.executeUpdate();
-            parametro.executeUpdate();
+          
             cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -166,7 +199,7 @@ public class Ventas {
             parametro.setInt(7, getId_venta());
 
             retorno = parametro.executeUpdate();
-            parametro.executeUpdate();
+        
             cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -186,7 +219,7 @@ public class Ventas {
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getId_venta());
             retorno = parametro.executeUpdate();
-            parametro.executeUpdate();
+
             cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

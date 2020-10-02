@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        
+
         <script src="JS/Clientes.js"></script>
 
         <title>JSP Page</title>
@@ -40,16 +40,20 @@
                 <label for="lbl_telefono">Telefono:</label>
                 <input type="number" name="txt_telefono" id="txt_telefono" class="form-control" placeholder="12345678" required>
                 <label for="lbl_correo">Correo:</label>
-                <input type="text" name="txt_correo" id="txt_correo" class="form-control" required>
+                <input type="email" name="txt_correo" id="txt_correo" class="form-control" required>
                 <label for="lbl_fecha">Fecha:</label>
-                <input type="date" name="txt_fecha" id="txt_fecha" class="form-control" required>
+                <input type="datetime" name="txt_fecha" id="txt_fecha" class="form-control" required>
                 <label for="lbl_genero">Genero:</label>
-               /*<select name="ListaProveedores" id="ListaProveedores" class="form-control">
-                   <% 
-                        
-                         
+                <select name="drop_genero" id="drop_genero" class="form-control">
                     
-                    %>
+                        
+                        <option value='0'>Seleccione</option>
+                        <option value='1'>Masculino</option>
+                        <option value='2'>Femenino</option>
+                      
+
+
+                    
                 </select>
 
                 <br>
@@ -72,8 +76,7 @@
                     </tr>
                 </thead>
                 <tbody id="tbl_clientes">
-                    <%
-                        Clientes clientes = new Clientes();
+                    <%                        Clientes clientes = new Clientes();
                         DefaultTableModel tabla = new DefaultTableModel();
                         tabla = clientes.leer();
                         for (int t = 0; t < tabla.getRowCount(); t++) {
@@ -97,7 +100,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-          <script src="JS/Clientes.js"></script>
+        
         <script type="text/javascript">
                     $('#tbl_clientes').on('click', 'tr td', function (evt) {
                         var target, id, nombres, apellidos, nit, telefono, correo, fechaingreso, genero;
@@ -118,7 +121,7 @@
                         $("#txt_telefono").val(telefono);
                         $("#txt_correo").val(correo);
                         $("#txt_fecha").val(fechaingreso);
-                        $("#txt_genero").val(genero);
+                        $("#drop_genero").val(genero);
 
                     }
                     );

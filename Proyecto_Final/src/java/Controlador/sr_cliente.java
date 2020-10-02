@@ -35,14 +35,9 @@ public class sr_cliente extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet sr_cliente</title>");
-            out.println("</head>");
-            out.println("<body>");
+ 
 
-            clientes = new Clientes(Integer.parseInt(request.getParameter("txt_id")), Integer.parseInt(request.getParameter("txt_genero")) ,request.getParameter("txt_nombres"), request.getParameter("txt_apellidos"), request.getParameter("txt_nit"), request.getParameter("txt_telefono"), request.getParameter("txt_correo"), request.getParameter("txt_fecha"));
+            clientes = new Clientes(Integer.parseInt(request.getParameter("txt_id")), Integer.parseInt(request.getParameter("drop_genero")) ,request.getParameter("txt_nombres"), request.getParameter("txt_apellidos"), request.getParameter("txt_nit"), request.getParameter("txt_telefono"), request.getParameter("txt_correo"), request.getParameter("txt_fecha"));
                 
             //Boton Agregar
             if ("agregar".equals(request.getParameter("btn_agregar"))) {
@@ -73,7 +68,6 @@ public class sr_cliente extends HttpServlet {
                     out.println("<a href ='clientes.jsp'>Regresar<a>");
                 }
             }
-             
             out.println("</body>");
             out.println("</html>");
         }
