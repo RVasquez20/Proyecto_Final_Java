@@ -8,10 +8,22 @@ package Modelo;
 import java.awt.HeadlessException;
 import java.sql.*;
 
+
+/**
+ *
+ * @author rodri
+ */
+
+
+
+import java.awt.HeadlessException;
+import java.sql.*;
+
 /**
  *
  * @author Miguel
  */
+
 public class Conexion {
     
     public Connection conexionbd;
