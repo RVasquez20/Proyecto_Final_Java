@@ -12,7 +12,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+
+
+        <h1>Bienvenido</h1>
+        
+        <a href="Proveedores.jsp">Proveedores</a>
         <a href="Empleados.jsp">Empleados</a>
+        
+
     </body>
 </html>
