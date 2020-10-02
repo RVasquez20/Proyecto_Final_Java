@@ -14,7 +14,7 @@
     <body>
         <h1>Bienvenido</h1>
         
-        <a href="Proveedores.jsp">Proveedores</a>
+        <a href="Empleados.jsp">Empleados</a>
         
     </body>
 </html>
