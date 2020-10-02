@@ -1,17 +1,14 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
     <servlet>
-
+<<<<<<< HEAD
         <servlet-name>sr_empleado</servlet-name>
         <servlet-class>Controlador.sr_empleado</servlet-class>
-
+=======
         <servlet-name>sr_Proveedores</servlet-name>
         <servlet-class>Controlador.sr_Proveedores</servlet-class>
-
+>>>>>>> master
     </servlet>
     <servlet>
         <servlet-name>sr_Compras</servlet-name>
@@ -22,13 +19,13 @@
         <url-pattern>/sr_Proveedores</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
+<<<<<<< HEAD
         <servlet-name>sr_empleado</servlet-name>
         <url-pattern>/sr_empleado</url-pattern>
-
+=======
         <servlet-name>sr_Compras</servlet-name>
         <url-pattern>/sr_Compras</url-pattern>
-
+>>>>>>> master
     </servlet-mapping>
     <session-config>
         <session-timeout>
