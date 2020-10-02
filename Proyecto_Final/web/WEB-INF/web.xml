@@ -8,6 +8,14 @@
         <servlet-name>sr_Compras</servlet-name>
         <servlet-class>Controlador.sr_Compras</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sr_empleado</servlet-name>
+        <servlet-class>Controlador.sr_empleado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sr_Puestos</servlet-name>
+        <servlet-class>Controlador.sr_Puestos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sr_Proveedores</servlet-name>
         <url-pattern>/sr_Proveedores</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>sr_Compras</servlet-name>
         <url-pattern>/sr_Compras</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_empleado</servlet-name>
+        <url-pattern>/sr_empleado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_Puestos</servlet-name>
+        <url-pattern>/sr_Puestos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
