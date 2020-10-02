@@ -32,6 +32,22 @@
         <servlet-name>sr_Puestos</servlet-name>
         <url-pattern>/sr_Puestos</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>sr_productos</servlet-name>
+        <servlet-class>Controlador.sr_productos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sr_Marcas</servlet-name>
+        <servlet-class>Controlador.sr_Marcas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sr_productos</servlet-name>
+        <url-pattern>/sr_productos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_Marcas</servlet-name>
+        <url-pattern>/sr_Marcas</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
