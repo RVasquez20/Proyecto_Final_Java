@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : 29/09/2020, 10:22:24 PM
-    Author     : Willy Valle
+    Created on : 29/09/2020, 10:02:16 PM
+    Author     : rodri
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,9 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <a href="clientes.jsp">Ventana Clientes</a>
-        <br>
-        <a href="ventas.jsp">Ventana Ventas</a>
+        <h1>Bienvenido</h1>
+        
+        <a href="Proveedores.jsp">Proveedores</a>
+        <a href="Empleados.jsp">Empleados</a>
     </body>
 </html>
