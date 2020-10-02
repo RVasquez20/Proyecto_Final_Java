@@ -8,6 +8,7 @@ package Modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -153,5 +154,21 @@ public DefaultTableModel ListaDeCompras(){
             System.out.println(ex.getMessage());
         }
     return retorno;
+    }
+           public HashMap Lista_Odenes(){
+    HashMap<String,String> drop = new HashMap();
+    try{
+        String query ="select idcompra as ID,no_orden_compra from compras;";
+         cn = new Conexion();
+         cn.abrirconexion();
+            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+            while (consulta.next()){
+            drop.put(consulta.getString("ID"),consulta.getString("no_orden_compra") );
+            }
+         cn.cerrarconexion();
+    }catch(SQLException ex){
+        System.out.println(ex.getMessage());
+    }
+    return drop;
     }
 }

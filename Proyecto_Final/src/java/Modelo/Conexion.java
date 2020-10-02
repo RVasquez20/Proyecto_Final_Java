@@ -21,7 +21,7 @@ import java.sql.*;
 
 /**
  *
- * @author Miguel
+ * @author rodri
  */
 
 public class Conexion {
@@ -36,7 +36,6 @@ public class Conexion {
         try{
             Class.forName(jdbc);
             conexionbd=DriverManager.getConnection(url,usuario,contraseña);
-            System.out.println("Exito");
         }catch(HeadlessException|ClassNotFoundException|SQLException ex){
             System.out.println("Error->"+ex.getMessage());
         }

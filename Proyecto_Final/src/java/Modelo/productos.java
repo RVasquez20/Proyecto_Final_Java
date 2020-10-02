@@ -191,7 +191,24 @@ public class productos {
             System.out.println("Error->"+e.getMessage());
               return retorno;
         }
+        
       
+    }
+                 public HashMap ListaProductos(){
+    HashMap<String,String> drop = new HashMap();
+    try{
+        String query ="select idProducto as ID,producto from productos;";
+         con = new Conexion();
+         con.abrirconexion();
+            ResultSet consulta = con.conexionbd.createStatement().executeQuery(query);
+            while (consulta.next()){
+            drop.put(consulta.getString("ID"),consulta.getString("producto") );
+            }
+         con.cerrarconexion();
+    }catch(SQLException ex){
+        System.out.println(ex.getMessage());
+    }
+    return drop;
     }
 
     public String getImagen() {

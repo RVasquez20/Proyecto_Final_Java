@@ -17,5 +17,8 @@
         <a href="Proveedores.jsp">Proveedores</a>
         <a href="Empleados.jsp">Empleados</a>
         <a href="Productos.jsp">Productos</a>
+        <a href="ventas.jsp">ventas</a>
+        <a href="Compras.jsp">Compras</a>
+        <a href="Compras_Detalle.jsp">Compras Detalle</a>
     </body>
 </html>
