@@ -103,7 +103,7 @@ public class ComprasDetalle {
         try{
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "insert into compras_detalle(idcompra,idproducto,cantidad,precio_costo_unitario) values(?,?,?,?);";
+            String query = "insert into compras_detalle(idcompra,idproducto,cantidad,precio_costo_unitario) values(?,?,?,?)";
             cn.abrirconexion();
             parametro = (PreparedStatement)cn.conexionbd.prepareStatement(query);
             parametro.setInt(1,getIdCompra());
@@ -155,6 +155,97 @@ public class ComprasDetalle {
         }
     return retorno;
     }
-
     
+       public int cantidadantigua(int id2){
+          int retorno=0;
+          int cant=0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query2="select cantidad from compras_detalle where idcompra_detalle="+id2+";";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta2=cn.conexionbd.createStatement().executeQuery(query2);
+             while (consulta2.next()) {
+                cant=consulta2.getInt("cantidad");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return cant;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+    }
+    public int ActualizarExistencias(){
+         int retorno=0;
+         int antigua=0;
+        try {
+            cn=new Conexion();
+            productos p1=new productos();
+            ComprasDetalle c1=new ComprasDetalle();
+            PreparedStatement parametro;
+            String query="UPDATE  productos SET existencia=?+? WHERE idProducto=?;";
+            cn.abrirconexion();
+            parametro=cn.conexionbd.prepareStatement(query);
+            parametro.setInt(1, p1.ex(getIdProducto()));
+            
+                parametro.setInt(2, getCantidad());
+            
+            parametro.setInt(3,getIdProducto());
+           
+                    retorno=parametro.executeUpdate();
+            cn.cerrarconexion(); 
+            return retorno;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        } 
+    }
+    public int ActualizarPrecioCosto(){
+         int retorno=0;
+        try {
+            cn=new Conexion();
+            
+            PreparedStatement parametro;
+            String query="UPDATE  productos SET precio_costo=? WHERE idProducto=?;";
+            cn.abrirconexion();
+            parametro=cn.conexionbd.prepareStatement(query);
+            parametro.setDouble(1, getPrecioUnitario());
+            parametro.setInt(2,getIdProducto());
+           
+                    retorno=parametro.executeUpdate();
+            cn.cerrarconexion(); 
+            return retorno;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        } 
+    }
+     public int ActualizarPrecioventa(){
+         int retorno=0;
+        try {
+            cn=new Conexion();
+            
+            PreparedStatement parametro;
+            String query="UPDATE  productos SET precio_venta=?+(?*0.25) WHERE idProducto=?;";
+            cn.abrirconexion();
+            parametro=cn.conexionbd.prepareStatement(query);
+            parametro.setDouble(1, getPrecioUnitario());
+            parametro.setDouble(2, getPrecioUnitario());
+            parametro.setInt(3,getIdProducto());
+           
+                    retorno=parametro.executeUpdate();
+            cn.cerrarconexion(); 
+            return retorno;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        } 
+    }
 }

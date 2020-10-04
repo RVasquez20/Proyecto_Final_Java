@@ -94,7 +94,7 @@ public class productos {
         try {
             con=new Conexion();
             con.abrirconexion();
-            String query="SELECT p.idProducto as id,p.producto,m.marca,m.idmarca,p.Descripcion,p.Imagen,p.precio_costo,p.precio_venta,p.existencia,p.fecha_ingreso FROM productos as p inner join marcas as m on p.idmarca=m.idmarca order by id;";
+            String query="SELECT p.idProducto as id,p.producto,m.marca,m.idmarca,p.Descripcion,p.Imagen,p.precio_costo,p.precio_venta,p.existencia,p.fecha_ingreso FROM productos as p inner join marcas as m on p.idmarca=m.idmarca order by id ;";
             ResultSet consulta=con.conexionbd.createStatement().executeQuery(query);
             String encabezado[]={"id","Producto","Descripcion","Marca","Imagen","Precio_Costo","Precio_venta","Existencias","Fecha De Ingreso","idMarca"};
             tabla.setColumnIdentifiers(encabezado);
@@ -121,6 +121,36 @@ public class productos {
         }
         
     }
+
+    
+     public int ex(int id) throws SQLException{
+          int retorno=0;
+          int exi=1;
+     
+        try {
+            con=new Conexion();
+       
+            String query="select existencia from productos where idProducto="+id+";";
+            con.abrirconexion();
+           
+            
+           
+             ResultSet consulta=con.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getInt("existencia");
+               
+                }
+                   
+                    
+            con.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+    }
+
+
     public int agregar(){
         int retorno=0;
         try {
@@ -210,7 +240,8 @@ public class productos {
     }
     return drop;
     }
-
+    
+                 
     public String getImagen() {
         return imagen;
     }

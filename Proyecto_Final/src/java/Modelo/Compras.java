@@ -76,7 +76,7 @@ public DefaultTableModel ListaDeCompras(){
  try{
      cn = new Conexion();
      cn.abrirconexion();
-      String query = "select c.idcompra as ID,c.no_orden_compra,p.idproveedor,p.proveedor,c.fecha_orden,c.fechaingreso from compras as c inner join proveedores as p where c.idproveedor=p.idproveedor;";
+      String query = "select c.idcompra as ID,c.no_orden_compra,p.idproveedor,p.proveedor,c.fecha_orden,c.fechaingreso from compras as c inner join proveedores as p where c.idproveedor=p.idproveedor order by ID;";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
       String encabezado[] = {"ID","Numero de Compra","idProveedor","Proveedor","Fecha De Orden","Fecha de Ingreso"};
       tabla.setColumnIdentifiers(encabezado);

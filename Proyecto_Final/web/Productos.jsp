@@ -26,15 +26,18 @@
         
             <br><h1>Listado De Productos</h1>
        
-  
+         
 <div class="container">
  
   <br>
 
  
-        
        
             <form action="sr_productos" method="POST" class="form-group">
+                   <%
+                productos p1=new productos();
+                p1.ex(2);
+                %>
                 <label><b>id</b></label>
                 <input type="text" name="txt_id" class="form-control" id="txt_id" placeholder="id" value="0" readonly style="max-width: 250px;"><br>
                 <label><b>Producto</b></label>
