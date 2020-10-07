@@ -95,11 +95,11 @@ public class Ventas {
         try {
             cn = new Conexion();
             cn.abrirconexion();
-            String query = "SELECT e.idVentas as id, e.nofactura, e.serie, e.fechafactura, c.idClientes, c.nombres,c.nit, e.idempleado, e.fechaingreso FROM ventas as e inner join clientes as c on e.idcliente=c.idClientes;";
+            String query = "SELECT v.idVentas as id, v.nofactura, v.serie, v.fechafactura, c.idClientes, c.nombres,c.nit,e.nombres,e.idempleado,v.fechaingreso FROM ventas as v inner join clientes as c inner join empleados as e on v.idcliente=c.idClientes and v.idempleado=e.idEmpleado order by id;";
             ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-            String encabezado[] = {"ID", "No.Factura", "Serie", "Fecha", "ID Clientes", "Nombre Cliente", "NIT", "ID Empleado", "fechaingreso"};
+            String encabezado[] = {"ID", "No.Factura", "Serie", "Fecha", "ID Clientes", "Nombre Cliente", "NIT","Nombre empleado", "ID Empleado", "fechaingreso"};
             tabla.setColumnIdentifiers(encabezado);
-            String datos[] = new String[9];
+            String datos[] = new String[10];
             while (consulta.next()) {
                 datos[0] = consulta.getString("id");
                 datos[1] = consulta.getString("nofactura");
@@ -108,8 +108,9 @@ public class Ventas {
                 datos[4] = consulta.getString("idClientes");
                 datos[5] = consulta.getString("nombres");
                 datos[6] = consulta.getString("nit");
-                datos[7] = consulta.getString("idempleado");
-                datos[8] = consulta.getString("fechaingreso");
+                datos[7] = consulta.getString("nombres");
+                datos[8] = consulta.getString("idempleado");
+                datos[9] = consulta.getString("fechaingreso");
                 tabla.addRow(datos);
                 
             }
@@ -153,6 +154,8 @@ public class Ventas {
     }
     return drop;
     }
+        
+       
      //////////////////////////////////////////////////////////////////////
     public int agregar() {
         int retorno = 0;

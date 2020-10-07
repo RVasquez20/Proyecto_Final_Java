@@ -7,6 +7,7 @@ package Modelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -14,7 +15,7 @@ public class Empleado{
 
     private int id_puesto;
         private int id,Genero;
-    private String nombres,apellidos,direccion,telefono,fecha_nacimiento,DPI,FechaDeIngreso,FechaInicio;
+    private String nombres,apellidos,FechaDeIngreso,direccion,telefono,fecha_nacimiento,DPI,FechaInicio;
     private Conexion cn;
     public Empleado() {}
 
@@ -32,14 +33,8 @@ public class Empleado{
         this.Genero = Genero;
     }
 
-   
-
   
-
-  
-
     
-
 
     public int getId_puesto() {
         return id_puesto;
@@ -82,6 +77,23 @@ public class Empleado{
  return tabla;
  }
 
+    public HashMap ListaEmpleados(){
+    HashMap<String,String> drop = new HashMap();
+    try{
+        String query ="select idempleado as Id,nombres from empleados;";
+         cn = new Conexion();
+         cn.abrirconexion();
+            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+            while (consulta.next()){
+            drop.put(consulta.getString("Id"),consulta.getString("nombres"));
+            }
+         cn.cerrarconexion();
+    }catch(SQLException ex){
+        System.out.println(ex.getMessage());
+    }
+    return drop;
+    }
+ 
     public int agregar(){
         int retorno =0;
         try{

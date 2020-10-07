@@ -12,6 +12,10 @@
         <servlet-name>sr_ComprasDetalle</servlet-name>
         <servlet-class>Controlador.sr_ComprasDetalle</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sr_VentasDetalle</servlet-name>
+        <servlet-class>Controlador.sr_VentasDetalle</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sr_cliente</servlet-name>
         <url-pattern>/sr_cliente</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>sr_ComprasDetalle</servlet-name>
         <url-pattern>/sr_ComprasDetalle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_VentasDetalle</servlet-name>
+        <url-pattern>/sr_VentasDetalle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

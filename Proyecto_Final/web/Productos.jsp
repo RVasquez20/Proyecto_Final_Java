@@ -9,6 +9,10 @@
 <%@page import="Modelo.productos"%>
 <%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!-- <-% 
+String variable = (String)request.getAttribute("txt_locale");
+
+%-> -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +21,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-<script src="jquery-3.5.1.min.js"></script>
+<script src="JS/Producto.js" type="text/javascript"></script>
+ <script src="JS/jquery.js" type="text/javascript"></script>
         <title>Productos</title>
     </head>
     
@@ -33,11 +38,8 @@
 
  
        
-            <form action="sr_productos" method="POST" class="form-group">
-                   <%
-                productos p1=new productos();
-                p1.ex(2);
-                %>
+            <form action="sr_productos" method="POST" class="form-group" enctype="multipart/form-data" class="form-horizontal" role="form" name="formulario">
+                  
                 <label><b>id</b></label>
                 <input type="text" name="txt_id" class="form-control" id="txt_id" placeholder="id" value="0" readonly style="max-width: 250px;"><br>
                 <label><b>Producto</b></label>
@@ -57,8 +59,9 @@
                 <input type="text" name="txt_descripcion" class="form-control" id="txt_descripcion" placeholder="Ejemplo:Pan blanco" required><br>
                 
                 <label><b>Imagen</b></label>
-                <input type="file" name="txt_Imagen"  id="txt_Imagen" required><br>
-                
+                 <input type="file" id="imagen" name="archivo" class="col-md-8 btn" onchange="cargarArchivo(this)">
+                 <input type="hidden" id="imagenes" name="imagenes"/>
+                                <div class="clear"></div>
                  <label><b>Precio Costo</b></label>
                 <input type="money" name="txt_preciocosto" class="form-control" id="txt_preciocosto" placeholder="Ejemplo:12.20" required><br>
                  <label><b>Precio Venta</b></label>
@@ -68,10 +71,11 @@
                 <label><b>Fecha de Ingreso</b></label>
                 <input type="datetime" name="txt_FechaIngreso" class="form-control" id="txt_FechaIngreso" placeholder="Ejemplo:20" required><br>
                
-            <button class="btn btn-primary" name="btn_agregar" id="btn_agregar" value="agregar">Agregar</button>
-            <button class="btn btn-primary" name="btn_modificar" id="btn_modificar" value="modificar">Modificar</button>
-            <button class="btn btn-primary" name="btn_eliminar" id="btn_eliminar" value="eliminar" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false">Eliminar</button>
-       
+            <button type="submit" class="btn btn-primary" name="btn_agregar" id="btn_agregar" value="agregar" data-text-loading="Loading..." >Agregar</button>
+            <button type="submit" class="btn btn-primary" name="btn_actualizar" id="btn_actualizar" value="modificarguardimagen">Modificar Con misma imagen</button>
+            <button type="submit" class="btn btn-primary" name="btn_modificar" id="btn_modificar" value="modificar">Modificar Con distinta imagen</button>
+            <button type="submit" class="btn btn-primary" name="btn_eliminar" id="btn_eliminar" value="eliminar" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false">Eliminar</button>
+       <input type="hidden" name="nombre" id="file">
             </form>
         </div>
         
@@ -99,11 +103,11 @@
         productos producto=new productos();
         tblTabla=producto.Lista();
         for (int i = 0; i < tblTabla.getRowCount(); i++) {
-                out.println("<tr data-id_productos="+tblTabla.getValueAt(i, 0)+" data-id_marcas="+tblTabla.getValueAt(i, 9)+">");
+                out.println("<tr data-id_productos="+tblTabla.getValueAt(i, 0)+" data-id_marcas="+tblTabla.getValueAt(i, 9)+" data-idimagen="+ tblTabla.getValueAt(i, 4) +">");
                 out.println("<td>"+tblTabla.getValueAt(i, 1)+"</td>");
                 out.println("<td>"+tblTabla.getValueAt(i, 2)+"</td>");
                 out.println("<td>"+tblTabla.getValueAt(i, 3)+"</td>");
-                out.println("<td>"+tblTabla.getValueAt(i, 4)+"</td>");
+                out.println("<td><img src='upload/"+tblTabla.getValueAt(i, 4)+"' style='width:100px; height:100px; cursor:pointer' value="+tblTabla.getValueAt(i, 4)+" title="+tblTabla.getValueAt(i, 4)+"></td>");
                 out.println("<td>"+tblTabla.getValueAt(i, 5)+"</td>");
                 out.println("<td>"+tblTabla.getValueAt(i, 6)+"</td>");
                 out.println("<td>"+tblTabla.getValueAt(i, 7)+"</td>");
@@ -118,7 +122,7 @@
 </div>
   
 
-         <script type="text/javascript">   
+         <script  type="text/javascript">   
 $('#tbl_productos').on('click','tr td', function(evt){
  
    var target,idproducto,idmarcas,descripcion,precio_costo,precio_venta,existencias,producto,fechaingreso,imagen;
@@ -131,7 +135,7 @@ $('#tbl_productos').on('click','tr td', function(evt){
   precio_costo= target.parents("tr").find("td").eq(5).html();
   existencias= target.parents("tr").find("td").eq(6).html();
    fechaingreso=target.parents("tr").find("td").eq(7).html();
-   imagen=target.parents("tr").find("td").eq(3).html();
+   imagen= target.parents().data('idimagen');
    $("#txt_id").val(idproducto);
     $("#box_marcas").val(idmarcas);
    $("#txt_producto").val(producto);
@@ -140,7 +144,7 @@ $('#tbl_productos').on('click','tr td', function(evt){
    $("#txt_precioventa").val(precio_venta);
    $("#txt_exitencias").val(existencias);
    $("#txt_FechaIngreso").val(fechaingreso);
-   $("#txt_Imagen").val(imagen);
+   $("#imagenes").val(imagen);
    
         
 

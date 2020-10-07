@@ -19,5 +19,6 @@
         <a href="Productos.jsp">Productos</a>
         <a href="ventas.jsp">ventas</a>
         <a href="Compras_Detalle.jsp">Compras Detalle</a>
+         <a href="VentasDetalle.jsp">Ventas Detalle</a>
     </body>
 </html>
