@@ -50,7 +50,7 @@ public class sr_venta extends HttpServlet {
             out.println("<h1>" + request.getParameter("txt_fechafactura") + "</h1>");
             out.println("<h1>" + request.getParameter("txt_fechaingreso") + "</h1>");*/
 
-            ventas = new Ventas(Integer.parseInt(request.getParameter("txt_id")), Integer.parseInt(request.getParameter("txt_nofactura")), Integer.parseInt(request.getParameter("txt_idcliente")), Integer.parseInt(request.getParameter("txt_idempleado")), request.getParameter("txt_serie"),request.getParameter("txt_fechafactura"), request.getParameter("txt_fechaingreso"));
+            ventas = new Ventas(Integer.parseInt(request.getParameter("txt_idventas")), Integer.parseInt(request.getParameter("txt_nofactura")), Integer.parseInt(request.getParameter("txt_idcliente")), Integer.parseInt(request.getParameter("txt_idempleado")), request.getParameter("txt_serie"),request.getParameter("txt_fechafactura"), request.getParameter("txt_fechaingreso"));
 
             //Boton Agregar
             if ("agregar".equals(request.getParameter("btn_agregar"))) {

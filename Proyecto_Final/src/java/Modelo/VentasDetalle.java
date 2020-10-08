@@ -187,9 +187,8 @@ public class VentasDetalle {
         try {
             cn=new Conexion();
             productos p1=new productos();
-            ComprasDetalle c1=new ComprasDetalle();
             PreparedStatement parametro;
-            String query="UPDATE productos SET existencia=?+? WHERE idProducto=?;";
+            String query="UPDATE productos SET existencia=?-? WHERE idProducto=?;";
             cn.abrirconexion();
             parametro=cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, p1.ex(getIdProducto()));
@@ -206,5 +205,31 @@ public class VentasDetalle {
               return retorno;
         } 
     }
+    public int idforventasdetalle(int nofactura) throws SQLException{
+          int retorno=0;
+          int exi=0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="select idVentas from ventas where nofactura="+nofactura+";";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getInt("idVentas");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+ }
 
 }

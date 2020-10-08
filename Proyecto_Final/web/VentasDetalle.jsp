@@ -4,6 +4,7 @@
     Author     : rodri
 --%>
 
+<%@page import="Modelo.VentasDetalle"%>
 <%@page import="Modelo.productos"%>
 <%@page import="Modelo.Empleado"%>
 <%@page import="javax.swing.table.DefaultTableModel"%>
@@ -89,13 +90,39 @@
                 <br>
                 <button name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-success">Agregar</button>
                 <button name="btn_modificar" id="btn_modificar" value="modificar" class="btn btn-primary">Modificar</button>
-                <button name="btn_eliminar" id="btn_eliminar" value="eliminar" class="btn btn-danger">Eliminar</button>
+                <button name="btn_eliminar" id="btn_eliminar" value="eliminar" class="btn btn-danger" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
 
             </form>
                 
                 
-                
-                
+                <!--Ventas Detalle-->
+                 <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No. Factura</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_ventasDetalle">
+                    <%
+                    VentasDetalle vd = new VentasDetalle();
+                    DefaultTableModel tabladv = new DefaultTableModel();
+                    tabladv = vd.ListaDeVentasDetalle();
+                    for (int t=0;t<tabladv.getRowCount();t++){
+                        out.println("<tr data-idvd="+ tabladv.getValueAt(t, 0) +" data-idv="+ tabladv.getValueAt(t, 1) +" data-idpr="+ tabladv.getValueAt(t, 3) +">");
+                        out.println("<td>"+ tabladv.getValueAt(t, 2) +"</td>");
+                        out.println("<td>"+ tabladv.getValueAt(t, 4) +"</td>");
+                        out.println("<td>"+ tabladv.getValueAt(t, 5) +"</td>");
+                        out.println("<td>"+ tabladv.getValueAt(t, 6) +"</td>");
+                        out.println("</tr>");
+                        
+                        
+                    }
+                    %>
+                </tbody>
+            </table>
               <!--Ventas-->
                  <table class="table table-striped">
                 <thead>
@@ -105,7 +132,7 @@
                         <th>Fecha Factura</th>
                         <th>Nombre</th>
                         <th>NIT</th>
-                        <th>Id Empleado</th>
+                        <th>Empleado</th>
                         <th>Fecha Ingreso</th>
                     </tr>
                 </thead>
@@ -115,14 +142,14 @@
                     DefaultTableModel tabla = new DefaultTableModel();
                     tabla = ventas.leer();
                     for (int t=0;t<tabla.getRowCount();t++){
-                        out.println("<tr data-id="+ tabla.getValueAt(t, 0) +" data-idc="+ tabla.getValueAt(t, 4) +">");
+                        out.println("<tr data-id="+ tabla.getValueAt(t, 0) +" data-idc="+ tabla.getValueAt(t, 4) +" data-ide="+ tabla.getValueAt(t, 8) +">");
                         out.println("<td>"+ tabla.getValueAt(t, 1) +"</td>");
                         out.println("<td>"+ tabla.getValueAt(t, 2) +"</td>");
                         out.println("<td>"+ tabla.getValueAt(t, 3) +"</td>");
                         out.println("<td>"+ tabla.getValueAt(t, 5) +"</td>");
                         out.println("<td>"+ tabla.getValueAt(t, 6) +"</td>");
                         out.println("<td>"+ tabla.getValueAt(t, 7) +"</td>");
-                        out.println("<td>"+ tabla.getValueAt(t, 8) +"</td>");
+                        out.println("<td>"+ tabla.getValueAt(t, 9) +"</td>");
                         out.println("</tr>");
                         
                         
@@ -131,5 +158,53 @@
                 </tbody>
             </table>
         </div>
+                    <script type="text/javascript">
+    $('#tbl_ventasDetalle').on('click','tr td',function(evt){
+       var target,idvd,idv,idpr,noFac,producto,precio,cantidad; 
+       target = $(event.target);
+       idvd = target.parent().data('idvd');
+       idv = target.parent().data('idv'); 
+       idpr = target.parent().data('idpr'); 
+       noFac= target.parent("tr").find("td").eq(0).html();
+       producto = target.parent("tr").find("td").eq(1).html();
+       cantidad=target.parent("tr").find("td").eq(2).html();
+       precio = target.parent("tr").find("td").eq(3).html();
+       
+       $("#txt_id_Ventas").val(idvd);
+        $("#txt_idventas").val(idv);
+         $("#drop_Producto").val(idpr);
+       $("#txt_PrecioUnitario").val(precio);
+       $("#txt_Cantidad").val(cantidad);
+       
+       
+    });
+    
+</script>
+  <script type="text/javascript">
+         $('#tbl_ventas').on('click', 'tr td', function (evt) {
+                        var target, id, nofactura, serie, fechafactura, idcliente, idempleado, fechaingreso;
+                        target = $(evt.target);
+                        id = target.parent().data('id');
+                        idcliente = target.parent().data('idc');
+                        idempleado = target.parent().data('ide');
+                        nofactura = target.parent("tr").find("td").eq(0).html();
+                        serie = target.parent("tr").find("td").eq(1).html();
+                        fechafactura = target.parent("tr").find("td").eq(2).html();
+                        
+                        
+                        fechaingreso = target.parent("tr").find("td").eq(6).html();
+
+                        $("#txt_idventas").val(id);
+                        $("#txt_nofactura").val(nofactura);
+                        $("#txt_serie").val(serie);
+                        $("#txt_fechafactura").val(fechafactura);
+                        $("#txt_idcliente").val(idcliente);
+                        $("#txt_idempleado").val(idempleado);
+                        $("#txt_fechaingreso").val(fechaingreso);
+
+ 
+    });
+    </script>
+        
     </body>
 </html>

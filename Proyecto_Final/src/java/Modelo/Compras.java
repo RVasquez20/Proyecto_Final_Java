@@ -171,4 +171,31 @@ public DefaultTableModel ListaDeCompras(){
     }
     return drop;
     }
+             public int idfordetalle(int orden) throws SQLException{
+          int retorno=0;
+          int exi=0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="select idcompra from compras where no_orden_compra="+orden+";";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getInt("idcompra");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+    }
+
 }

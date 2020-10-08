@@ -10,6 +10,9 @@ import Modelo.ComprasDetalle;
 import Modelo.productos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +36,7 @@ public class sr_ComprasDetalle extends HttpServlet {
     ComprasDetalle detalle,detalleantiguo;  
     Compras compra;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -48,20 +51,27 @@ public class sr_ComprasDetalle extends HttpServlet {
             out.println("<h1>id producto "+Integer.parseInt(request.getParameter("drop_Producto"))+"</h1>");
             out.println("<h1>Cantidad "+Integer.parseInt(request.getParameter("txt_Cantidad"))+"</h1>");
             out.println("<h1>precio "+Double.parseDouble(request.getParameter("txt_PrecioUnitario"))+"</h1>");
-            
+               Compras obj1=new Compras();
+            int idc;
+            idc=obj1.idfordetalle(Integer.parseInt(request.getParameter("txt_No_Orden")));
             out.println("<h1>Id C"+Integer.parseInt(request.getParameter("txt_id_Compra"))+"</h1>");
             out.println("<h1>no orden "+Integer.parseInt(request.getParameter("txt_No_Orden"))+"</h1>");
             out.println("<h1>proveedor "+Integer.parseInt(request.getParameter("ListaProveedores"))+"</h1>");
             out.println("<h1>fecha orden  "+request.getParameter("txt_Fecha_Orden")+"</h1>");
-            out.println("<h1>ingreso "+request.getParameter("txt_Fecha_Ingreso")+"</h1>");*/
+            out.println("<h1>ingreso "+request.getParameter("txt_Fecha_Ingreso")+"</h1>");
+            out.println("<h1>Id compra "+idc+"</h1>");
        
-            detalleantiguo=new ComprasDetalle();
+            */detalleantiguo=new ComprasDetalle();
             int x=detalleantiguo.cantidadantigua(Integer.parseInt(request.getParameter("txt_id")));
-             detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
+             
             compra=new Compras(Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("ListaProveedores")),request.getParameter("txt_Fecha_Orden"),request.getParameter("txt_Fecha_Ingreso"));
             if ("agregar".equals(request.getParameter("btn_agregar"))){
                 
              if ((compra.agregar()>0)){
+                 Compras obj1=new Compras();
+            int idc;
+            idc=obj1.idfordetalle(Integer.parseInt(request.getParameter("txt_No_Orden")));
+                 detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),idc,Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
                  if ((detalle.agregar()>0)&&(detalle.ActualizarExistencias()>0)&&(detalle.ActualizarPrecioCosto()>0)&&(detalle.ActualizarPrecioventa()>0)){ 
              response.sendRedirect("Compras_Detalle.jsp");
                  }
@@ -72,13 +82,15 @@ public class sr_ComprasDetalle extends HttpServlet {
              }
            if ("modificar".equals(request.getParameter("btn_modificar"))){
              if (compra.Modificar()>0){
+                
+                 detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
                   if (detalle.Modificar()>0){
                       if(Integer.parseInt(request.getParameter("txt_Cantidad"))>x){
-                     detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("drop_Producto")),(Integer.parseInt(request.getParameter("txt_Cantidad"))-x),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));    
+                     detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),(Integer.parseInt(request.getParameter("txt_Cantidad"))-x),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));    
                       }else if(Integer.parseInt(request.getParameter("txt_Cantidad"))<x){
-                     detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("drop_Producto")),(Integer.parseInt(request.getParameter("txt_Cantidad"))-x),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));    
+                     detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),(Integer.parseInt(request.getParameter("txt_Cantidad"))-x),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));    
                       }else{
-                      detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad"))-x,Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
+                      detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad"))-x,Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
                       }
                       if((detalle.ActualizarExistencias()>0)&&(detalle.ActualizarPrecioCosto()>0)&&(detalle.ActualizarPrecioventa()>0)){ 
              response.sendRedirect("Compras_Detalle.jsp");
@@ -92,7 +104,9 @@ public class sr_ComprasDetalle extends HttpServlet {
              }
             if ("eliminar".equals(request.getParameter("btn_eliminar"))){
              if (detalle.Eliminar()>0){
-                 detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("drop_Producto")),(0-Integer.parseInt(request.getParameter("txt_Cantidad"))),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
+               
+                 detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),(0-Integer.parseInt(request.getParameter("txt_Cantidad"))),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
+                
                  detalle.ActualizarExistencias();
                   if ((compra.Eliminar()>0)){ 
              response.sendRedirect("Compras_Detalle.jsp");
@@ -121,7 +135,11 @@ public class sr_ComprasDetalle extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sr_ComprasDetalle.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -135,7 +153,11 @@ public class sr_ComprasDetalle extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sr_ComprasDetalle.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
