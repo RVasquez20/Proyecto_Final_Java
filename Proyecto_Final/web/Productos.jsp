@@ -3,7 +3,15 @@
     Created on : 18/09/2020, 10:43:41 PM
     Author     : cindy
 --%>
-
+<%
+      HttpSession actual =request.getSession(true);
+      String usuario = (String) actual.getAttribute("Logueado");
+      String nombres=(String) actual.getAttribute("nom");
+      String email=(String) actual.getAttribute("em");
+      String profile=(String) actual.getAttribute("Ft");
+      session.setMaxInactiveInterval(900);
+      if(actual.getAttribute("Logueado")!=null){
+        %>
 <%@page import="java.util.HashMap"%>
 <%@page import="Modelo.marcas"%>
 <%@page import="Modelo.productos"%>
@@ -131,7 +139,26 @@ function showtime () {
     </head>
     
     <body onLoad="startclock()">
-        
+                           <div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h4 class="text-white">Herramientas</h4>
+        <form action="sr_login" method="post">
+            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
+        </form>
+    </div>
+
+  </div>
+  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
+    <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+      <span class="navbarr-brand"><%=nombres%></span>
+<span class="navbarr-brand"><%=usuario%></span>
+<span class="navbarr-brand"><%=email%></span>
+  </button>
+
+  </nav>
+</div>
         
             <br><h1>Listado De Productos</h1>
        
@@ -302,3 +329,10 @@ $('#tbl_productos').on('click','tr td', function(evt){
 </script>
     </body>
 </html>
+<%
+   }
+else{
+response.sendRedirect("index.jsp");
+
+}
+%>
