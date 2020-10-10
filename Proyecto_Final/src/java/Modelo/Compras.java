@@ -8,6 +8,7 @@ package Modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -75,7 +76,7 @@ public DefaultTableModel ListaDeCompras(){
  try{
      cn = new Conexion();
      cn.abrirconexion();
-      String query = "select c.idcompra as ID,c.no_orden_compra,p.idproveedor,p.proveedor,c.fecha_orden,c.fechaingreso from compras as c inner join proveedores as p where c.idproveedor=p.idproveedor;";
+      String query = "select c.idcompra as ID,c.no_orden_compra,p.idproveedor,p.proveedor,c.fecha_orden,c.fechaingreso from compras as c inner join proveedores as p where c.idproveedor=p.idproveedor order by ID;";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
       String encabezado[] = {"ID","Numero de Compra","idProveedor","Proveedor","Fecha De Orden","Fecha de Ingreso"};
       tabla.setColumnIdentifiers(encabezado);
@@ -154,4 +155,47 @@ public DefaultTableModel ListaDeCompras(){
         }
     return retorno;
     }
+           public HashMap Lista_Odenes(){
+    HashMap<String,String> drop = new HashMap();
+    try{
+        String query ="select idcompra as ID,no_orden_compra from compras;";
+         cn = new Conexion();
+         cn.abrirconexion();
+            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+            while (consulta.next()){
+            drop.put(consulta.getString("ID"),consulta.getString("no_orden_compra") );
+            }
+         cn.cerrarconexion();
+    }catch(SQLException ex){
+        System.out.println(ex.getMessage());
+    }
+    return drop;
+    }
+             public int idfordetalle(int orden) throws SQLException{
+          int retorno=0;
+          int exi=0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="select idcompra from compras where no_orden_compra="+orden+";";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getInt("idcompra");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+    }
+
 }

@@ -9,12 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>JSP Page</title>
     </head>
     <body>
         <h1>Bienvenido</h1>
         
         <a href="Proveedores.jsp">Proveedores</a>
-        
+        <a href="Empleados.jsp">Empleados</a>
+        <a href="Productos.jsp">Productos</a>
+        <a href="ventas.jsp">ventas</a>
+        <a href="Compras_Detalle.jsp">Compras Detalle</a>
+         <a href="VentasDetalle.jsp">Ventas Detalle</a>
     </body>
 </html>

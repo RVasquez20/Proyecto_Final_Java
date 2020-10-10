@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
+        <servlet-name>sr_cliente</servlet-name>
+        <servlet-class>Controlador.sr_cliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sr_venta</servlet-name>
+        <servlet-class>Controlador.sr_venta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sr_ComprasDetalle</servlet-name>
+        <servlet-class>Controlador.sr_ComprasDetalle</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sr_VentasDetalle</servlet-name>
+        <servlet-class>Controlador.sr_VentasDetalle</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sr_cliente</servlet-name>
+        <url-pattern>/sr_cliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_venta</servlet-name>
+        <url-pattern>/sr_venta</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>sr_Proveedores</servlet-name>
         <servlet-class>Controlador.sr_Proveedores</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>sr_Compras</servlet-name>
         <servlet-class>Controlador.sr_Compras</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sr_empleado</servlet-name>
+        <servlet-class>Controlador.sr_empleado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sr_Puestos</servlet-name>
+        <servlet-class>Controlador.sr_Puestos</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>sr_Proveedores</servlet-name>
@@ -15,6 +47,38 @@
     <servlet-mapping>
         <servlet-name>sr_Compras</servlet-name>
         <url-pattern>/sr_Compras</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_empleado</servlet-name>
+        <url-pattern>/sr_empleado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_Puestos</servlet-name>
+        <url-pattern>/sr_Puestos</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>sr_productos</servlet-name>
+        <servlet-class>Controlador.sr_productos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sr_Marcas</servlet-name>
+        <servlet-class>Controlador.sr_Marcas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sr_productos</servlet-name>
+        <url-pattern>/sr_productos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_Marcas</servlet-name>
+        <url-pattern>/sr_Marcas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_ComprasDetalle</servlet-name>
+        <url-pattern>/sr_ComprasDetalle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_VentasDetalle</servlet-name>
+        <url-pattern>/sr_VentasDetalle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
