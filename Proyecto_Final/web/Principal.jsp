@@ -49,6 +49,7 @@
        <h1>Bienvenido</h1>
         
         <a href="Proveedores.jsp">Proveedores</a>
+         <a href="clientes.jsp">Clientes</a>
         <a href="Empleados.jsp">Empleados</a>
         <a href="Productos.jsp">Productos</a>
         <a href="ventas.jsp">ventas</a>

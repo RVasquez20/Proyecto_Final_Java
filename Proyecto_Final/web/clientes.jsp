@@ -29,9 +29,7 @@
 
     </head>
     <body>
-        <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-        <div class="pos-f-t">
+             <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
         <h4 class="text-white">Herramientas</h4>
@@ -43,7 +41,7 @@
   </div>
   <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
     <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-     <img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+        <img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
 <span class="navbarr-brand"><%=email%></span>

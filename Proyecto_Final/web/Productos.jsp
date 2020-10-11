@@ -227,6 +227,7 @@ function showtime () {
             <button type="submit" class="btn btn-primary" name="btn_eliminar" id="btn_eliminar" value="eliminar" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false">Eliminar</button>
        <input type="hidden" name="nombre" id="file">
             </form>
+    
         </div>
         
         
