@@ -8,6 +8,7 @@ package Modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 /**
  *
@@ -152,5 +153,31 @@ public class Usuarios {
         
         return retorno;
     }
-     
+  public HashMap Menu(String usuario) throws SQLException{
+       HashMap<String,String> lista=new HashMap();
+        String retorno = null;
+       
+            cn = new Conexion();
+            cn.abrirconexion();
+            PreparedStatement parametro;
+            String Query = "select Tipo from usuarios where Usuario='"+usuario+"';";
+            parametro = cn.conexionbd.prepareStatement(Query);
+            ResultSet rs = parametro.executeQuery();
+      
+            while (rs.next()) {
+              retorno=rs.getString("Tipo");
+            }
+             String query ="select nombre,URL from menu where tipousuario='"+retorno+"';";
+         cn = new Conexion();
+         cn.abrirconexion();
+            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+            while (consulta.next()){
+            lista.put(consulta.getString("nombre"),consulta.getString("URL"));
+            }
+         cn.cerrarconexion();
+        return lista;
+    }
+
+    
+                
 }

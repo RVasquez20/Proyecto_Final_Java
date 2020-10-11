@@ -9,6 +9,7 @@ import Modelo.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -53,7 +54,7 @@ public class sr_login extends HttpServlet {
             
             obj.setUsuario(request.getParameter("txt_usuario"));
            // obj.setNombres(request.getParameter("txt_nombre"));
-            obj.setApellidos(request.getParameter("txt_apellidos"));
+            //obj.setApellidos(request.getParameter("txt_apellidos"));
             //obj.setCorreo(request.getParameter("txt_correo"));
             obj.setPass(request.getParameter("txt_pass"));
             //obj.setCODIGO(request.getParameter("txt_codigo"));
@@ -74,11 +75,13 @@ public class sr_login extends HttpServlet {
                     String nombre=obj.Name(usuario);
                     String email=obj.Email(usuario);
                     String profile=obj.Foto(usuario);
+                    HashMap<String,String> Lista=obj.Menu(usuario);
                     HttpSession actual = request.getSession(true);
                     actual.setAttribute("Logueado", usuario);
                     actual.setAttribute("nom", nombre);
                     actual.setAttribute("em", email);
                     actual.setAttribute("Ft", profile);
+                    actual.setAttribute("Men", Lista);
                     response.sendRedirect("Principal.jsp");
                 }
                 else {

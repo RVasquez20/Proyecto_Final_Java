@@ -3,12 +3,14 @@
     Created on : 8/10/2020, 06:34:15 PM
     Author     : rodri
 --%>
+<%@page import="java.util.HashMap"%>
 <%
       HttpSession actual =request.getSession(true);
       String usuario = (String) actual.getAttribute("Logueado");
       String nombres=(String) actual.getAttribute("nom");
       String email=(String) actual.getAttribute("em");
       String profile=(String) actual.getAttribute("Ft");
+      HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
       session.setMaxInactiveInterval(900);
       if(actual.getAttribute("Logueado")!=null){
         %>
@@ -42,7 +44,14 @@
 <span class="navbarr-brand"><%=usuario%></span>
 <span class="navbarr-brand"><%=email%></span>
   </button>
+  <% 
 
+                         for (String i:Menu.keySet()){
+                             out.println("<a href='" + Menu.get(i) + "'>" + Menu.get(i) + "</a><br>");
+                         }
+                         
+                    
+                    %>
   </nav>
 </div>
           
