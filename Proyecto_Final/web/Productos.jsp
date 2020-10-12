@@ -218,13 +218,13 @@ function showtime () {
                 <input type="money" name="txt_precioventa" class="form-control" id="txt_precioventa" placeholder="Ejemplo:12.20" required><br>
                   <label><b>Existencias</b></label>
                 <input type="number" name="txt_exitencias" class="form-control" id="txt_exitencias" placeholder="Ejemplo:20" required><br>
-                <label><b>Fecha de Ingreso</b></label>
-                <input type="datetime" name="txt_FechaIngreso" class="form-control" id="txt_FechaIngreso" placeholder="Ejemplo:20" required><br>
+                <label id="lbl_fecha"><b>Fecha de Ingreso</b></label>
+                <input type="datetime" name="txt_FechaIngreso" class="form-control" id="txt_FechaIngreso" value="0" placeholder="Ejemplo:20" required><br>
                
             <button type="submit" class="btn btn-primary" name="btn_agregar" id="btn_agregar" value="agregar" data-text-loading="Loading..." >Agregar</button>
             <button type="submit" class="btn btn-primary" name="btn_actualizar" id="btn_actualizar" value="modificarguardimagen">Modificar Con misma imagen</button>
             <button type="submit" class="btn btn-primary" name="btn_modificar" id="btn_modificar" value="modificar">Modificar Con distinta imagen</button>
-            <button type="submit" class="btn btn-primary" name="btn_eliminar" id="btn_eliminar" value="eliminar" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false">Eliminar</button>
+            <button type="submit" class="btn btn-primary" name="btn_eliminar" id="btn_eliminar" value="eliminar" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
        <input type="hidden" name="nombre" id="file">
             </form>
     
@@ -272,12 +272,28 @@ function showtime () {
     <a href="Marcas.jsp">Marcas</a> 
 </div>
   
-
+ <script type="text/javascript">
+            $(document).ready(function () {
+            $("#lbl_fecha").hide();
+                        $("#txt_FechaIngreso").hide();
+                        $("#btn_agregar").show();
+                        $("#btn_modificar").hide();
+                        $("#btn_actualizar").hide();
+                        $("#btn_eliminar").hide();
+    });
+            
+            </script>
          <script  type="text/javascript">   
 $('#tbl_productos').on('click','tr td', function(evt){
  
    var target,idproducto,idmarcas,descripcion,precio_costo,precio_venta,existencias,producto,fechaingreso,imagen;
    target = $(event.target);
+    $("#lbl_fecha").show();
+                        $("#txt_FechaIngreso").show();
+                        $("#btn_agregar").hide();
+                        $("#btn_modificar").show();
+                        $("#btn_eliminar").show();
+                         $("#btn_actualizar").show();
    idproducto = target.parent().data('id_productos');
   idmarcas = target.parent().data('id_marcas');
    producto=target.parents("tr").find("td").eq(0).html();

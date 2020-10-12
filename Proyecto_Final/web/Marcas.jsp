@@ -3,12 +3,14 @@
     Created on : 1/10/2020, 04:55:32 PM
     Author     : rodri
 --%>
+<%@page import="java.util.HashMap"%>
 <%
       HttpSession actual =request.getSession(true);
       String usuario = (String) actual.getAttribute("Logueado");
       String nombres=(String) actual.getAttribute("nom");
       String email=(String) actual.getAttribute("em");
       String profile=(String) actual.getAttribute("Ft");
+      HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
       session.setMaxInactiveInterval(900);
       if(actual.getAttribute("Logueado")!=null){
         %>
@@ -26,9 +28,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-                <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-        <div class="pos-f-t">
+             <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
         <h4 class="text-white">Herramientas</h4>
@@ -40,12 +40,19 @@
   </div>
   <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
     <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+<img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
 <span class="navbarr-brand"><%=email%></span>
   </button>
+  <% 
 
+                         for (String i:Menu.keySet()){
+                             out.println("<a href='" + Menu.get(i) + "'>" + Menu.get(i) + "</a><br>");
+                         }
+                         
+                    
+                    %>
   </nav>
 </div>
         <h1>Marcas</h1>
@@ -53,7 +60,7 @@
         <div class="container">
          <form action="sr_Marcas" method="POST" class="form-group">
            <label>ID:</label>
-           <input type="text" name="txt_id_Marcas" id="txt_id_Marcas" class="form-control" value="0">
+           <input type="text" name="txt_id_Marcas" id="txt_id_Marcas" class="form-control" value="0" readonly="">
            <label for="lbl_Marca" ><b>Marca</b></label>
            <input type="text" name="txt_Marca" id="txt_Marca" class="form-control" placeholder="Ejemplo: Pepsi" required>
            
@@ -72,10 +79,9 @@
                 <div class="container">
                            
            
-    <table class="table table-striped">
+    <table class="table table-striped" style="text-align: center;">
     <thead>
       <tr>
-          <th>Id</th>
         <th>Marca</th>
 
       </tr>
@@ -86,8 +92,7 @@
         DefaultTableModel tabla = new DefaultTableModel();
         tabla = marca.ListaDeMarcas();
         for (int t=0;t<tabla.getRowCount();t++){
-            out.println("<tr>");
-             out.println("<td>" + tabla.getValueAt(t,0) + "</td>");
+             out.println("<tr data-idm=" + tabla.getValueAt(t,0) + ">");
             out.println("<td>" + tabla.getValueAt(t,1) + "</td>");
             out.println("</tr>");
         
@@ -103,8 +108,8 @@
          $('#tbl_Marcas').on('click','tr td',function(evt){
        var target,id,Marcas; 
        target = $(event.target);
-       id = target.parent("tr").find("td").eq(0).html();
-       Marcas = target.parent("tr").find("td").eq(1).html();
+       id = target.parent().data("idm");
+       Marcas = target.parent("tr").find("td").eq(0).html();
        
 
        $("#txt_id_Marcas").val(id);

@@ -83,11 +83,10 @@ public class marcas {
         try {
             cn=new Conexion();
             PreparedStatement parametro;
-            String query="INSERT INTO marcas(idmarca,marca)VALUES(?,?);";
+            String query="INSERT INTO marcas(marca)VALUES(?);";
             cn.abrirconexion();
             parametro=cn.conexionbd.prepareStatement(query);
-            parametro.setInt(1, getIdMarca());
-            parametro.setString(2, getMarca());
+            parametro.setString(1, getMarca());
            
                     retorno=parametro.executeUpdate();
             cn.cerrarconexion(); 

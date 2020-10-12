@@ -47,7 +47,7 @@
   <% 
 
                          for (String i:Menu.keySet()){
-                             out.println("<a href='" + Menu.get(i) + "'>" + Menu.get(i) + "</a><br>");
+                             out.println("<a href='" + Menu.get(i) + "'>" + i + "</a><br>");
                          }
                          
                     

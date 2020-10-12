@@ -156,7 +156,7 @@ public class productos {
         try {
             con=new Conexion();
             PreparedStatement parametro;
-            String query="INSERT INTO productos(producto,idmarca,Descripcion,Imagen,precio_costo,precio_venta,existencia,fecha_ingreso)VALUES(?,?,?,?,?,?,?,?);";
+            String query="INSERT INTO productos(producto,idmarca,Descripcion,Imagen,precio_costo,precio_venta,existencia,fecha_ingreso)VALUES(?,?,?,?,?,?,?,now());";
             con.abrirconexion();
             parametro=con.conexionbd.prepareStatement(query);
             parametro.setString(1, getProducto());
@@ -166,7 +166,6 @@ public class productos {
             parametro.setDouble(5,getPrecio_costo());
             parametro.setDouble(6,getPrecio_venta());
             parametro.setInt(7, getExistencia());
-            parametro.setString(8,getFechaDeIngreso());
                     retorno=parametro.executeUpdate();
             con.cerrarconexion(); 
             return retorno;

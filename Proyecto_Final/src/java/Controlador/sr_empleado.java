@@ -48,33 +48,33 @@ public class sr_empleado extends HttpServlet {
              
             if ("agregar".equals(request.getParameter("btn_agregar"))){
              if (empleado.agregar()>0){
-             response.sendRedirect("index.jsp");
+             response.sendRedirect("Empleados.jsp");
              
              }else{
              out.println("<h1> xxxxxxx No se Ingreso xxxxxxxxxxxx </h1>");
-             out.println("<a href='index.jsp'>Regresar...</a>");
+             out.println("<a href='Empleados.jsp'>Regresar...</a>");
              }
              }
             
             // Boton modificar 
             if ("modificar".equals(request.getParameter("btn_modificar"))){
              if (empleado.modificar()>0){
-             response.sendRedirect("index.jsp");
+             response.sendRedirect("Empleados.jsp");
              
              }else{
              out.println("<h1> xxxxxxx No se Modifico xxxxxxxxxxxx </h1>");
-             out.println("<a href='index.jsp'>Regresar...</a>");
+             out.println("<a href='Empleados.jsp'>Regresar...</a>");
              }
              }
             
             // Boton eliminar 
             if ("eliminar".equals(request.getParameter("btn_eliminar"))){
              if (empleado.eliminar()>0){
-             response.sendRedirect("index.jsp");
+             response.sendRedirect("Empleados.jsp");
              
              }else{
              out.println("<h1> xxxxxxx No se Elimino xxxxxxxxxxxx </h1>");
-             out.println("<a href='index.jsp'>Regresar...</a>");
+             out.println("<a href='Empleados.jsp'>Regresar...</a>");
              }
              }
             

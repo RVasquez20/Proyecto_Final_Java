@@ -82,8 +82,8 @@
                 <input type="number" name="txt_nofactura" id="txt_nofactura" class="form-control" required>
                 <label for="lbl_serie">Serie:</label>
                 <input type="text" name="txt_serie" id="txt_serie" class="form-control" required>
-                <label for="lbl_fechafactura">Fecha Factura:</label>
-                <input type="date" name="txt_fechafactura" id="txt_fechafactura" class="form-control" required>
+                <label id="lbl_fechafactura">Fecha Factura:</label>
+                <input type="date" name="txt_fechafactura" id="txt_fechafactura" value="0" class="form-control" required>
                 <label for="lbl_idcliente">Cliente:</label>
 
                 <select name="txt_idcliente" id="txt_idcliente" class="form-control">
@@ -111,8 +111,8 @@
                          }
                 %>
                  </select>
-                <label for="lbl_fechaingreso">Fecha Ingreso:</label>
-                <input type="datetime" name="txt_fechaingreso" id="txt_fechaingreso" class="form-control" required>
+                <label id="lbl_fechaingreso">Fecha Ingreso:</label>
+                <input type="datetime" name="txt_fechaingreso" id="txt_fechaingreso" value="0" class="form-control" required>
 
 
                 <br>
@@ -186,9 +186,28 @@
                 </tbody>
             </table>
         </div>
+                 <script type="text/javascript">
+            $(document).ready(function () {
+            $("#lbl_fechafactura").hide();
+                        $("#txt_fechafactura").hide();
+                                 $("#lbl_fechaingreso").hide();
+                        $("#txt_fechaingreso").hide();
+                        $("#btn_agregar").show();
+                        $("#btn_modificar").hide();
+                        $("#btn_eliminar").hide();
+    });
+            
+            </script>
                     <script type="text/javascript">
     $('#tbl_ventasDetalle').on('click','tr td',function(evt){
        var target,idvd,idv,idpr,noFac,producto,precio,cantidad; 
+       $("#lbl_fechafactura").show();
+                        $("#txt_fechafactura").show();
+                                 $("#lbl_fechaingreso").show();
+                        $("#txt_fechaingreso").show();
+                        $("#btn_agregar").hide();
+                        $("#btn_modificar").showv();
+                        $("#btn_eliminar").show();
        target = $(event.target);
        idvd = target.parent().data('idvd');
        idv = target.parent().data('idv'); 

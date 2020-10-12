@@ -48,7 +48,7 @@ public class Empleado{
  try{
      cn = new Conexion();
      cn.abrirconexion();
-      String query = "SELECT e.idEmpleado as id,e.nombres,e.apellidos,e.direccion,e.telefono,e.DPI,p.idPuesto,p.puesto,e.fecha_nacimiento,e.fecha_inicio_labores,e.fechaingreso,e.genero FROM empleados as e inner join puestos as p where e.idPuesto = p.idPuesto;";
+      String query = "SELECT e.idEmpleado as id,e.nombres,e.apellidos,e.direccion,e.telefono,e.DPI,p.idPuesto,p.puesto,e.fecha_nacimiento,e.fecha_inicio_labores,e.fechaingreso,e.genero FROM empleados as e inner join puestos as p where e.idPuesto = p.idPuesto order by id;";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
       String encabezado[] = {"id","nombres","apellidos","direccion","telefono","DPI","Fecha De nacimiento","fecha inicio de labores","fecha ingreso","puesto","id_puesto","genero"};
       tabla.setColumnIdentifiers(encabezado);
@@ -99,7 +99,7 @@ public class Empleado{
         try{
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "insert into empleados(nombres,apellidos,direccion,telefono,DPI,idPuesto,fecha_nacimiento,fecha_inicio_labores,fechaingreso,genero) values(?,?,?,?,?,?,?,?,?,?);";
+            String query = "insert into empleados(nombres,apellidos,direccion,telefono,DPI,idPuesto,fecha_nacimiento,fecha_inicio_labores,fechaingreso,genero) values(?,?,?,?,?,?,?,?,now(),?);";
             cn.abrirconexion();
             parametro = (PreparedStatement)cn.conexionbd.prepareStatement(query);
             parametro.setString(1,getNombres());
@@ -110,8 +110,7 @@ public class Empleado{
             parametro.setInt(6,getId_puesto());
             parametro.setString(7, getFecha_nacimiento());
             parametro.setString(8, getFechaInicio());
-            parametro.setString(9, getFechaDeIngreso());
-            parametro.setInt(10, getGenero());
+            parametro.setInt(9, getGenero());
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }catch(SQLException ex){
