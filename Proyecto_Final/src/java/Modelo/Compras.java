@@ -103,13 +103,12 @@ public DefaultTableModel ListaDeCompras(){
         try{
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "insert into compras(no_orden_compra,idproveedor,fecha_orden,fechaingreso) values(?,?,?,?);";
+            String query = "insert into compras(no_orden_compra,idproveedor,fecha_orden,fechaingreso) values(?,?,?,now());";
             cn.abrirconexion();
             parametro = (PreparedStatement)cn.conexionbd.prepareStatement(query);
             parametro.setInt(1,getNumeroDeOrden());
             parametro.setInt(2,getIdProveedor());
             parametro.setString(3,getFechaOden());
-            parametro.setString(4,getFechaIngreso());
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }catch(SQLException ex){

@@ -65,12 +65,20 @@
                 <input type="number" name="txt_telefono" id="txt_telefono" class="form-control" placeholder="Ejemplo: 5555555" required>
                 <label for="lbl_DPI" ><b>DPI</b></label>
                 <input type="number" name="txt_DPI" id="txt_DPI" class="form-control" placeholder="Ejemplo: 521312321" required>
-                <label for="lbl_genero" ><b>Genero</b></label>
-                <select name="txt_genero" id="txt_genero" class="form-control">
-                    <option value='0'>Seleccione</option>
-                    <option value='1'>Hombre</option>
-                    <option value='2'>Mujer</option>
-                </select>
+               <br>
+                <label for="lbl_genero" style="font-size: 18px;">Genero: &ensp;</label>
+                <div class="form-check-inline">
+                  <label class="form-check-label" for="Masculino">
+                      <input type="radio" class="form-check-input" id="txt_genero" name="txt_genero" value="1" style="width: 1.2em;height: 1.2em;">Masculino
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                  <label class="form-check-label" for="Femenino">
+                    <input type="radio" class="form-check-input" id="txt_genero2" name="txt_genero" value="2" style="width: 1.2em;height: 1.2em;">Femenino
+                  </label>
+                </div>
+<br>
+                <br>
                 <label for="lbl_fn" ><b>Fecha de Nacimiento</b></label>
                 <input type="date"  name="txt_fn" id="txt_fn" class="form-control" required>
                 <label for="lbl_puesto" ><b>Puesto</b></label>
@@ -89,8 +97,8 @@
                 <br>
                 <label for="lbl_fechaInicio" ><b>Fecha de Inicio de Labores</b></label>
                 <input type="date"  name="txt_fechaInicio" id="txt_fechaInicio" class="form-control" required>
-                 <label for="lbl_fechaIngreso" ><b>Fecha de Ingreso</b></label>
-                 <input type="datetime   "  name="txt_fechaIngreso" id="txt_fechaIngreso" class="form-control" required><br>
+                 <label id="lbl_fechaIngreso" ><b>Fecha de Ingreso</b></label>
+                 <input type="datetime   "  name="txt_fechaIngreso" id="txt_fechaIngreso" value="0" class="form-control" required><br>
                 <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg">Agregar</button>
                 <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success btn-lg">Modificar</button>
                 <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger btn-lg" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
@@ -124,7 +132,11 @@
             out.println("<td>" + tabla.getValueAt(t,3) + "</td>");
             out.println("<td>" + tabla.getValueAt(t,4) + "</td>");
             out.println("<td>" + tabla.getValueAt(t,5) + "</td>");
-            out.println("<td>" + tabla.getValueAt(t,11) + "</td>");
+             if(tabla.getValueAt(t,11).equals("1")){
+                                out.println("<td>Masculino</td>");
+                            }else{
+                                out.println("<td>Femenino</td>");
+                            }
             out.println("<td>" + tabla.getValueAt(t,8) + "</td>");
             out.println("<td>" + tabla.getValueAt(t,7) + "</td>");
             out.println("<td>" + tabla.getValueAt(t,9) + "</td>");
@@ -138,9 +150,24 @@
   </table>
   </div>
         <script type="text/javascript">
+            $(document).ready(function () {
+            $("#lbl_fechaIngreso").hide();
+                        $("#txt_fechaIngreso").hide();
+                        $("#btn_agregar").show();
+                        $("#btn_modificar").hide();
+                        $("#btn_eliminar").hide();
+    });
+            
+            </script>
+        <script type="text/javascript">
     $('#tbl_empleados').on('click','tr td',function(evt){
        var target,id,id_p,nombres,apellidos,direccion,telefono,DPI,genero, nacimiento, fecha_inicio_labores,fechaIngreso; 
        target = $(event.target);
+       $("#lbl_fechaIngreso").show();
+                        $("#txt_fechaIngreso").show();
+                        $("#btn_agregar").hide();
+                        $("#btn_modificar").show();
+                        $("#btn_eliminar").show();
        id = target.parent().data('id');
        id_p = target.parent().data('id_p'); 
        nombres= target.parent("tr").find("td").eq(0).html();
@@ -151,7 +178,13 @@
        genero = target.parent("tr").find("td").eq(5).html();
        nacimiento = target.parent("tr").find("td").eq(6).html();
        fecha_inicio_labores = target.parent("tr").find("td").eq(8).html();
-       fechaIngreso = target.parent("tr").find("td").eq(9).html();       
+       fechaIngreso = target.parent("tr").find("td").eq(9).html();  
+       if(genero==="Masculino"){
+                            $("#txt_genero").prop('checked',true);
+                        }
+                        if(genero==="Femenino"){
+                            $("#txt_genero2").prop('checked',true);
+                        }
        $("#txt_id").val(id);
        $("#txt_nombres").val(nombres);
        $("#txt_apellidos").val(apellidos);

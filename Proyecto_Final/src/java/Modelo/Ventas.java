@@ -162,7 +162,7 @@ public class Ventas {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "INSERT INTO ventas(nofactura,serie,fechafactura,idcliente,idempleado,fechaingreso) VALUES (?,?,?,?,?,?);";
+            String query = "INSERT INTO ventas(nofactura,serie,fechafactura,idcliente,idempleado,fechaingreso) VALUES (?,?,now(),?,?,now());";
             cn.abrirconexion();
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getNofactura());

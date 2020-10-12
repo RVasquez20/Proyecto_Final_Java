@@ -44,7 +44,7 @@ public class sr_Marcas extends HttpServlet {
             if("agregar".equals(request.getParameter("btn_agregar"))){
                
                if(marca.agregar()>0){
-                    response.sendRedirect("Productos.jsp"); 
+                    response.sendRedirect("Marcas.jsp"); 
                }else{
                    out.println("<script>alert('Error');</scrpt>");
                }
@@ -53,7 +53,7 @@ public class sr_Marcas extends HttpServlet {
               if("modificar".equals(request.getParameter("btn_modificar"))){
               
                if(marca.modificar()>0){
-                    response.sendRedirect("Productos.jsp"); 
+                    response.sendRedirect("Marcas.jsp"); 
                }else{
                    out.println("<script>alert('Error');</scrpt>");
                }
@@ -62,7 +62,7 @@ public class sr_Marcas extends HttpServlet {
                  if("eliminar".equals(request.getParameter("btn_eliminar"))){
               
                if(marca.eliminar()>0){
-                    response.sendRedirect("Productos.jsp"); 
+                    response.sendRedirect("Marcas.jsp"); 
                }else{
                    out.println("<script>alert('Error');</scrpt>");
                }

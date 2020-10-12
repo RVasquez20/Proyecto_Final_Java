@@ -96,8 +96,8 @@
                 <br>
            <label for="lbl_Fecha_Orden" ><b>Fecha_Orden</b></label>
            <input type="Date" name="txt_Fecha_Orden" id="txt_Fecha_Orden" class="form-control" placeholder="Ejemplo:12/12/2020" required>
-           <label for="lbl_Fecha_Ingreso" ><b>Fecha De Ingreso</b></label>
-           <input type="DateTime" name="txt_Fecha_Ingreso" id="txt_Fecha_Ingreso" class="form-control" placeholder="Ejemplo: 12/12/2000 2:2:2" " required>
+           <label id="lbl_Fecha_Ingreso" ><b>Fecha De Ingreso</b></label>
+           <input type="DateTime" name="txt_Fecha_Ingreso" id="txt_Fecha_Ingreso" class="form-control" placeholder="Ejemplo: 12/12/2000 2:2:2" value="0" required>
            
            <br>
  <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg">Agregar</button>
@@ -108,6 +108,7 @@
                 
             </form>
         </div>
+                <div class="container">
           
   <table class="table table-hover">
     <thead>
@@ -168,9 +169,24 @@
                   
         </div>
          <script type="text/javascript">
+            $(document).ready(function () {
+            $("#lbl_Fecha_Ingreso").hide();
+                        $("#txt_Fecha_Ingreso").hide();
+                        $("#btn_agregar").show();
+                        $("#btn_modificar").hide();
+                        $("#btn_eliminar").hide();
+    });
+            
+            </script>
+         <script type="text/javascript">
     $('#tbl_CompraDetalle').on('click','tr td',function(evt){
        var target,id,idc,idp,orden,producto,precio,cantidad; 
        target = $(event.target);
+       $("#lbl_Fecha_Ingreso").show();
+                        $("#txt_Fecha_Ingreso").show();
+                        $("#btn_agregar").hide();
+                        $("#btn_modificar").show();
+                        $("#btn_eliminar").show();
        id = target.parent().data('id');
        idc = target.parent().data('idc'); 
        idp = target.parent().data('idp'); 

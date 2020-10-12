@@ -3,12 +3,14 @@
     Created on : sep 30, 2020, 5:32:13 p.m.
     Author     : eriki
 --%>
+<%@page import="java.util.HashMap"%>
 <%
       HttpSession actual =request.getSession(true);
       String usuario = (String) actual.getAttribute("Logueado");
       String nombres=(String) actual.getAttribute("nom");
       String email=(String) actual.getAttribute("em");
       String profile=(String) actual.getAttribute("Ft");
+      HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
       session.setMaxInactiveInterval(900);
       if(actual.getAttribute("Logueado")!=null){
         %>
@@ -27,8 +29,6 @@
         <title>Empleados</title>
     </head>
     <body>
-                <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
         <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
@@ -41,12 +41,19 @@
   </div>
   <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
     <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+<img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
 <span class="navbarr-brand"><%=email%></span>
   </button>
+  <% 
 
+                         for (String i:Menu.keySet()){
+                             out.println("<a href='" + Menu.get(i) + "'>" + Menu.get(i) + "</a><br>");
+                         }
+                         
+                    
+                    %>
   </nav>
 </div>
         <h1>Empleados</h1>

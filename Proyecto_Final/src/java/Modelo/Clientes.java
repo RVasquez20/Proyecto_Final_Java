@@ -24,7 +24,7 @@ public class Clientes {
     public Clientes() {
     }
 
-    public Clientes(int id, int genero, String nombres, String apellidos, String nit, String telefono, String correo, String fecha_ingreso) {
+    public Clientes(int id, int genero, String nombres, String apellidos, String nit, String telefono, String correo) {
         this.id = id;
         this.genero = genero;
         this.nombres = nombres;
@@ -32,7 +32,17 @@ public class Clientes {
         this.nit = nit;
         this.telefono = telefono;
         this.correo = correo;
-        this.fecha_ingreso = fecha_ingreso;
+
+    }
+     public Clientes(int id, int genero, String nombres, String apellidos, String nit, String telefono, String correo,String fecha_ingreso ) {
+        this.id = id;
+        this.genero = genero;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.nit = nit;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.fecha_ingreso=fecha_ingreso;
     }
 
     public int getId() {
@@ -139,7 +149,7 @@ public class Clientes {
         try {
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "INSERT INTO clientes(nombres,apellidos,NIT,telefono,correo_electronico,fechaingreso,genero) VALUES (?,?,?,?,?,?,?);";
+            String query = "INSERT INTO clientes(nombres,apellidos,NIT,telefono,correo_electronico,fechaingreso,genero) VALUES (?,?,?,?,?,now(),?);";
             cn.abrirconexion();
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setString(1, getNombres());
@@ -147,8 +157,7 @@ public class Clientes {
             parametro.setString(3, getNit());
             parametro.setString(4, getTelefono());
             parametro.setString(5, getCorreo());
-            parametro.setString(6, getFecha_ingreso());
-            parametro.setInt(7, getGenero());
+            parametro.setInt(6, getGenero());
 
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();

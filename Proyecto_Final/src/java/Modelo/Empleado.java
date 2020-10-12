@@ -99,7 +99,7 @@ public class Empleado{
         try{
             PreparedStatement parametro;
             cn = new Conexion();
-            String query = "insert into empleados(nombres,apellidos,direccion,telefono,DPI,idPuesto,fecha_nacimiento,fecha_inicio_labores,fechaingreso,genero) values(?,?,?,?,?,?,?,?,?,?);";
+            String query = "insert into empleados(nombres,apellidos,direccion,telefono,DPI,idPuesto,fecha_nacimiento,fecha_inicio_labores,fechaingreso,genero) values(?,?,?,?,?,?,?,?,now(),?);";
             cn.abrirconexion();
             parametro = (PreparedStatement)cn.conexionbd.prepareStatement(query);
             parametro.setString(1,getNombres());
@@ -110,8 +110,7 @@ public class Empleado{
             parametro.setInt(6,getId_puesto());
             parametro.setString(7, getFecha_nacimiento());
             parametro.setString(8, getFechaInicio());
-            parametro.setString(9, getFechaDeIngreso());
-            parametro.setInt(10, getGenero());
+            parametro.setInt(9, getGenero());
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }catch(SQLException ex){
