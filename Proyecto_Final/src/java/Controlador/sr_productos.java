@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import javax.servlet.http.Part;
  *
  * @author rodri
  */
+
 @MultipartConfig
 public class sr_productos extends HttpServlet {
 
@@ -76,8 +78,8 @@ public class sr_productos extends HttpServlet {
                     }
                     ous.close();
                     is.close();
-               
-                   response.sendRedirect("Productos.jsp");
+                response.sendRedirect("Productos.jsp");
+                   
                }else{
                    out.println("<script>alert('Error');</scrpt>");
                }

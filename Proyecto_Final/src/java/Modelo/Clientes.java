@@ -107,7 +107,7 @@ public class Clientes {
         try {
             cn = new Conexion();
             cn.abrirconexion();
-            String query = "SELECT e.idClientes as id, e.nombres, e.apellidos, e.NIT, e.telefono, e.correo_electronico, e.fechaingreso, e.genero FROM dbempresa.clientes as e;";
+            String query = "SELECT idClientes as id, nombres, apellidos, NIT, telefono, correo_electronico, fechaingreso, genero FROM clientes order by id;";
             ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
             String encabezado[] = {"id", "nombres", "apellidos", "nit", "genero", "telefono", "correo_electronico", "fechaingreso"};
             tabla.setColumnIdentifiers(encabezado);
@@ -151,7 +151,6 @@ public class Clientes {
             parametro.setInt(7, getGenero());
 
             retorno = parametro.executeUpdate();
-            parametro.executeUpdate();
             cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -180,7 +179,6 @@ public class Clientes {
             parametro.setInt(8, getId());
 
             retorno = parametro.executeUpdate();
-            parametro.executeUpdate();
             cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -200,7 +198,6 @@ public class Clientes {
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getId());
             retorno = parametro.executeUpdate();
-            parametro.executeUpdate();
             cn.cerrarconexion();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
