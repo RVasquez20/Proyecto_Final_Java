@@ -1,7 +1,7 @@
 <%-- 
     Document   : Compras
-    Created on : 29/09/2020, 11:50:11 PM
-    Author     : josef
+    Created on : 12/10/2020, 05:18:00 PM
+    Author     : rodri
 --%>
 <%
       HttpSession actual =request.getSession(true);
@@ -141,3 +141,10 @@
     </script>
     </body>
 </html>
+<%
+   }
+else{
+response.sendRedirect("index.jsp");
+
+}
+%>

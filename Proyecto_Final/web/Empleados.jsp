@@ -201,7 +201,7 @@
     
 </script>
         <a href="Puestos.jsp">Puestos</a>
-        <a href="index.jsp">Regresar</a>
+        <a href="Principal.jsp">Regresar</a>
     </body>
 </html>
 <%

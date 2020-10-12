@@ -69,8 +69,8 @@
     </div>
         <br>
         
-                <br> <a href="Compras.jsp">Compras</a>
-                <a href="index.jsp">Regresar</a>
+                <br> <a href="Compras_Detalle.jsp">Compras</a>
+                <a href="Principal.jsp">Regresar</a>
                 <br>
                 <br>
                 <div class="container">

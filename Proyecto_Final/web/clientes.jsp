@@ -52,7 +52,7 @@
         <h1>Ventana Clientes</h1>
 
         <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarClientes();">Nuevo</button>
-        <a href="index.jsp">Regresar</a>
+        <a href="Principal.jsp">Regresar</a>
 
         <div class="container-fluid">
             <form action="sr_cliente" method="post" class="form-group">
@@ -139,6 +139,7 @@
                         $("#btn_agregar").show();
                         $("#btn_modificar").hide();
                         $("#btn_eliminar").hide();
+                        
     });
             
             </script>

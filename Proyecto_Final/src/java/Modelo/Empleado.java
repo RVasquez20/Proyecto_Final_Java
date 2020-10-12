@@ -48,7 +48,7 @@ public class Empleado{
  try{
      cn = new Conexion();
      cn.abrirconexion();
-      String query = "SELECT e.idEmpleado as id,e.nombres,e.apellidos,e.direccion,e.telefono,e.DPI,p.idPuesto,p.puesto,e.fecha_nacimiento,e.fecha_inicio_labores,e.fechaingreso,e.genero FROM empleados as e inner join puestos as p where e.idPuesto = p.idPuesto;";
+      String query = "SELECT e.idEmpleado as id,e.nombres,e.apellidos,e.direccion,e.telefono,e.DPI,p.idPuesto,p.puesto,e.fecha_nacimiento,e.fecha_inicio_labores,e.fechaingreso,e.genero FROM empleados as e inner join puestos as p where e.idPuesto = p.idPuesto order by id;";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
       String encabezado[] = {"id","nombres","apellidos","direccion","telefono","DPI","Fecha De nacimiento","fecha inicio de labores","fecha ingreso","puesto","id_puesto","genero"};
       tabla.setColumnIdentifiers(encabezado);

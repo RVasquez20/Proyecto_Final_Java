@@ -109,8 +109,7 @@
     });
     
 </script>
-        <a href="Puestos.jsp">Puestos</a>
-        <a href="index.jsp">Regresar</a>
+        <a href="Empleados.jsp">Regresar</a>
     </body>
 </html>
 <%
