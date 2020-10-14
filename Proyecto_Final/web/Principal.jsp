@@ -12,7 +12,7 @@
       String profile=(String) actual.getAttribute("Ft");
       HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
       session.setMaxInactiveInterval(900);
-      if(actual.getAttribute("Logueado")!=null){
+      if((actual.getAttribute("Logueado")!=null)){
         %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -39,7 +39,7 @@
   </div>
   <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
     <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-<img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+<img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
 <span class="navbarr-brand"><%=email%></span>
@@ -57,13 +57,13 @@
           
        <h1>Bienvenido</h1>
         
-        <a href="Proveedores.jsp">Proveedores</a>
+        <!--<a href="Proveedores.jsp">Proveedores</a>
          <a href="clientes.jsp">Clientes</a>
         <a href="Empleados.jsp">Empleados</a>
         <a href="Productos.jsp">Productos</a>
         <a href="ventas.jsp">ventas</a>
         <a href="Compras_Detalle.jsp">Compras Detalle</a>
-         <a href="VentasDetalle.jsp">Ventas Detalle</a>
+         <a href="VentasDetalle.jsp">Ventas Detalle</a>-->
     </body>
 </html>
 <%

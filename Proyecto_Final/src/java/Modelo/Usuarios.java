@@ -153,6 +153,26 @@ public class Usuarios {
         
         return retorno;
     }
+           
+           public String tipe(String usuario) throws SQLException{
+        String retorno = null;
+        
+       
+            cn = new Conexion();
+            cn.abrirconexion();
+            PreparedStatement parametro;
+            String Query = "select Tipo from usuarios where Usuario='"+usuario+"';";
+            parametro = cn.conexionbd.prepareStatement(Query);
+            ResultSet rs = parametro.executeQuery();
+      
+            while (rs.next()) {
+              retorno=rs.getString("Tipo");
+            }
+            cn.cerrarconexion();
+        
+        return retorno;
+    }
+           
   public HashMap Menu(String usuario) throws SQLException{
        HashMap<String,String> lista=new HashMap();
         String retorno = null;

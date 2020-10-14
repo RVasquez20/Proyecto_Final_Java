@@ -75,9 +75,11 @@ public class sr_login extends HttpServlet {
                     String nombre=obj.Name(usuario);
                     String email=obj.Email(usuario);
                     String profile=obj.Foto(usuario);
+                    String tipo=obj.tipe(usuario);
                     HashMap<String,String> Lista=obj.Menu(usuario);
                     HttpSession actual = request.getSession(true);
                     actual.setAttribute("Logueado", usuario);
+                    actual.setAttribute("T", tipo);
                     actual.setAttribute("nom", nombre);
                     actual.setAttribute("em", email);
                     actual.setAttribute("Ft", profile);

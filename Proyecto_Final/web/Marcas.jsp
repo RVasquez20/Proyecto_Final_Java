@@ -3,6 +3,7 @@
     Created on : 1/10/2020, 04:55:32 PM
     Author     : rodri
 --%>
+<%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="java.util.HashMap"%>
 <%
       HttpSession actual =request.getSession(true);
@@ -11,8 +12,9 @@
       String email=(String) actual.getAttribute("em");
       String profile=(String) actual.getAttribute("Ft");
       HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
+      String tipo=(String) actual.getAttribute("T");
       session.setMaxInactiveInterval(900);
-      if(actual.getAttribute("Logueado")!=null){
+      if((actual.getAttribute("Logueado")!=null)&&(tipo.equals("ADMIN"))){
         %>
 <%@page import="Modelo.marcas"%>
 <%@page import="javax.swing.table.DefaultTableModel"%>
@@ -44,6 +46,7 @@
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
 <span class="navbarr-brand"><%=email%></span>
+
   </button>
   <% 
 
@@ -123,7 +126,8 @@
 <%
    }
 else{
-response.sendRedirect("index.jsp");
+
+response.sendRedirect("Error.jsp");
 
 }
 %>

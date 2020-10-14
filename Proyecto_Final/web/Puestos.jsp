@@ -10,9 +10,11 @@
       String nombres=(String) actual.getAttribute("nom");
       String email=(String) actual.getAttribute("em");
       String profile=(String) actual.getAttribute("Ft");
+            String tipo=(String) actual.getAttribute("T");
       HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
+      
       session.setMaxInactiveInterval(900);
-      if(actual.getAttribute("Logueado")!=null){
+      if((actual.getAttribute("Logueado")!=null)&&(tipo.equals("ADMIN"))){
         %>
 <%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="Modelo.Puesto"%>
@@ -115,7 +117,7 @@
 <%
    }
 else{
-response.sendRedirect("index.jsp");
+response.sendRedirect("Error.jsp");
 
 }
 %>
