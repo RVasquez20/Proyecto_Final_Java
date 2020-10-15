@@ -41,7 +41,20 @@ public class sr_empleado extends HttpServlet {
             out.println("<title>Servlet sr_empleado</title>");            
             out.println("</head>");
             out.println("<body>");
-                 empleado = new Empleado(Integer.parseInt(request.getParameter("drop_puesto")),Integer.parseInt(request.getParameter("txt_id")),
+            /*out.println("<h1>Puesto "+Integer.parseInt(request.getParameter("drop_puesto"))+"</h1>");
+            out.println("<h1>id "+Integer.parseInt(request.getParameter("txt_id"))+"</h1>");
+            out.println("<h1>name "+request.getParameter("txt_nombres")+"</h1>");
+            out.println("<h1>apellidos "+request.getParameter("txt_apellidos")+"</h1>");
+            out.println("<h1>direccion "+request.getParameter("txt_direccion")+"</h1>");
+            out.println("<h1>telefono "+request.getParameter("txt_telefono")+"</h1>");
+            out.println("<h1>fn "+request.getParameter("txt_fn")+"</h1>");
+            out.println("<h1>dpi "+request.getParameter("txt_DPI")+"</h1>");
+            out.println("<h1>fi "+request.getParameter("txt_fechaIngreso")+"</h1>");
+            out.println("<h1>fin "+request.getParameter("txt_fechaInicio")+"</h1>");
+             out.println("<h1>genero "+Integer.parseInt(request.getParameter("txt_genero"))+"</h1>");
+            */
+            
+              empleado = new Empleado(Integer.parseInt(request.getParameter("drop_puesto")),Integer.parseInt(request.getParameter("txt_id")),
             request.getParameter("txt_nombres"),request.getParameter("txt_apellidos"),request.getParameter("txt_direccion"),request.getParameter("txt_telefono"),
             request.getParameter("txt_fn"),request.getParameter("txt_DPI"),request.getParameter("txt_fechaIngreso"),request.getParameter("txt_fechaInicio"),Integer.parseInt(request.getParameter("txt_genero")));
             // Boton agregar 

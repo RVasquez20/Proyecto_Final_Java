@@ -72,19 +72,19 @@ public class Usuarios {
     public void setCodigo(String Codigo) {
         this.Codigo = Codigo;
     }
-       public int ValidarUS(String pass, String usuario){
+       public int ValidarUS(String pass, String usuario,String codigo){
         int retorno = 0;
         
         try {
             cn = new Conexion();
             cn.abrirconexion();
             PreparedStatement parametro;
-            String Query = "select * from usuarios where Usuario='"+usuario+"' and Pass='"+pass+"';";
+            String Query = "select * from usuarios where Usuario='"+usuario+"' and Pass='"+pass+"' and Codigo='"+codigo+"';";
             parametro = cn.conexionbd.prepareStatement(Query);
             ResultSet rs = parametro.executeQuery();
       
             if (rs.next()) {
-                if (rs.getString(1).equals(pass)||rs.getString(2).equals(usuario)) {
+                if (rs.getString(1).equals(pass)||rs.getString(2).equals(usuario)||rs.getString(3).equals(codigo)) {
                     retorno=1;
                 }
                 else {
@@ -153,6 +153,26 @@ public class Usuarios {
         
         return retorno;
     }
+           
+           public String tipe(String usuario) throws SQLException{
+        String retorno = null;
+        
+       
+            cn = new Conexion();
+            cn.abrirconexion();
+            PreparedStatement parametro;
+            String Query = "select Tipo from usuarios where Usuario='"+usuario+"';";
+            parametro = cn.conexionbd.prepareStatement(Query);
+            ResultSet rs = parametro.executeQuery();
+      
+            while (rs.next()) {
+              retorno=rs.getString("Tipo");
+            }
+            cn.cerrarconexion();
+        
+        return retorno;
+    }
+           
   public HashMap Menu(String usuario) throws SQLException{
        HashMap<String,String> lista=new HashMap();
         String retorno = null;
@@ -178,6 +198,58 @@ public class Usuarios {
         return lista;
     }
 
-    
-                
+        public int NuevoUsuario() {
+        int retorno = 0;
+        
+        try {
+            PreparedStatement parametro;
+            String sqlinsert;
+            cn = new Conexion();
+            cn.abrirconexion();
+            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo) values(?,?,?,?,?,?,?,?)";
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
+            parametro.setString(1, getUsuario());
+            parametro.setString(2, getNombres());
+            parametro.setString(3, getApellidos());
+            parametro.setString(4, getCorreo());
+            parametro.setString(5, getPass());
+            parametro.setString(6, getFoto());
+            parametro.setString(7, getCodigo());
+            parametro.setString(8, "USER");
+            retorno = parametro.executeUpdate();
+            cn.cerrarconexion();
+        }
+        catch (Exception ex) {
+            retorno=0;
+        }
+        return retorno; 
+    }
+         public int NuevoAdmin() {
+        int retorno = 0;
+        
+        try {
+            PreparedStatement parametro;
+            String sqlinsert;
+            cn = new Conexion();
+            cn.abrirconexion();
+            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo) values(?,?,?,?,?,?,?,?)";
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
+            parametro.setString(1, getUsuario());
+            parametro.setString(2, getNombres());
+            parametro.setString(3, getApellidos());
+            parametro.setString(4, getCorreo());
+            parametro.setString(5, getPass());
+            parametro.setString(6, getFoto());
+            parametro.setString(7, getCodigo());
+            parametro.setString(8, "ADMIN");
+            retorno = parametro.executeUpdate();
+            cn.cerrarconexion();
+        }
+        catch (Exception ex) {
+            retorno=0;
+        }
+        return retorno; 
+    }
 }
+                
+

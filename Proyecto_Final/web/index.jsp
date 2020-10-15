@@ -13,81 +13,120 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-        <title>JSP Page</title>
+<script src="JS/AllInOne.js"></script>
+<link rel="stylesheet" href="CSS/EstilosIndex.css" type="text/css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fuentes/iconic/css/material-design-iconic-font.min.css">
+<title>JSP Page</title>
     </head>
     <body>
-        <div class="container mt-4 col-lg-4">
-            <div class="card col-sm-10">
-                <div class="card-body">
-                    <form class="form-sign" action="sr_login" method="POST">
-                        <div class="form-group text-center">
-                            <h3>Login</h3>
-                            <img src="upload/2551513.jpg" alt="" height="70" width="170"/>
-                            <label>Bienvenido</label>
+        <div class="container-login">
+            <div class="wrap-login">
+               
+                    <form class="login-form validate-form" id="formLogin" action="sr_login" method="POST">
+                         <span class="login-form-title">LOGIN</span>
+                        <div class="wrap-input100">
+                            <br>
+                            <label class="input110">Usuario</label>
+                            <input type="text" id="txt_usuario" name="txt_usuario" class="input100" placeholder="Escriba su usuario" required>
+                            <span class="focus-efecto"></span>
                         </div>
-                        <div class="form-group">
-                            <label>Usuario</label>
-                            <input type="text" id="txt_usuario" name="txt_usuario" class="form-control" placeholder="Escriba su usuario" required>
+                        <div class="wrap-input100">
+                            <label class="input110">Contraseña</label>
+                            <input type="password" id="txt_pass" name="txt_pass" class="input100" placeholder="Escriba su Contraseña" required>
+                            <span class="focus-efecto"></span>
+                         
                         </div>
-                        <div class="form-group">
-                            <label>Contraseña</label>
-                            <input type="password" id="txt_pass" name="txt_pass" class="form-control" placeholder="Escriba su Contraseña" required>
-                         <a style="color: #000000" data-toggle="modal" data-target="#ModalUsuario" href="#ModalUsuario">No tienes cuenta?</a>
+                         <div class="wrap-input100">
+                            <label class="input110">Codigo de Verificacion</label>
+                            <input type="text" id="text_cod" name="txt_cod" class="input100" placeholder="Escriba su codigo" required>
+                            <span class="focus-efecto"></span>
+                         
                         </div>
-                        <input type="submit" value="Ingresar" class="btn btn-primary btn-b" name="Ingresar" id="Ingresar"/>
+                        <a style="color: #000000" data-toggle="modal" data-target="#ModalUsuario" href="#ModalUsuario">No tienes cuenta?</a>
+                        <div class="container-login-form-btn">
+                            <div class="wrap-login-form-btn">
+                                <div class="login-form-bgbtn"></div>
+                       
+                        <input type="submit" value="Ingresar" class="btn login-form-btn" name="Ingresar" id="Ingresar" onclick="return ValidarCodigoLogin();">
                         <!--<input type="submit" name="accion" value="Ingresar" class="btn btn-primary btn-b">-->
-                    </form>
+                    </div>
                 </div>
+                    </form>
+       
             </div>
         </div>
         <!-- Fin form-->
-         <div id="ModalUsuario" class="modal fade register" role="dialog">
-             <button type="button" class="close" data-dismiss="modal">×</button>
-            <div class="register-full" role="document">
-                <div class="register-right">
-                    <div class=" form-group">
-                        <br>
-                        <br>
-                        <h5 style="color: #ffffff; text-align: center" id="Titulo">NUEVO REGISTRO</h5>
-                        <hidden class="modal-dialog" data-dismiss="modal"/>    
-                    </div>
-                    <div class="form-register">
-                        <form action="sr_login" method="post">
-                            <div class="fiels-grid container">
-                               
-                                <div class="styled-input agile-styled-input-top">
-                                    <input type="text" id="text_usuario" name="txt_usuario" required="">
-                                    <label style="color: #ffffff">Nombre usuario</label>
+        <div class="modal" id="ModalUsuario">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+       <h5 id="Titulo" class="input110">NUEVO REGISTRO</h5>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" >
+     <form action="sr_login" method="post" class="form-group" enctype="multipart/form-data" name="formulario" role="form">
+                                    
+                                    <div class="wrap-input100">
+                                     <label class="input110">Nombre usuario</label>                                    
+                                    <input type="text" id="text_usuario" class="input100" name="txt_usuarionuevo" required="">
+                                    <span class="focus-efecto"></span>
+                                    </div>
+                                    
+                                    <div class="wrap-input100">
+                                    <label class="input110">Nombres</label>                                    
+                                    <input type="text" id="text_nombre" class="input100" name="txt_nombre" required="" onkeypress="return text(event);">
+                                    <span class="focus-efecto"></span>
+                                    </div>
+                                    
+                                    <div class="wrap-input100">
+                                    <label class="input110">Apellidos</label>                               
+                                    <input type="text" id="text_apellidos" class="input100" name="txt_apellidos" required="" onkeypress="return text(event);">
+                                    <span class="focus-efecto"></span> 
+                                    </div>
+                                    
+                                    <div class="wrap-input100">
+                                     <label class="input110">Correo</label>                                  
+                                    <input type="email" id="text_correo" class="input100" name="txt_correo" required="">
+                                    <span class="focus-efecto"></span>
+                                    </div>
+                                    
+                                    <div class="wrap-input100">
+                                    <label class="input110">Password</label>                        
+                                    <input type="password" id="text_pass" class="input100" name="txt_passnueva" required="">
+                                    <span class="focus-efecto"></span>
+                                    </div>
+                                    
+                                    <div class="wrap-input100">
+                                       <label class="input110">Foto De Perfil</label>  
+                                     <input type="file" id="imagen" name="archivo" class="col-md-8 btn" onchange="cargarFotodeperfil(this)">
+                                <span class="focus-efecto"></span>
                                 </div>
-                                <div class="styled-input agile-styled-input-top">
-                                    <input type="text" id="text_nombre" name="txt_nombre" required="" onkeypress="return text(event);">
-                                    <label style="color: #ffffff">Nombres</label>
-                                </div>
-                                <div class="styled-input agile-styled-input-top">
-                                    <input type="text" id="text_apellidos" name="txt_apellidos" required="" onkeypress="return text(event);">
-                                    <label style="color: #ffffff">Apellidos</label>
-                                </div>
-                                <div class="styled-input agile-styled-input-top">
-                                    <input type="email" id="text_correo" name="txt_correo" required="">
-                                    <label style="color: #ffffff">Correo</label>
-                                </div>
-                                <div class="styled-input agile-styled-input-top">
-                                    <input type="password" id="text_pass" name="txt_pass" required="">
-                                    <label style="color: #ffffff">Password</label>
-                                </div>
-                                <div class="styled-input agile-styled-input-top">
-                                    <input type="text" id="text_codigo" name="txt_codigo" required="" maxlength="7">
-                                    <label style="color: #ffffff">Codigo de validacion</label>
-                                </div>
-                                <div class="form-group container" style="margin: 10px 90px">
-                                    <input style="margin: 0px 70px" type ="submit" id ="Registrar" name="Registrar" value="Registrar" class="btn btn-outline-light" onclick="return ValidarUsuario();">
-                                </div>
-                            </div>
+                                     
+                                     <div class="wrap-input100">
+                                    <label class="input110">Codigo de validacion</label>                               
+                                    <input type="text" id="text_codigo" class="input100" name="txt_codigo" required="" maxlength="7">
+                                    <span class="focus-efecto"></span>
+                                    </div>
+                                    
+                              
+                                     <input type="hidden" name="nombre" id="file">
+                                     <input id ="Registrar" name="Registrar" value="Registrar" class="btn btn-success" type ="submit" onclick="return ValidarCodigo();">
+        <button  class="btn btn-danger" data-dismiss="modal">Close</button>
+                     
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-                        
+      </div>
+
+
+          
+
+
+    </div>
+  </div>
+</div>   
+<script src="bootstrap/js/bootstrap.min.js"></script>    
     </body>
 </html>

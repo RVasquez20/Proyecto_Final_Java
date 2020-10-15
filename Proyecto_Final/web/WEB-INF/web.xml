@@ -20,6 +20,10 @@
         <servlet-name>sr_login</servlet-name>
         <servlet-class>Controlador.sr_login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sr_Admin</servlet-name>
+        <servlet-class>Controlador.sr_Admin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sr_cliente</servlet-name>
         <url-pattern>/sr_cliente</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>sr_login</servlet-name>
         <url-pattern>/sr_login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sr_Admin</servlet-name>
+        <url-pattern>/sr_Admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
