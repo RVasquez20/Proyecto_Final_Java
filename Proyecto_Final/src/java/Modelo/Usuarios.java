@@ -72,19 +72,19 @@ public class Usuarios {
     public void setCodigo(String Codigo) {
         this.Codigo = Codigo;
     }
-       public int ValidarUS(String pass, String usuario){
+       public int ValidarUS(String pass, String usuario,String codigo){
         int retorno = 0;
         
         try {
             cn = new Conexion();
             cn.abrirconexion();
             PreparedStatement parametro;
-            String Query = "select * from usuarios where Usuario='"+usuario+"' and Pass='"+pass+"';";
+            String Query = "select * from usuarios where Usuario='"+usuario+"' and Pass='"+pass+"' and Codigo='"+codigo+"';";
             parametro = cn.conexionbd.prepareStatement(Query);
             ResultSet rs = parametro.executeQuery();
       
             if (rs.next()) {
-                if (rs.getString(1).equals(pass)||rs.getString(2).equals(usuario)) {
+                if (rs.getString(1).equals(pass)||rs.getString(2).equals(usuario)||rs.getString(3).equals(codigo)) {
                     retorno=1;
                 }
                 else {

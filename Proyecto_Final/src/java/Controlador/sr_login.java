@@ -54,9 +54,10 @@ public class sr_login extends HttpServlet {
             out.println("<body>");
      Usuarios obj = new Usuarios();
             String n = request.getParameter("nombre");
-           String pass,usuario;
+           String pass,usuario,cod;
             pass = request.getParameter("txt_pass");
             usuario = request.getParameter("txt_usuario");
+            cod=request.getParameter("txt_cod");
             obj.setFoto(n);
             obj.setUsuario(request.getParameter("txt_usuarionuevo"));
            obj.setNombres(request.getParameter("txt_nombre"));
@@ -79,7 +80,7 @@ public class sr_login extends HttpServlet {
                     ous.close();
                     is.close();
                 if (obj.NuevoUsuario() > 0) {
-                    if(obj.ValidarUS(request.getParameter("txt_passnueva"),request.getParameter("txt_usuarionuevo")) > 0) {
+                    if(obj.ValidarUS(request.getParameter("txt_passnueva"),request.getParameter("txt_usuarionuevo"),request.getParameter("txt_cod")) > 0) {
                     String nombre=obj.Name(request.getParameter("txt_usuarionuevo"));
                     String email=obj.Email(request.getParameter("txt_usuarionuevo"));
                     String profile=obj.Foto(request.getParameter("txt_usuarionuevo"));
@@ -108,7 +109,7 @@ public class sr_login extends HttpServlet {
             }
             
             /*else*/ if (request.getParameter("Ingresar") != null) {
-                if(obj.ValidarUS(pass,usuario) > 0) {
+                if(obj.ValidarUS(pass,usuario,cod) > 0) {
                     String nombre=obj.Name(usuario);
                     String email=obj.Email(usuario);
                     String profile=obj.Foto(usuario);
@@ -138,7 +139,7 @@ public class sr_login extends HttpServlet {
             
             else if(request.getParameter("cerrarsesion") != null) {
                 request.getSession().removeAttribute("Logueado");
-                response.sendRedirect("index.jsp");
+              response.sendRedirect("index.jsp");
             }
             /*String accion=request.getParameter("accion");
             if(accion.equals("Ingresar")){

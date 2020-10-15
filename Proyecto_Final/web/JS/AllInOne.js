@@ -37,7 +37,22 @@ function ValidarCodigo(){
         return false;
     }
 };
+function ValidarCodigoLogin(){
 
+    
+    var expresion,usuario;
+    
+    usuario = document.getElementById("text_cod").value;
+    
+    expresion = new RegExp(/^U2020\D[A-Z{2}]/);
+    
+    if(expresion.test(usuario)){
+       return true;
+    } else{
+        alert("Error codigo de validacion invalido");
+        return false;
+    }
+};
 var text = function (e){
   var event = e || window.event;
   var key = event.keyCode || event.wchich;
