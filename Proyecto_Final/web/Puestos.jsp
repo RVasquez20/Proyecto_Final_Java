@@ -27,45 +27,59 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-        <title>Empleados</title>
+<script src="JS/AllInOne.js"></script>
+        <title>Puestos</title>
     </head>
     <body>
         <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
         <h4 class="text-white">Herramientas</h4>
-        <form action="sr_login" method="post">
+        <!--<form action="sr_login" method="post">
             <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>
+        </form>-->
     </div>
 
   </div>
-  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
-    <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-<img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E">
+      <div class="dropdown">
+          <button type="button" class="btn btn-outline-light dropdown-toggle" style="border:none;" data-toggle="dropdown">
+    <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   <span class="navbarr-brand"><%=nombres%></span>
+  </button>
+  <div class="dropdown-menu text-center" style="font-size: 22px;">
+
+    <span class="dropdown-item"><%=usuario%></span>
+    <span class="dropdown-item"><%=email%></span>
+    <form action="sr_login" method="post">
+            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
+        </form>
+  </div>
+</div>
+   <!-- <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+<img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
-<span class="navbarr-brand"><%=email%></span>
+-->
   </button>
   <% 
 
                          for (String i:Menu.keySet()){
-                             out.println("<a href='" + Menu.get(i) + "'>" + Menu.get(i) + "</a><br>");
+                             out.println("<a href='" + Menu.get(i) + "'>" + i + "</a><br>");
                          }
                          
                     
                     %>
   </nav>
 </div>
-        <h1>Empleados</h1>
-          <h1>Formulario Empleados</h1>
+
+        <h1>Puestos</h1>
+          <h1>Formulario Puestos</h1>
         <div class="container">
             <form action="sr_Puestos" method="post" class="form-group">
                <label for="lbl_id" ><b>ID</b></label>
                 <input type="text" name="txt_id" id="txt_id" class="form-control" value="0" readonly > 
                 <label for="lbl_puestos" ><b>Puestos</b></label>
-                <input type="text" name="txt_puestos" id="txt_puestos" class="form-control" placeholder="Ejemplo: Gerente" required>
+                <input type="text" name="txt_puestos" id="txt_puestos" class="form-control" placeholder="Ejemplo: Gerente" onkeypress="return text(event);" required>
                 <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg">Agregar</button>
                 <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success btn-lg">Modificar</button>
                 <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger btn-lg" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
@@ -75,7 +89,6 @@
                   <table class="table table-striped">
     <thead>
         <tr>
-        <th>ID</th>
         <th>Puestos</th>
       </tr>
     </thead>
@@ -85,8 +98,7 @@
         DefaultTableModel tabla = new DefaultTableModel();
         tabla = puesto.leer();
         for (int t=0;t<tabla.getRowCount();t++){
-            out.println("<tr>");
-            out.println("<td>" + tabla.getValueAt(t,0) + "</td>");
+            out.println("<tr data-id="+ tabla.getValueAt(t,0) + ">");
             out.println("<td>" + tabla.getValueAt(t,1) + "</td>");
             out.println("</tr>");
         
@@ -101,8 +113,8 @@
        var target,id,puestos; 
        target = $(event.target);
       
-       id= target.parent("tr").find("td").eq(0).html();
-       puestos = target.parent("tr").find("td").eq(1).html();
+      id = target.parent().data("id");
+       puestos = target.parent("tr").find("td").eq(0).html();
        
        $("#txt_id").val(id);
        $("#txt_puestos").val(puestos);

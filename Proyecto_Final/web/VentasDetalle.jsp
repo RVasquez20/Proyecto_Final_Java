@@ -9,6 +9,7 @@
       String nombres=(String) actual.getAttribute("nom");
       String email=(String) actual.getAttribute("em");
       String profile=(String) actual.getAttribute("Ft");
+      HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
       session.setMaxInactiveInterval(900);
       if(actual.getAttribute("Logueado")!=null){
         %>
@@ -28,27 +29,48 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="JS/AllInOne.js"></script>
         <title>Ventas Detalle</title>
     </head>
     <body>
-                 <div class="pos-f-t">
+    <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
         <h4 class="text-white">Herramientas</h4>
-        <form action="sr_login" method="post">
+        <!--<form action="sr_login" method="post">
             <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>
+        </form>-->
     </div>
 
   </div>
-  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
-    <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-     <img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E">
+      <div class="dropdown">
+          <button type="button" class="btn btn-outline-light dropdown-toggle" style="border:none;" data-toggle="dropdown">
+    <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   <span class="navbarr-brand"><%=nombres%></span>
+  </button>
+  <div class="dropdown-menu text-center" style="font-size: 22px;">
+
+    <span class="dropdown-item"><%=usuario%></span>
+    <span class="dropdown-item"><%=email%></span>
+    <form action="sr_login" method="post">
+            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
+        </form>
+  </div>
+</div>
+   <!-- <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+<img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
-<span class="navbarr-brand"><%=email%></span>
+-->
   </button>
+  <% 
 
+                         for (String i:Menu.keySet()){
+                             out.println("<a href='" + Menu.get(i) + "'>" + i + "</a><br>");
+                         }
+                         
+                    
+                    %>
   </nav>
 </div>
         <div class="container">
@@ -69,9 +91,9 @@
                     %>
                 </select>
                 <label for="lbl_Cantidad" ><b>Cantidad</b></label>
-                <input type="number"  name="txt_Cantidad" id="txt_Cantidad" class="form-control" required>
+                <input type="number"  name="txt_Cantidad" id="txt_Cantidad" class="form-control"  onkeypress="return entero(event);" required>
                  <label for="lbl_PrecioUnitario" ><b>Precio Unitario</b></label>
-                <input type="money"  name="txt_PrecioUnitario" id="txt_PrecioUnitario" class="form-control" required>
+                <input type="money"  name="txt_PrecioUnitario" id="txt_PrecioUnitario" class="form-control" onkeypress="return decimal(event);" required>
                 <br>
                
                 <!--ventas-->
@@ -79,9 +101,9 @@
                 <label for="lbl_idventas">ID:</label>
                 <input type="text" name="txt_idventas" id="txt_idventas" class="form-control" value ="0" readonly>
                 <label for="lbl_nofactura">No.Factura:</label>
-                <input type="number" name="txt_nofactura" id="txt_nofactura" class="form-control" required>
+                <input type="number" name="txt_nofactura" id="txt_nofactura" class="form-control"  onkeypress="return entero(event);" required>
                 <label for="lbl_serie">Serie:</label>
-                <input type="text" name="txt_serie" id="txt_serie" class="form-control" required>
+                <input type="text" name="txt_serie" id="txt_serie" class="form-control" maxlength="1" required>
                 <label id="lbl_fechafactura">Fecha Factura:</label>
                 <input type="date" name="txt_fechafactura" id="txt_fechafactura" value="0" class="form-control" required>
                 <label for="lbl_idcliente">Cliente:</label>

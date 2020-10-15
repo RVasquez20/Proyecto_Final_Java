@@ -24,7 +24,7 @@
     <body>
 
   <script>
-alert("Regresando");
+alert("Permisos Insuficientes \n Regresando");
 setTimeout("location.href='Principal.jsp'",100);
 </script>
     </body>

@@ -27,37 +27,51 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="JS/AllInOne.js"></script>
         <title>JSP Page</title>
     </head>
     <body>
-             <div class="pos-f-t">
+<div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
         <h4 class="text-white">Herramientas</h4>
-        <form action="sr_login" method="post">
+        <!--<form action="sr_login" method="post">
             <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>
+        </form>-->
     </div>
 
   </div>
-  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
-    <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-<img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E">
+      <div class="dropdown">
+          <button type="button" class="btn btn-outline-light dropdown-toggle" style="border:none;" data-toggle="dropdown">
+    <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   <span class="navbarr-brand"><%=nombres%></span>
+  </button>
+  <div class="dropdown-menu text-center" style="font-size: 22px;">
+
+    <span class="dropdown-item"><%=usuario%></span>
+    <span class="dropdown-item"><%=email%></span>
+    <form action="sr_login" method="post">
+            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
+        </form>
+  </div>
+</div>
+   <!-- <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+<img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
-<span class="navbarr-brand"><%=email%></span>
-
+-->
   </button>
   <% 
 
                          for (String i:Menu.keySet()){
-                             out.println("<a href='" + Menu.get(i) + "'>" + Menu.get(i) + "</a><br>");
+                             out.println("<a href='" + Menu.get(i) + "'>" + i + "</a><br>");
                          }
                          
                     
                     %>
   </nav>
 </div>
+
         <h1>Marcas</h1>
        
         <div class="container">
@@ -65,7 +79,7 @@
            <label>ID:</label>
            <input type="text" name="txt_id_Marcas" id="txt_id_Marcas" class="form-control" value="0" readonly="">
            <label for="lbl_Marca" ><b>Marca</b></label>
-           <input type="text" name="txt_Marca" id="txt_Marca" class="form-control" placeholder="Ejemplo: Pepsi" required>
+           <input type="text" name="txt_Marca" id="txt_Marca" class="form-control" placeholder="Ejemplo: Pepsi" onkeypress="return text(event);" required>
            
            <br>
  <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg">Agregar</button>

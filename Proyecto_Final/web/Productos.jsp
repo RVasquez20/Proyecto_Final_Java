@@ -9,6 +9,7 @@
       String nombres=(String) actual.getAttribute("nom");
       String email=(String) actual.getAttribute("em");
       String profile=(String) actual.getAttribute("Ft");
+      HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
       session.setMaxInactiveInterval(900);
       if(actual.getAttribute("Logueado")!=null){
         %>
@@ -29,7 +30,7 @@ String variable = (String)request.getAttribute("txt_locale");
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-<script src="JS/Producto.js" type="text/javascript"></script>
+<script src="JS/AllInOne.js" type="text/javascript"></script>
  <script src="JS/jquery.js" type="text/javascript"></script>
  <script Language="JavaScript">
 
@@ -139,24 +140,44 @@ function showtime () {
     </head>
     
     <body onLoad="startclock()">
-                           <div class="pos-f-t">
+  <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
         <h4 class="text-white">Herramientas</h4>
-        <form action="sr_login" method="post">
+        <!--<form action="sr_login" method="post">
             <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>
+        </form>-->
     </div>
 
   </div>
-  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E;">
-    <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="sources/<%=profile%>" style="width: 40px; height: 40px"/>
+  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E">
+      <div class="dropdown">
+          <button type="button" class="btn btn-outline-light dropdown-toggle" style="border:none;" data-toggle="dropdown">
+    <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   <span class="navbarr-brand"><%=nombres%></span>
+  </button>
+  <div class="dropdown-menu text-center" style="font-size: 22px;">
+
+    <span class="dropdown-item"><%=usuario%></span>
+    <span class="dropdown-item"><%=email%></span>
+    <form action="sr_login" method="post">
+            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
+        </form>
+  </div>
+</div>
+   <!-- <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+<img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>
       <span class="navbarr-brand"><%=nombres%></span>
 <span class="navbarr-brand"><%=usuario%></span>
-<span class="navbarr-brand"><%=email%></span>
+-->
   </button>
+  <% 
 
+                         for (String i:Menu.keySet()){
+                             out.println("<a href='" + Menu.get(i) + "'>" + i + "</a><br>");
+                         }
+                         
+                    
+                    %>
   </nav>
 </div>
         
@@ -193,7 +214,7 @@ function showtime () {
                 <label><b>id</b></label>
                 <input type="text" name="txt_id" class="form-control" id="txt_id" placeholder="id" value="0" readonly style="max-width: 250px;"><br>
                 <label><b>Producto</b></label>
-                <input type="text" name="txt_producto" class="form-control" id="txt_producto" placeholder="Ejemplo:Pan" required><br>
+                <input type="text" name="txt_producto" class="form-control" id="txt_producto" placeholder="Ejemplo:Pan" onkeypress="return text(event);" required><br>
                 <label><b>Marca</b></label>
                 <select name="box_marcas" id="box_marcas" class="form-control">
                     <%
@@ -206,18 +227,19 @@ function showtime () {
                     %> 
                 </select><br>
                 <label><b>descripcion</b></label>
-                <input type="text" name="txt_descripcion" class="form-control" id="txt_descripcion" placeholder="Ejemplo:Pan blanco" required><br>
+                <input type="text" name="txt_descripcion" class="form-control" id="txt_descripcion" placeholder="Ejemplo:Pan blanco" 
+ onkeypress="return text(event);" required><br>
                 
                 <label><b>Imagen</b></label>
                  <input type="file" id="imagen" name="archivo" class="col-md-8 btn" onchange="cargarArchivo(this)">
                  <input type="hidden" id="imagenes" name="imagenes"/>
                                 <div class="clear"></div>
                  <label><b>Precio Costo</b></label>
-                <input type="money" name="txt_preciocosto" class="form-control" id="txt_preciocosto" placeholder="Ejemplo:12.20" required><br>
+                <input type="money" name="txt_preciocosto" class="form-control" id="txt_preciocosto" placeholder="Ejemplo:12.20"  onkeypress="return decimal(event);" required><br>
                  <label><b>Precio Venta</b></label>
-                <input type="money" name="txt_precioventa" class="form-control" id="txt_precioventa" placeholder="Ejemplo:12.20" required><br>
+                <input type="money" name="txt_precioventa" class="form-control" id="txt_precioventa" placeholder="Ejemplo:12.20"  onkeypress="return decimal(event);" required><br>
                   <label><b>Existencias</b></label>
-                <input type="number" name="txt_exitencias" class="form-control" id="txt_exitencias" placeholder="Ejemplo:20" required><br>
+                <input type="number" name="txt_exitencias" class="form-control" id="txt_exitencias" placeholder="Ejemplo:20" onkeypress="return entero(event);" required><br>
                 <label id="lbl_fecha"><b>Fecha de Ingreso</b></label>
                 <input type="datetime" name="txt_FechaIngreso" class="form-control" id="txt_FechaIngreso" value="0" placeholder="Ejemplo:20" required><br>
                

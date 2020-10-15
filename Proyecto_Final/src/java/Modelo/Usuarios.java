@@ -198,6 +198,58 @@ public class Usuarios {
         return lista;
     }
 
-    
-                
+        public int NuevoUsuario() {
+        int retorno = 0;
+        
+        try {
+            PreparedStatement parametro;
+            String sqlinsert;
+            cn = new Conexion();
+            cn.abrirconexion();
+            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo) values(?,?,?,?,?,?,?,?)";
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
+            parametro.setString(1, getUsuario());
+            parametro.setString(2, getNombres());
+            parametro.setString(3, getApellidos());
+            parametro.setString(4, getCorreo());
+            parametro.setString(5, getPass());
+            parametro.setString(6, getFoto());
+            parametro.setString(7, getCodigo());
+            parametro.setString(8, "USER");
+            retorno = parametro.executeUpdate();
+            cn.cerrarconexion();
+        }
+        catch (Exception ex) {
+            retorno=0;
+        }
+        return retorno; 
+    }
+         public int NuevoAdmin() {
+        int retorno = 0;
+        
+        try {
+            PreparedStatement parametro;
+            String sqlinsert;
+            cn = new Conexion();
+            cn.abrirconexion();
+            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo) values(?,?,?,?,?,?,?,?)";
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
+            parametro.setString(1, getUsuario());
+            parametro.setString(2, getNombres());
+            parametro.setString(3, getApellidos());
+            parametro.setString(4, getCorreo());
+            parametro.setString(5, getPass());
+            parametro.setString(6, getFoto());
+            parametro.setString(7, getCodigo());
+            parametro.setString(8, "ADMIN");
+            retorno = parametro.executeUpdate();
+            cn.cerrarconexion();
+        }
+        catch (Exception ex) {
+            retorno=0;
+        }
+        return retorno; 
+    }
 }
+                
+
