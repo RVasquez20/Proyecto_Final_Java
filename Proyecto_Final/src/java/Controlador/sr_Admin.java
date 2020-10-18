@@ -56,7 +56,7 @@ public class sr_Admin extends HttpServlet {
             if (request.getParameter("Registrar") != null) {
                 Part archivo = request.getPart("archivo");
                     InputStream is = archivo.getInputStream();
-                    File f = new File("C:/Users/jeron/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/sources/"+n);
+                   File("C:/Users/rodri/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/sources/"+n);
                     FileOutputStream ous = new FileOutputStream(f);
                     
                     int dato = is.read();
