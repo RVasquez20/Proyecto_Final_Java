@@ -69,7 +69,7 @@ public class sr_login extends HttpServlet {
             if (request.getParameter("Registrar") != null) {
                 Part archivo = request.getPart("archivo");
                     InputStream is = archivo.getInputStream();
-                    File("C:/Users/rodri/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/sources/"+n);
+                    File f = new File("C:/Users/rodri/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/sources/"+n);
                     FileOutputStream ous = new FileOutputStream(f);
                     
                     int dato = is.read();
