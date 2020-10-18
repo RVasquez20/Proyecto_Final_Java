@@ -51,7 +51,7 @@
 
                 </div>
                 <div class="logo">
-                    <span class="icon fa-gem"></span>
+                    <span ><img src="CSS/Logos/PE.svg" style="max-width: 40px; max-height: 40px;"></span>
                 </div>
                 <div class="content">
                     <div class="inner">

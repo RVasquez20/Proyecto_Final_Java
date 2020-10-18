@@ -51,13 +51,12 @@
 
                 </div>
                 <div class="logo">
-                    <span class="icon fa-gem"></span>
+                    <span ><img src="CSS/Logos/PE.svg" style="max-width: 40px; max-height: 40px;"></span>
                 </div>
                 <div class="content">
                     <div class="inner">
-                        <h1>Dimension</h1>
-                        <p>A fully responsive site template designed by <a href="https://html5up.net">HTML5 UP</a> and released<br />
-                            for free under the <a href="https://html5up.net/license">Creative Commons</a> license.</p>
+                        <h1>Menú Principal</h1>
+                        <p></p>
                     </div>
                 </div>
                 <nav>

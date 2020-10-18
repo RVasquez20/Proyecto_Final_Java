@@ -26,12 +26,22 @@ String variable = (String)request.getAttribute("txt_locale");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-<script src="JS/AllInOne.js" type="text/javascript"></script>
- <script src="JS/jquery.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="CSS/comun.css">
+        <script src="JS/AllInOne.js"></script>
+        <script>
+        $(document).ready(function () {
+            
+              $("#btn_modificar").hide();
+       $("#btn_eliminar").hide();
+       $("#btn_agregar").show();
+        });
+    </script>
  <script Language="JavaScript">
 
 <!-- Helpers for JSI page...
@@ -139,52 +149,37 @@ function showtime () {
         <title>Productos</title>
     </head>
     
-    <body onLoad="startclock()">
-  <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-        <h4 class="text-white">Herramientas</h4>
-        <!--<form action="sr_login" method="post">
-            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>-->
-    </div>
+    <body class="is-preload" onload="startclock()">
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Header -->
+            <header id="header">
+                <div class="dropdown">
+                    <button id="btn_sesion" type="button" class="btn btn-outline-light" dropdown-toggle="dropdown" style="border:none;" data-toggle="dropdown">
+                        <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   
+                        <span id="nombre_sesion" class="navbarr-brand"><%=nombres%></span>
+                    </button>
+                    <div id="dropdown_menu" class="dropdown-menu text-center" style="font-size: 22px;">
 
-  </div>
-  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E">
-      <div class="dropdown">
-          <button type="button" class="btn btn-outline-light dropdown-toggle" style="border:none;" data-toggle="dropdown">
-    <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   <span class="navbarr-brand"><%=nombres%></span>
-  </button>
-  <div class="dropdown-menu text-center" style="font-size: 22px;">
+                        <span class="dropdown-item"><%=usuario%></span>
+                        <span class="dropdown-item"><%=email%></span>
+                        <form action="sr_login" method="post">
+                            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
+                        </form>
+                    </div>
 
-    <span class="dropdown-item"><%=usuario%></span>
-    <span class="dropdown-item"><%=email%></span>
-    <form action="sr_login" method="post">
-            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>
-  </div>
-</div>
-   <!-- <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-<img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>
-      <span class="navbarr-brand"><%=nombres%></span>
-<span class="navbarr-brand"><%=usuario%></span>
--->
-  </button>
-  <% 
 
-                         for (String i:Menu.keySet()){
-                             out.println("<a href='" + Menu.get(i) + "'>" + i + "</a><br>");
-                         }
-                         
-                    
-                    %>
-  </nav>
-</div>
+                </div>
+                <div class="logo">
+                    <span ><img src="CSS/Logos/eme.svg" style="max-width: 60px; max-height: 60px;margin-right:5px; "></span>
+                </div>
+                <div class="content">
+                    <div class="inner">
         
             <br><h1>Listado De Productos</h1>
        
          
-<div class="container">
+
 
 
 
@@ -208,7 +203,7 @@ function showtime () {
   <br>
 
  
-       
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
             <form action="sr_productos" method="POST" class="form-group" enctype="multipart/form-data" class="form-horizontal" role="form" name="formulario">
                   
                 <label><b>id</b></label>
@@ -249,14 +244,48 @@ function showtime () {
             <button type="submit" class="btn btn-primary" name="btn_eliminar" id="btn_eliminar" value="eliminar" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
        <input type="hidden" name="nombre" id="file">
             </form>
-    
-        </div>
-        
-        
-      
-             
-                     
-  <table class="table table-hover">
+     </div>
+                </div>
+                <nav>
+                    <ul>
+                        <%
+
+                            for (String i : Menu.keySet()) {
+                                out.println("<li><a href='" + Menu.get(i) + "'>" + i + "</a></li><br>");
+                            }
+
+
+                        %>
+                        <!--<li><a href="#elements">Elements</a></li>-->
+                    </ul>
+                </nav>
+            </header>
+     
+
+                      
+        <br>
+
+       
+
+        <br>
+ 
+        <!-- BG -->
+
+  	</div>
+      <div class="modal" id="myModal">
+   <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header text-center">
+        <h4 class="modal-title text-center">Lasta de las Marcas </h4>
+ 
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center">
+
+         <table class="table table-dark table-hover text-center">
     <thead>
       <tr>
         <th>Producto</th>
@@ -291,9 +320,23 @@ function showtime () {
     </tbody>
     
   </table>
-    <a href="Marcas.jsp">Marcas</a> 
+ </div>
+
+ 
+
+    </div>
+  </div>
 </div>
-  
+                    <!-- BG -->
+			<div id="bg"></div>
+    
+                    
+		<!-- Scripts -->
+			
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
  <script type="text/javascript">
             $(document).ready(function () {
             $("#lbl_fecha").hide();
@@ -335,7 +378,7 @@ $('#tbl_productos').on('click','tr td', function(evt){
    $("#txt_FechaIngreso").val(fechaingreso);
    $("#imagenes").val(imagen);
    
-        
+          $('#myModal').modal('hide');
 
   
   

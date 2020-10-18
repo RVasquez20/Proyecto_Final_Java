@@ -1367,14 +1367,17 @@ input, select, textarea {
 					letter-spacing: 0.2rem;
 					font-size: 0.8rem;
 					border-bottom: 0;
+                                        color: #ffffff;
 				}
 
 					#header nav ul li a:hover {
 						background-color: rgba(255, 255, 255, 0.075);
+                                                color:white;
 					}
 
 					#header nav ul li a:active {
 						background-color: rgba(255, 255, 255, 0.175);
+                                                color:white;
 					}
 
 		#header nav.use-middle:after {

@@ -32,6 +32,7 @@
 
 .form-group .form-control{
     color:#FFF;
+    background-color: transparent; 
 }
 .form-control[readonly]{
     color:#FFF;
@@ -52,4 +53,11 @@
 }
 .td{
     color:white;
+}
+a {
+color:wheat;
+}
+input[type="checkbox"], input[type="radio"]{
+    border-color: white;
+    background-color: wheat;
 }

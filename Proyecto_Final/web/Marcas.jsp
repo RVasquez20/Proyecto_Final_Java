@@ -31,6 +31,14 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
         <script src="JS/AllInOne.js"></script>
+        <script>
+        $(document).ready(function () {
+            
+              $("#btn_modificar").hide();
+       $("#btn_eliminar").hide();
+       $("#btn_agregar").show();
+        });
+    </script>
         <title>JSP Page</title>
     </head>
     <body class="is-preload">
@@ -55,15 +63,13 @@
 
                 </div>
                 <div class="logo">
-                    <span class="icon fa-gem"></span>
+                    <span ><img src="CSS/Logos/eme.svg" style="max-width: 60px; max-height: 60px;margin-right:5px; "></span>
                 </div>
                 <div class="content">
                     <div class="inner">
 
                         <h1>Marcas</h1>
-                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  Open modal
-</button>
+                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
                         <form action="sr_Marcas" method="POST" class="form-group">
                             <label>ID:</label>
                             <input type="text" name="txt_id_Marcas" id="txt_id_Marcas" class="form-control" value="0" readonly="">
@@ -107,19 +113,19 @@
 
 		
         <div class="modal" id="myModal">
-  <div class="modal-dialog">
+   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
 
       <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+      <div class="modal-header text-center">
+        <h4 class="modal-title text-center">Lasta de las Marcas </h4>
  
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
+      <div class="modal-body text-center">
 
-         <table class="table table-striped" style="text-align: center;">
+         <table class="table table-dark table-hover text-center">
                 <thead>
                     <tr>
                         <th>Marca</th>
@@ -163,13 +169,16 @@
                                 $('#tbl_Marcas').on('click', 'tr td', function (evt) {
                                     var target, id, Marcas;
                                     target = $(event.target);
+                                      $("#btn_modificar").show();
+       $("#btn_eliminar").show();
+       $("#btn_agregar").hide();
                                     id = target.parent().data("idm");
                                     Marcas = target.parent("tr").find("td").eq(0).html();
 
 
                                     $("#txt_id_Marcas").val(id);
                                     $("#txt_Marca").val(Marcas);
-   $('#myModal').modal('hide')
+   $('#myModal').modal('hide');
                                 });
         </script>
  

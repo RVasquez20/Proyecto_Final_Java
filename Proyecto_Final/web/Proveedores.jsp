@@ -22,7 +22,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/main.css" />
         <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -38,12 +38,12 @@
             <!-- Header -->
             <header id="header">
               
-                  <div class="dropdown">
-                    <button id="btn_sesion" type="button" class="btn btn-outline-light dropdown-toggle"  data-toggle="dropdown" style="border:none;">
+                       <div class="dropdown">
+                    <button id="btn_sesion" type="button" class="btn btn-outline-light" dropdown-toggle="dropdown" style="border:none;" data-toggle="dropdown">
                         <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   
                         <span id="nombre_sesion" class="navbarr-brand"><%=nombres%></span>
                     </button>
-                    <div id="dropdown_menu" class="dropdown-menu text-center" style="font-size: 22px; z-index: 1500;">
+                    <div id="dropdown_menu" class="dropdown-menu text-center" style="font-size: 22px;">
 
                         <span class="dropdown-item"><%=usuario%></span>
                         <span class="dropdown-item"><%=email%></span>
@@ -105,15 +105,13 @@
                     </ul>
                 </nav>
             </header>
-        </div>
-        <br>
-
-        <br>
-        <br>
-        <!-- BG -->
-        <div id="bg"></div>
-
         
+        <br>
+
+        <br>
+        <br>
+      
+         </div>
       <!-- The Modal -->
   <div class="modal" id="myModal2">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
@@ -159,17 +157,19 @@
       </div>
     </div>
   </div>
-  
+ 
 
-        
-                   <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/util.js"></script>
-        <script src="assets/js/main.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- BG -->
+			<div id="bg"></div>
+    
+                    
+		<!-- Scripts -->
+			
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>     
+                
 
      
         <script type="text/javascript">
