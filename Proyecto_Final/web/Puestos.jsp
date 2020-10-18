@@ -23,76 +23,115 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="JS/AllInOne.js"></script>
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="CSS/comun.css">
+        <script src="JS/AllInOne.js"></script>
+         <script>
+        $(document).ready(function () {
+            
+              $("#btn_modificar").hide();
+       $("#btn_eliminar").hide();
+       $("#btn_agregar").show();
+        });
+    </script>
         <title>Puestos</title>
     </head>
     <body>
-        <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-        <h4 class="text-white">Herramientas</h4>
-        <!--<form action="sr_login" method="post">
-            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>-->
-    </div>
+      <body class="is-preload">
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Header -->
+            <header id="header">
+                <div class="dropdown">
+                    <button id="btn_sesion" type="button" class="btn btn-outline-light" dropdown-toggle="dropdown" style="border:none;" data-toggle="dropdown">
+                        <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   
+                        <span id="nombre_sesion" class="navbarr-brand"><%=nombres%></span>
+                    </button>
+                    <div id="dropdown_menu" class="dropdown-menu text-center" style="font-size: 22px;">
 
-  </div>
-  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E">
-      <div class="dropdown">
-          <button type="button" class="btn btn-outline-light dropdown-toggle" style="border:none;" data-toggle="dropdown">
-    <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   <span class="navbarr-brand"><%=nombres%></span>
-  </button>
-  <div class="dropdown-menu text-center" style="font-size: 22px;">
+                        <span class="dropdown-item"><%=usuario%></span>
+                        <span class="dropdown-item"><%=email%></span>
+                        <form action="sr_login" method="post">
+                            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
+                        </form>
+                    </div>
 
-    <span class="dropdown-item"><%=usuario%></span>
-    <span class="dropdown-item"><%=email%></span>
-    <form action="sr_login" method="post">
-            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>
-  </div>
-</div>
-   <!-- <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-<img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>
-      <span class="navbarr-brand"><%=nombres%></span>
-<span class="navbarr-brand"><%=usuario%></span>
--->
-  </button>
-  <% 
 
-                         for (String i:Menu.keySet()){
-                             out.println("<a href='" + Menu.get(i) + "'>" + i + "</a><br>");
-                         }
-                         
-                    
-                    %>
-  </nav>
-</div>
+                </div>
+                <div class="logo">
+                    <span class="icon fa-gem"></span>
+                </div>
+                <div class="content">
+                    <div class="inner">
 
-        <h1>Puestos</h1>
+ 
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
           <h1>Formulario Puestos</h1>
-        <div class="container">
+       
             <form action="sr_Puestos" method="post" class="form-group">
                <label for="lbl_id" ><b>ID</b></label>
                 <input type="text" name="txt_id" id="txt_id" class="form-control" value="0" readonly > 
                 <label for="lbl_puestos" ><b>Puestos</b></label>
                 <input type="text" name="txt_puestos" id="txt_puestos" class="form-control" placeholder="Ejemplo: Gerente" onkeypress="return text(event);" required>
+                <br>
                 <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg">Agregar</button>
                 <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success btn-lg">Modificar</button>
                 <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger btn-lg" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
                 
             </form>
-                <div class="container">
-                  <table class="table table-striped">
+
+                </div>
+                     </div>
+                <nav>
+                    <ul>
+                        <%
+
+                            for (String i : Menu.keySet()) {
+                                out.println("<li><a href='" + Menu.get(i) + "'>" + i + "</a></li><br>");
+                            }
+
+
+                        %>
+                        <!--<li><a href="#elements">Elements</a></li>-->
+                    </ul>
+                </nav>
+            </header>
+     
+
+                      
+        <br>
+
+       
+
+        <br>
+ 
+        <!-- BG -->
+
+  	</div>
+            <div class="modal" id="myModal">
+   <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header text-center">
+        <h4 class="modal-title text-center">Lasta de las Productos </h4>
+ 
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center">
+                  <table class="table table-dark table-hover text-center">
     <thead>
         <tr>
         <th>Puestos</th>
       </tr>
     </thead>
-    <tbody id="tbl_puestos">
+    <tbody id="tbl_puestos" style="color:white;">
         <% 
        Puesto puesto = new Puesto();
         DefaultTableModel tabla = new DefaultTableModel();
@@ -108,22 +147,41 @@
     </tbody>
   </table>
   </div>
+
+ 
+
+    </div>
+  </div>
+</div>
+                    <!-- BG -->
+			<div id="bg"></div>
+    
+                    
+		<!-- Scripts -->
+			
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
         <script type="text/javascript">
     $('#tbl_puestos').on('click','tr td',function(evt){
        var target,id,puestos; 
        target = $(event.target);
-      
+       $("#btn_modificar").show();
+       $("#btn_eliminar").show();
+       $("#btn_agregar").hide();
       id = target.parent().data("id");
        puestos = target.parent("tr").find("td").eq(0).html();
        
        $("#txt_id").val(id);
        $("#txt_puestos").val(puestos);
       
-       
+          $('#myModal').modal('hide');
     });
     
 </script>
-        <a href="Empleados.jsp">Regresar</a>
+      
     </body>
 </html>
 <%

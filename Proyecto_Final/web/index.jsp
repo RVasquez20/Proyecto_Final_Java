@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="CSS/EstilosIndex.css" type="text/css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="fuentes/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="CSS/comun.css">
 <title>JSP Page</title>
     </head>
     <body>
@@ -48,7 +49,7 @@
                             <div class="wrap-login-form-btn">
                                 <div class="login-form-bgbtn"></div>
                        
-                        <input type="submit" value="Ingresar" class="btn login-form-btn" name="Ingresar" id="Ingresar" onclick="return ValidarCodigoLogin();">
+                        <input type="submit" value="Ingresar" class="btn login-form-btn" name="Ingresar" id="Ingresar" >
                         <!--<input type="submit" name="accion" value="Ingresar" class="btn btn-primary btn-b">-->
                     </div>
                 </div>
