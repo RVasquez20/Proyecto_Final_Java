@@ -102,6 +102,7 @@ var entero = function (e){
        $("#txt_NIT").val('');
        $("#txt_Direccion").val('');
        $("#txt_Telefono").val('');
+       
     };
       function LimpiarCompras(){
         $("#txt_id_Compra").val(0);
