@@ -86,21 +86,22 @@
                 <label for="lbl_telefono">Telefono:</label>
                 <input type="text" name="txt_telefono" id="txt_telefono" class="form-control" placeholder="12345678" maxlength="8"  onkeypress="return entero(event);" required>
                 <label for="lbl_correo">Correo:</label>
-                <input type="email" name="txt_correo" id="txt_correo" class="form-control" required>
+                <input type="email" name="txt_correo" id="txt_correo" class="form-control" placeholder="example@example.com" required>
                 <label id="lbl_fecha">Fecha:</label>
                 <input type="datetime" name="txt_fecha" id="txt_fecha" class="form-control" value="0" required>
                 <br>
                 <label for="lbl_genero" style="font-size: 18px;">Genero: &ensp;</label>
-                <div class="form-check-inline">
-                  <label class="form-check-label" for="Masculino">
-                      <input type="radio" class="form-check-input" id="drop_genero" name="drop_genero" value="1" style="width: 1.2em;height: 1.2em;">Masculino
-                  </label>
-                </div>
-                <div class="form-check-inline">
-                  <label class="form-check-label" for="Femenino">
-                    <input type="radio" class="form-check-input" id="drop_genero2" name="drop_genero" value="2" style="width: 1.2em;height: 1.2em;">Femenino
-                  </label>
-                </div>
+                 <select name="drop_genero" id="drop_genero" class="form-control">
+                    
+                        
+                        <option value='0'>Seleccione</option>
+                        <option value='1'>Masculino</option>
+                        <option value='2'>Femenino</option>
+                      
+
+
+                    
+                </select>
 <br>
                 <br>
                 <button name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-success">Agregar</button>
@@ -145,8 +146,22 @@
 
       <!-- Modal Header -->
       <div class="modal-header text-center">
-        <h4 class="modal-title text-center">Lasta de las Marcas </h4>
- 
+        <h4 class="modal-title text-center">Lista de Clientes </h4>
+ <form class="mr-sm-2">
+                            <input class="form-control" id="myInput" type="text" placeholder="Buscar">
+                            <br><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                <circle cx="8" cy="4.5" r="1"/>
+                                </svg>&ensp;Ayuda</button>
+                            <div id="demo" class="collapse">
+                                <br><b>Esta busqueda esta basada en cada tipo de columna de la tabla
+                                Si desea regresar a la lista completa de empleados solo debe borrar lo
+                                    buscado :D.</b>
+
+                            </div>
+                        </form>
       </div>
 
       <!-- Modal body -->
@@ -236,10 +251,10 @@
                         fechaingreso = target.parent("tr").find("td").eq(5).html();
                         genero = target.parent("tr").find("td").eq(6).html();
                         if(genero==="Masculino"){
-                            $("#drop_genero").prop('checked',true);
+                            $("#drop_genero").val('1');
                         }
                         if(genero==="Femenino"){
-                            $("#drop_genero2").prop('checked',true);
+                            $("#drop_genero").val('2');
                         }
                         $("#txt_id").val(id);
                         $("#txt_nombres").val(nombres);
@@ -261,13 +276,23 @@
                         $("#btn_agregar").show();
                         $("#btn_modificar").hide();
                         $("#btn_eliminar").hide();
-                             $("#drop_genero").prop('checked',false);
-      $("#drop_genero2").prop('checked',false);
+                             $("#drop_genero").val(0);
+ 
                     }
                     );
 
         </script>
-
+ <script>
+        $(document).ready(function () {
+            
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tbl_clientes tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
     </body>
 </html>
 <%

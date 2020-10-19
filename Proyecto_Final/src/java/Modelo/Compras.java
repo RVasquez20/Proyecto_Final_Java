@@ -71,33 +71,7 @@ public class Compras {
         this.FechaIngreso = FechaIngreso;
     }
 
-public DefaultTableModel ListaDeCompras(){
- DefaultTableModel tabla = new DefaultTableModel();
- try{
-     cn = new Conexion();
-     cn.abrirconexion();
-      String query = "select c.idcompra as ID,c.no_orden_compra,p.idproveedor,p.proveedor,c.fecha_orden,c.fechaingreso from compras as c inner join proveedores as p where c.idproveedor=p.idproveedor order by ID;";
-      ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-      String encabezado[] = {"ID","Numero de Compra","idProveedor","Proveedor","Fecha De Orden","Fecha de Ingreso"};
-      tabla.setColumnIdentifiers(encabezado);
-      String datos[] = new String[6];
-      while (consulta.next()){
-          datos[0] = consulta.getString("ID");
-          datos[1] = consulta.getString("no_orden_compra");
-          datos[2] = consulta.getString("idproveedor");
-          datos[3] = consulta.getString("proveedor");
-          datos[4] = consulta.getString("fecha_orden");
-          datos[5] = consulta.getString("fechaingreso");
-          tabla.addRow(datos);
-      
-      }
-      
-     cn.cerrarconexion();
- }catch(SQLException ex){
-     System.out.println(ex.getMessage());
- }
- return tabla;
- }
+
  public int agregar(){
         int retorno =0;
         try{

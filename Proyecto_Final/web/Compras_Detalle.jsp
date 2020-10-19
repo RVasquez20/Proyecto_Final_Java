@@ -24,57 +24,53 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="JS/AllInOne.js"></script>
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="CSS/comun.css">
+       
+        <script src="JS/AllInOne.js"></script>
+        <script>
+        $(document).ready(function () {
+            
+              $("#btn_modificar").hide();
+       $("#btn_eliminar").hide();
+       $("#btn_agregar").show();
+        });
+    </script>
         <title>Compras Detalle</title>
     </head>
-    <body>
-<div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-        <h4 class="text-white">Herramientas</h4>
-        <!--<form action="sr_login" method="post">
-            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>-->
-    </div>
+    <body class="is-preload">
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Header -->
+            <header id="header">
+                <div class="dropdown">
+                    <button id="btn_sesion" type="button" class="btn btn-outline-light" dropdown-toggle="dropdown" style="border:none;" data-toggle="dropdown">
+                        <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   
+                        <span id="nombre_sesion" class="navbarr-brand"><%=nombres%></span>
+                    </button>
+                    <div id="dropdown_menu" class="dropdown-menu text-center" style="font-size: 22px;">
 
-  </div>
-  <nav class="navbar navbar-dark baner" style="background-color: #2A2A1E">
-      <div class="dropdown">
-          <button type="button" class="btn btn-outline-light dropdown-toggle" style="border:none;" data-toggle="dropdown">
-    <img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>   <span class="navbarr-brand"><%=nombres%></span>
-  </button>
-  <div class="dropdown-menu text-center" style="font-size: 22px;">
+                        <span class="dropdown-item"><%=usuario%></span>
+                        <span class="dropdown-item"><%=email%></span>
+                        <form action="sr_login" method="post">
+                            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
+                        </form>
+                    </div>
 
-    <span class="dropdown-item"><%=usuario%></span>
-    <span class="dropdown-item"><%=email%></span>
-    <form action="sr_login" method="post">
-            <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
-        </form>
-  </div>
-</div>
-   <!-- <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-<img src="sources/<%=profile%>" style="width: 60px; height: 60px; border-radius: 2em;"/>
-      <span class="navbarr-brand"><%=nombres%></span>
-<span class="navbarr-brand"><%=usuario%></span>
--->
-  </button>
-  <% 
 
-                         for (String i:Menu.keySet()){
-                             out.println("<a href='" + Menu.get(i) + "'>" + i + "</a><br>");
-                         }
-                         
-                    
-                    %>
-  </nav>
-</div>
-        <div class="container">
+                </div>
+                <div class="logo">
+                    <span class="icon fa-gem"></span>
+                </div>
+                <div class="content">
+                    <div class="inner">
             <h1>Compras Detalle</h1>
-            <a href="index.jsp">Regresar</a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
        <form action="sr_ComprasDetalle" method="POST" class="form-group">
                <label for="lbl_id" ><b>ID</b></label>
                <input type="text" name="txt_id" id="txt_id" class="form-control" value="0" readonly><br>
@@ -129,16 +125,72 @@
     
                 
             </form>
-        </div>
-                <div class="container">
-          
-  <table class="table table-hover">
+       </div>
+                </div>
+                <nav>
+                    <ul>
+                        <%
+
+                            for (String i : Menu.keySet()) {
+                                out.println("<li><a href='" + Menu.get(i) + "'>" + i + "</a></li><br>");
+                            }
+
+
+                        %>
+                      
+                    </ul>
+                </nav>
+            </header>
+     
+
+                      
+        <br>
+
+       
+
+        <br>
+ 
+        <!-- BG -->
+
+  	</div>
+
+		        <div class="modal" id="myModal">
+   <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header text-center">
+        <h4 class="modal-title text-center">Lasta de las Compras y sus Detalles </h4>
+ <form class="mr-sm-2">
+                            <input class="form-control" id="myInput" type="text" placeholder="Buscar">
+                            <br><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                <circle cx="8" cy="4.5" r="1"/>
+                                </svg>&ensp;Ayuda</button>
+                            <div id="demo" class="collapse">
+                                <br><b>Esta busqueda esta basada en cada tipo de columna de la tabla
+                                Si desea regresar a la lista completa de empleados solo debe borrar lo
+                                    buscado :D.</b>
+
+                            </div>
+                        </form>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center">
+
+         <table class="table table-dark table-hover text-center">
     <thead>
       <tr>
         <th>No. Orden</th>
         <th>Productos</th>
         <th>Cantidad</th>
         <th>Precio Costo Unitario</th>
+        <th>Proveedor</th>
+        <th>Fecha De Orden</th>
+        <th>Fecha De Ingreso</th>
       </tr>
       </thead>
       <tbody id="tbl_CompraDetalle">
@@ -147,49 +199,37 @@
         DefaultTableModel tabla = new DefaultTableModel();
         tabla = Detalle.ListaDeComprasDetalle();
         for (int t=0;t<tabla.getRowCount();t++){
-            out.println("<tr data-id=" + tabla.getValueAt(t,0) + " data-idc=" + tabla.getValueAt(t,1) +" data-idp=" + tabla.getValueAt(t,3) + ">");
+            out.println("<tr data-id=" + tabla.getValueAt(t,0) + " data-idc=" + tabla.getValueAt(t,1) +" data-idp=" + tabla.getValueAt(t,3) +" data-idx="+ tabla.getValueAt(t,7) + ">");
             out.println("<td>" + tabla.getValueAt(t,2) + "</td>");
             out.println("<td>" + tabla.getValueAt(t,4) + "</td>");
             out.println("<td>" + tabla.getValueAt(t,5) + "</td>");
             out.println("<td>" + tabla.getValueAt(t,6) + "</td>");
+            out.println("<td>" + tabla.getValueAt(t,8) + "</td>");
+            out.println("<td>" + tabla.getValueAt(t,9) + "</td>");
+            out.println("<td>" + tabla.getValueAt(t,10) + "</td>");
             out.println("</tr>");
         
         }
         %>  
     </tbody>
   </table>
-        <br>
-             
-          
-         <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Numero De Orden</th>
-        <th>Proveedor</th>
-        <th>Fecha de Orden</th>
-        <th>Fecha De Ingreso</th>
-      </tr>
-    </thead>
-    <tbody id="tbl_Compras">
-        <% 
-       Compras Compra=new Compras();
-        DefaultTableModel tabla2 = new DefaultTableModel();
-        tabla2 = Compra.ListaDeCompras();
-        for (int t=0;t<tabla2.getRowCount();t++){
-            out.println("<tr data-id=" + tabla2.getValueAt(t,0)+" data-idp="+tabla2.getValueAt(t,2)+ ">");
-            out.println("<td>" + tabla2.getValueAt(t,1) + "</td>");
-            out.println("<td>" + tabla2.getValueAt(t,3) + "</td>");
-            out.println("<td>" + tabla2.getValueAt(t,4) + "</td>");
-            out.println("<td>" + tabla2.getValueAt(t,5) + "</td>");
-            out.println("</tr>");
-        
-        }
-        %>
-      
-    </tbody>
-  </table>
-                  
-        </div>
+       </div>
+
+ 
+
+    </div>
+  </div>
+</div>
+                    <!-- BG -->
+			<div id="bg"></div>
+    
+                    
+		<!-- Scripts -->
+			
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
          <script type="text/javascript">
             $(document).ready(function () {
             $("#lbl_Fecha_Ingreso").hide();
@@ -202,7 +242,7 @@
             </script>
          <script type="text/javascript">
     $('#tbl_CompraDetalle').on('click','tr td',function(evt){
-       var target,id,idc,idp,orden,producto,precio,cantidad; 
+       var target,id,idc,idp,precio,cantidad,idc,NumeroDeOrden,FechaDeOrden,FechaDeIngreso,idProveedor; ; 
        target = $(event.target);
        $("#lbl_Fecha_Ingreso").show();
                         $("#txt_Fecha_Ingreso").show();
@@ -212,33 +252,41 @@
        id = target.parent().data('id');
        idc = target.parent().data('idc'); 
        idp = target.parent().data('idp'); 
-       orden= target.parent("tr").find("td").eq(0).html();
-       producto = target.parent("tr").find("td").eq(1).html();
+        idProveedor = target.parent().data('idx'); 
+        NumeroDeOrden = target.parent("tr").find("td").eq(0).html();
+       FechaDeOrden = target.parent("tr").find("td").eq(5).html();
+       FechaDeIngreso= target.parent("tr").find("td").eq(6).html();
        cantidad=target.parent("tr").find("td").eq(2).html();
        precio = target.parent("tr").find("td").eq(3).html();
        
        $("#txt_id").val(id);
-        $("#ListaOrdenes").val(idc);
+
          $("#drop_Producto").val(idp);
        $("#txt_PrecioUnitario").val(precio);
        $("#txt_Cantidad").val(cantidad);
        
+       $("#txt_id_Compra").val(idc);
+       $("#ListaProveedores").val(idProveedor);
+       $("#txt_No_Orden").val(NumeroDeOrden);
+       $("#txt_Fecha_Orden").val(FechaDeOrden);
+       $("#txt_Fecha_Ingreso").val(FechaDeIngreso);
+           $('#myModal').modal('hide');
        
     });
     
 </script>
   <script type="text/javascript">
          $('#tbl_Compras').on('click','tr td',function(evt){
-       var target,id,NumeroDeOrden,FechaDeOrden,FechaDeIngreso,idProveedor; 
+       var target,idc,NumeroDeOrden,FechaDeOrden,FechaDeIngreso,idProveedor; 
        target = $(event.target);
-       id = target.parent().data('id'); 
+       idc = target.parent().data('id'); 
         idProveedor = target.parent().data('idp'); 
         NumeroDeOrden = target.parent("tr").find("td").eq(0).html();
        FechaDeOrden = target.parent("tr").find("td").eq(2).html();
        FechaDeIngreso= target.parent("tr").find("td").eq(3).html();
        
 
-       $("#txt_id_Compra").val(id);
+       $("#txt_id_Compra").val(idc);
        $("#ListaProveedores").val(idProveedor);
        $("#txt_No_Orden").val(NumeroDeOrden);
        $("#txt_Fecha_Orden").val(FechaDeOrden);
@@ -246,7 +294,17 @@
  
     });
     </script>
-        
+        <script>
+        $(document).ready(function () {
+            
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tbl_CompraDetalle tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
     </body>
 </html>
 <%

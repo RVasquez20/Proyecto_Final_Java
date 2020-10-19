@@ -80,7 +80,7 @@ public class sr_login extends HttpServlet {
                     ous.close();
                     is.close();
                 if (obj.NuevoUsuario() > 0) {
-                    if(obj.ValidarUS(request.getParameter("txt_passnueva"),request.getParameter("txt_usuarionuevo"),request.getParameter("txt_cod")) > 0) {
+                    if(obj.ValidarUS(request.getParameter("txt_passnueva"),request.getParameter("txt_usuarionuevo"),request.getParameter("txt_codigo")) > 0) {
                     String nombre=obj.Name(request.getParameter("txt_usuarionuevo"));
                     String email=obj.Email(request.getParameter("txt_usuarionuevo"));
                     String profile=obj.Foto(request.getParameter("txt_usuarionuevo"));

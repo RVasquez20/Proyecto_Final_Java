@@ -68,7 +68,7 @@ public class sr_productos extends HttpServlet {
                if(producto.agregar()>0){
                    Part archivo = request.getPart("archivo");
                     InputStream is = archivo.getInputStream();
-                    File f = new File("C:/Users/jeron/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/upload/"+n);
+                    File f = new File("C:/Users/rodri/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/upload/"+n);
                     FileOutputStream ous = new FileOutputStream(f);
                     
                     int dato = is.read();
@@ -91,7 +91,7 @@ public class sr_productos extends HttpServlet {
                if(producto.modificar()>0){
                   Part archivo = request.getPart("archivo");
                     InputStream is = archivo.getInputStream();
-                    File f = new File("C:/Users/jeron/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/upload/"+n);
+                    File f = new File("C:/Users/rodri/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/upload/"+n);
                     FileOutputStream ous = new FileOutputStream(f);
                     
                     int dato = is.read();

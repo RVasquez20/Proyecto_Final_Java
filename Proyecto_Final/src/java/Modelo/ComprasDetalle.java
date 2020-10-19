@@ -74,11 +74,11 @@ public class ComprasDetalle {
  try{
      cn = new Conexion();
      cn.abrirconexion();
-      String query = "select dc.idcompra_detalle as ID,c.idcompra,c.no_orden_compra,p.idproducto,p.producto,dc.cantidad,dc.precio_costo_unitario from compras_detalle as dc inner join compras as c inner join productos as p  where dc.idcompra=c.idcompra and dc.idproducto=p.idProducto order by ID;";
+      String query = "select dc.idcompra_detalle as ID,c.idcompra,c.no_orden_compra,p.idproducto,p.producto,dc.cantidad,dc.precio_costo_unitario,c.idproveedor,pr.proveedor,c.fecha_orden,c.fechaingreso from compras_detalle as dc inner join compras as c inner join productos as p inner join proveedores as pr where dc.idcompra=c.idcompra and dc.idproducto=p.idProducto and pr.idproveedor=c.idproveedor order by ID;";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-      String encabezado[] = {"ID","idCompras","no Orden","idProducto","Productos","Cantidad","Precio unitario"};
+      String encabezado[] = {"ID","idCompras","no Orden","idProducto","Productos","Cantidad","Precio unitario","idProveedor","Proveedor","Fecha De Orden","Fecha de Ingreso"};
       tabla.setColumnIdentifiers(encabezado);
-      String datos[] = new String[7];
+      String datos[] = new String[11];
       while (consulta.next()){
           datos[0] = consulta.getString("ID");
           datos[1] = consulta.getString("idcompra");
@@ -87,6 +87,10 @@ public class ComprasDetalle {
           datos[4] = consulta.getString("producto");
           datos[5] = consulta.getString("cantidad");
           datos[6] = consulta.getString("precio_costo_unitario");
+          datos[7] = consulta.getString("idproveedor");
+          datos[8] = consulta.getString("proveedor");
+          datos[9] = consulta.getString("fecha_orden");
+          datos[10] = consulta.getString("fechaingreso");
           tabla.addRow(datos);
       
       }

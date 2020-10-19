@@ -90,38 +90,7 @@ public class Ventas {
         this.fechaingreso = fechaingreso;
     }
     
-     public DefaultTableModel leer() {
-        DefaultTableModel tabla = new DefaultTableModel();
-        try {
-            cn = new Conexion();
-            cn.abrirconexion();
-            String query = "SELECT v.idVentas as id, v.nofactura, v.serie, v.fechafactura, c.idClientes, c.nombres,c.nit,e.nombres,e.idempleado,v.fechaingreso FROM ventas as v inner join clientes as c inner join empleados as e on v.idcliente=c.idClientes and v.idempleado=e.idEmpleado order by id;";
-            ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-            String encabezado[] = {"ID", "No.Factura", "Serie", "Fecha", "ID Clientes", "Nombre Cliente", "NIT","Nombre empleado", "ID Empleado", "fechaingreso"};
-            tabla.setColumnIdentifiers(encabezado);
-            String datos[] = new String[10];
-            while (consulta.next()) {
-                datos[0] = consulta.getString("id");
-                datos[1] = consulta.getString("nofactura");
-                datos[2] = consulta.getString("serie");
-                datos[3] = consulta.getString("fechafactura");
-                datos[4] = consulta.getString("idClientes");
-                datos[5] = consulta.getString("nombres");
-                datos[6] = consulta.getString("nit");
-                datos[7] = consulta.getString("nombres");
-                datos[8] = consulta.getString("idempleado");
-                datos[9] = consulta.getString("fechaingreso");
-                tabla.addRow(datos);
-                
-            }
-
-            cn.cerrarconexion();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return tabla;
-    }
+     
     public HashMap ListaC(){
     HashMap<String,String> drop = new HashMap();
     try{
@@ -167,10 +136,9 @@ public class Ventas {
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(query);
             parametro.setInt(1, getNofactura());
             parametro.setString(2, getSerie());
-            parametro.setString(3, getFechafactura());
-            parametro.setInt(4, getIdcliente());
-            parametro.setInt(5, getIdempleado());
-            parametro.setString(6, getFechaingreso());
+            parametro.setInt(3, getIdcliente());
+            parametro.setInt(4, getIdempleado());
+    
             
 
             retorno = parametro.executeUpdate();

@@ -10,17 +10,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+       
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="JS/AllInOne.js"></script>
 <link rel="stylesheet" href="CSS/EstilosIndex.css" type="text/css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="fuentes/iconic/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" type="text/css" href="CSS/comun.css">
+
 <title>JSP Page</title>
     </head>
     <body>
+
         <div class="container-login">
             <div class="wrap-login">
                
@@ -44,7 +47,8 @@
                             <span class="focus-efecto"></span>
                          
                         </div>
-                        <a style="color: #000000" data-toggle="modal" data-target="#ModalUsuario" href="#ModalUsuario">No tienes cuenta?</a>
+                         <a style="color: #000000" data-toggle="modal" data-target="#myModal" href="#myModal">No tienes cuenta?</a>
+                      
                         <div class="container-login-form-btn">
                             <div class="wrap-login-form-btn">
                                 <div class="login-form-bgbtn"></div>
@@ -58,17 +62,18 @@
             </div>
         </div>
         <!-- Fin form-->
-        <div class="modal" id="ModalUsuario">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
+                <div class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h1 class="modal-title">Nuevo Registro</h1>
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-       <h5 id="Titulo" class="input110">NUEVO REGISTRO</h5>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body" >
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
      <form action="sr_login" method="post" class="form-group" enctype="multipart/form-data" name="formulario" role="form">
                                     
                                     <div class="wrap-input100">
@@ -115,19 +120,19 @@
                                     
                               
                                      <input type="hidden" name="nombre" id="file">
+                                      <div class="modal-footer">
                                      <input id ="Registrar" name="Registrar" value="Registrar" class="btn btn-success" type ="submit" onclick="return ValidarCodigo();">
         <button  class="btn btn-danger" data-dismiss="modal">Close</button>
-                     
+                       </div>
                         </form>
+     </div>
+        
+
+      
+        
       </div>
-
-
-          
-
-
     </div>
   </div>
-</div>   
-<script src="bootstrap/js/bootstrap.min.js"></script>    
+
     </body>
 </html>

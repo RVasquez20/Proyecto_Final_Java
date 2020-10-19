@@ -65,6 +65,7 @@ public class sr_VentasDetalle extends HttpServlet {
               ventas = new Ventas(Integer.parseInt(request.getParameter("txt_idventas")), Integer.parseInt(request.getParameter("txt_nofactura")), Integer.parseInt(request.getParameter("txt_idcliente")), Integer.parseInt(request.getParameter("txt_idempleado")), request.getParameter("txt_serie"),request.getParameter("txt_fechafactura"), request.getParameter("txt_fechaingreso"));
               detalleantiguo=new VentasDetalle();
             int x=detalleantiguo.cantidadantigua(Integer.parseInt(request.getParameter("txt_id_Ventas")));
+            
             if ("agregar".equals(request.getParameter("btn_agregar"))){
             if(ventas.agregar()>0){
                 VentasDetalle obj1=new VentasDetalle();

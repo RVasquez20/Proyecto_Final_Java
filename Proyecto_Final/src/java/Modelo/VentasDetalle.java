@@ -74,19 +74,28 @@ public class VentasDetalle {
  try{
      cn = new Conexion();
      cn.abrirconexion();
-      String query = "select dv.idVentas_detalle as ID,v.idVentas,v.nofactura,p.idProducto,p.producto,dv.cantidad,dv.precio_unitario  from ventas_detalle as dv inner join ventas as v inner join productos as p where dv.idProducto=p.idProducto and dv.idventa=v.idVentas order by ID;";
+      String query = "select dv.idVentas_detalle as ID,v.idVentas,v.nofactura,v.serie,v.fechafactura,c.idClientes,c.nombres,"
+              + "c.nit,e.nombres,e.idempleado,v.fechaingreso,p.idProducto,p.producto,dv.cantidad,dv.precio_unitario  from ventas_detalle as dv inner join ventas as v inner join productos as p inner join clientes as c inner join empleados as e on dv.idProducto=p.idProducto and dv.idventa=v.idVentas and v.idcliente=c.idClientes and v.idempleado=e.idEmpleado order by ID;";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-      String encabezado[] = {"ID","idVentas","no Factura","idProducto","Productos","Cantidad","Precio unitario"};
+      String encabezado[] = {"ID","idVentas","no Factura","Serie","Fecha de Factura","ID Clientes", "Nombre Cliente", "NIT","Nombre empleado", "ID Empleado", "fechaingreso","idProducto","Productos","Cantidad","Precio unitario"};
       tabla.setColumnIdentifiers(encabezado);
-      String datos[] = new String[7];
+      String datos[] = new String[15];
       while (consulta.next()){
           datos[0] = consulta.getString("ID");
           datos[1] = consulta.getString("idVentas");
           datos[2] = consulta.getString("nofactura");
-          datos[3] = consulta.getString("idproducto");
-          datos[4] = consulta.getString("producto");
-          datos[5] = consulta.getString("cantidad");
-          datos[6] = consulta.getString("precio_unitario");
+          datos[3] = consulta.getString("serie");
+          datos[4] = consulta.getString("fechafactura");
+          datos[5] = consulta.getString("idClientes");
+          datos[6] = consulta.getString("nombres");
+          datos[7] = consulta.getString("nit");
+          datos[8] = consulta.getString("nombres");
+          datos[9] = consulta.getString("idempleado");
+          datos[10] = consulta.getString("fechaingreso");
+          datos[11] = consulta.getString("idproducto");
+          datos[12] = consulta.getString("producto");
+          datos[13] = consulta.getString("cantidad");
+          datos[14] = consulta.getString("precio_unitario");
           tabla.addRow(datos);
       
       }

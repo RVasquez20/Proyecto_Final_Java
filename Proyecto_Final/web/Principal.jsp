@@ -27,6 +27,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
+        <script src="https://kit.fontawesome.com/d34e9eb680.js" crossorigin="anonymous"></script>
         <title>JSP Page</title>
     </head>
     <body class="is-preload">
@@ -51,7 +52,7 @@
 
                 </div>
                 <div class="logo">
-                    <span ><img src="CSS/Logos/PE.svg" style="max-width: 40px; max-height: 40px;"></span>
+                   <i class="fas fa-house-user fa-3x" style="color: white; margin-top: 20px;"></i>
                 </div>
                 <div class="content">
                     <div class="inner">

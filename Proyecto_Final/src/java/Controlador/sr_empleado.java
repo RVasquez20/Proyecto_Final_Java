@@ -56,7 +56,7 @@ public class sr_empleado extends HttpServlet {
             
               empleado = new Empleado(Integer.parseInt(request.getParameter("drop_puesto")),Integer.parseInt(request.getParameter("txt_id")),
             request.getParameter("txt_nombres"),request.getParameter("txt_apellidos"),request.getParameter("txt_direccion"),request.getParameter("txt_telefono"),
-            request.getParameter("txt_fn"),request.getParameter("txt_DPI"),request.getParameter("txt_fechaIngreso"),request.getParameter("txt_fechaInicio"),Integer.parseInt(request.getParameter("txt_genero")));
+            request.getParameter("txt_fn"),request.getParameter("txt_DPI"),request.getParameter("txt_fechaIngreso"),request.getParameter("txt_fechaInicio"),Integer.parseInt(request.getParameter("drop_genero")));
             // Boton agregar 
              
             if ("agregar".equals(request.getParameter("btn_agregar"))){

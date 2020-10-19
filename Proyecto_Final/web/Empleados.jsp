@@ -30,9 +30,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+       
         <script src="JS/AllInOne.js"></script>
         <script>
         $(document).ready(function () {
@@ -89,16 +87,17 @@
                <br>
                  <br>
                 <label for="lbl_genero" style="font-size: 18px;">Genero: &ensp;</label>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <label class="form-check-label" for="Masculino">
-                      <input type="radio" class="custom-control-input" id="txt_genero" name="txt_genero" value="1" style="width: 1.2em;height: 1.2em;">Masculino
-                  </label>
-                </div>
-                <div class="form-check-inline">
-                  <label class="form-check-label" for="Femenino">
-                    <input type="radio" class="form-check-input" id="txt_genero2" name="txt_genero" value="2" style="width: 1.2em;height: 1.2em;">Femenino
-                  </label>
-                </div>
+                <select name="drop_genero" id="drop_genero" class="form-control">
+                    
+                        
+                        <option value='0'>Seleccione</option>
+                        <option value='1'>Masculino</option>
+                        <option value='2'>Femenino</option>
+                      
+
+
+                    
+                </select>
 <br>
                 <br>
                 <label for="lbl_fn" ><b>Fecha de Nacimiento</b></label>
@@ -138,7 +137,7 @@
 
 
                         %>
-                        <!--<li><a href="#elements">Elements</a></li>-->
+                      
                     </ul>
                 </nav>
             </header>
@@ -161,8 +160,22 @@
 
       <!-- Modal Header -->
       <div class="modal-header text-center">
-        <h4 class="modal-title text-center">Lasta de las Marcas </h4>
- 
+        <h4 class="modal-title text-center">Lista de Empleados </h4>
+ <form class="mr-sm-2">
+                            <input class="form-control" id="myInput" type="text" placeholder="Buscar">
+                            <br><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                <circle cx="8" cy="4.5" r="1"/>
+                                </svg>&ensp;Ayuda</button>
+                            <div id="demo" class="collapse">
+                                <br><b>Esta busqueda esta basada en cada tipo de columna de la tabla
+                                Si desea regresar a la lista completa de empleados solo debe borrar lo
+                                    buscado :D.</b>
+
+                            </div>
+                        </form>
       </div>
 
       <!-- Modal body -->
@@ -235,8 +248,8 @@
                         $("#btn_agregar").show();
                         $("#btn_modificar").hide();
                         $("#btn_eliminar").hide();
-                         $("#txt_genero").prop('checked',false);
-      $("#txt_genero2").prop('checked',false);
+                         $("#drop_genero").val(0);
+    
     });
             
             </script>
@@ -261,11 +274,11 @@
        fecha_inicio_labores = target.parent("tr").find("td").eq(8).html();
        fechaIngreso = target.parent("tr").find("td").eq(9).html();  
        if(genero==="Masculino"){
-                            $("#txt_genero").prop('checked',true);
+                           $("#drop_genero").val('1');
                             
                         }
                         if(genero==="Femenino"){
-                            $("#txt_genero2").prop('checked',true);
+                             $("#drop_genero").val('2');
                         }
        $("#txt_id").val(id);
        $("#txt_nombres").val(nombres);
@@ -281,8 +294,17 @@
     });
     
 </script>
-        <a href="Puestos.jsp">Puestos</a>
-        <a href="Principal.jsp">Regresar</a>
+<script>
+        $(document).ready(function () {
+            
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tbl_empleados tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
     </body>
 </html>
 <%

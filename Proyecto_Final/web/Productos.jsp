@@ -42,114 +42,12 @@ String variable = (String)request.getAttribute("txt_locale");
        $("#btn_agregar").show();
         });
     </script>
- <script Language="JavaScript">
 
-<!-- Helpers for JSI page...
-
-// Navigation - Start
-
-function goback(){
-
-alert("Good Bye!");
-
-history.go(-1);
-
-}
-
-function gettheDate() {
-
-Todays = new Date();
-
-TheDate = "" + (Todays.getMonth()+ 1) +" / "+ Todays.getDate() + " / " + (Todays.getYear() + 1900) 
-
-document.clock.thedate.value = TheDate;
-
-}
-
-// Navigation - Stop
-
-// Netscapes Clock - Start
-
-// this code was taken from Netscapes JavaScript documentation at
-
-// www.netscape.com on Jan.25.96
-
-
-
-var timerID = null;
-
-var timerRunning = false;
-
-function stopclock (){
-
-	if(timerRunning)
-
-		clearTimeout(timerID);
-
-	timerRunning = false;
-
-}
-
-
-
-function startclock () {
-
-	// Make sure the clock is stopped
-
-	stopclock();
-
-	gettheDate()
-
-	showtime();
-
-}
-
-
-
-function showtime () {
-
-	var now = new Date();
-
-	var hours = now.getHours();
-
-	var minutes = now.getMinutes();
-
-	var seconds = now.getSeconds()
-
-	var timeValue = "" + ((hours >12) ? hours -12 :hours)
-
-	timeValue += ((minutes < 10) ? ":0" : ":") + minutes
-
-	timeValue += ((seconds < 10) ? ":0" : ":") + seconds
-
-	timeValue += (hours >= 12) ? " P.M." : " A.M."
-
-	document.clock.face.value = timeValue;
-
-	// you could replace the above with this
-
-	// and have a clock on the status bar:
-
-	// window.status = timeValue;
-
-	timerID = setTimeout("showtime()",1000);
-
-	timerRunning = true;
-
-}
-
-// Netscapes Clock - Stop
-
-
-
-// end Helpers -->
-
-</script>
 
         <title>Productos</title>
     </head>
     
-    <body class="is-preload" onload="startclock()">
+    <body class="is-preload">
         <!-- Wrapper -->
         <div id="wrapper">
             <!-- Header -->
@@ -184,22 +82,6 @@ function showtime () {
 
 
 
- <form name="clock" onSubmit="0">
-
-
-
-
-
-
-   Hoy es: <input type="text" name="thedate" size=12
-
-           value="" readonly>
-
-   La hora es: <input type="text" name="face" size=12
-
-           value="" readonly>
-</form>
-
   <br>
 
  
@@ -226,7 +108,8 @@ function showtime () {
  onkeypress="return text(event);" required><br>
                 
                 <label><b>Imagen</b></label>
-                 <input type="file" id="imagen" name="archivo" class="col-md-8 btn" onchange="cargarArchivo(this)">
+                 <input type="file" id="imagen" name="archivo" class="col-md-8 btn" onchange="cargarArchivo(this)" style="
+    color: wheat;">
                  <input type="hidden" id="imagenes" name="imagenes"/>
                                 <div class="clear"></div>
                  <label><b>Precio Costo</b></label>
@@ -278,8 +161,22 @@ function showtime () {
 
       <!-- Modal Header -->
       <div class="modal-header text-center">
-        <h4 class="modal-title text-center">Lasta de las Marcas </h4>
- 
+        <h4 class="modal-title text-center">Lista de Productos </h4>
+ <form class="mr-sm-2">
+                            <input class="form-control" id="myInput" type="text" placeholder="Buscar">
+                            <br><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                <circle cx="8" cy="4.5" r="1"/>
+                                </svg>&ensp;Ayuda</button>
+                            <div id="demo" class="collapse">
+                                <br><b>Esta busqueda esta basada en cada tipo de columna de la tabla
+                                Si desea regresar a la lista completa de empleados solo debe borrar lo
+                                    buscado :D.</b>
+
+                            </div>
+                        </form>
       </div>
 
       <!-- Modal body -->
@@ -409,6 +306,17 @@ $('#tbl_productos').on('click','tr td', function(evt){
 
       });
 </script>
+ <script>
+        $(document).ready(function () {
+            
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tbl_productos tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
     </body>
 </html>
 <%
