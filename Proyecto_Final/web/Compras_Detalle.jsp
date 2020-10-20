@@ -275,25 +275,7 @@
     });
     
 </script>
-  <script type="text/javascript">
-         $('#tbl_Compras').on('click','tr td',function(evt){
-       var target,idc,NumeroDeOrden,FechaDeOrden,FechaDeIngreso,idProveedor; 
-       target = $(event.target);
-       idc = target.parent().data('id'); 
-        idProveedor = target.parent().data('idp'); 
-        NumeroDeOrden = target.parent("tr").find("td").eq(0).html();
-       FechaDeOrden = target.parent("tr").find("td").eq(2).html();
-       FechaDeIngreso= target.parent("tr").find("td").eq(3).html();
-       
-
-       $("#txt_id_Compra").val(idc);
-       $("#ListaProveedores").val(idProveedor);
-       $("#txt_No_Orden").val(NumeroDeOrden);
-       $("#txt_Fecha_Orden").val(FechaDeOrden);
-       $("#txt_Fecha_Ingreso").val(FechaDeIngreso);
- 
-    });
-    </script>
+  
         <script>
         $(document).ready(function () {
             
