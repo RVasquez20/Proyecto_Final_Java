@@ -85,14 +85,30 @@ public class sr_login extends HttpServlet {
                     String email=obj.Email(request.getParameter("txt_usuarionuevo"));
                     String profile=obj.Foto(request.getParameter("txt_usuarionuevo"));
                     String tipo=obj.tipe(request.getParameter("txt_usuarionuevo"));
-                    HashMap<String,String> Lista=obj.Menu(request.getParameter("txt_usuarionuevo"));
+                     String marcas=obj.Marcas(request.getParameter("txt_usuarionuevo"));
+                    String prod=obj.Productos(request.getParameter("txt_usuarionuevo"));
+                    String cliente=obj.Clientes(request.getParameter("txt_usuarionuevo"));
+                    String compras_detalle=obj.ComprasDetalle(request.getParameter("txt_usuarionuevo"));
+                    String emple=obj.Empleado(request.getParameter("txt_usuarionuevo"));
+                    String prove=obj.Proveedores(request.getParameter("txt_usuarionuevo"));
+                    String puest=obj.Puestos(request.getParameter("txt_usuarionuevo"));
+                    String vendet=obj.VentasDetalles(request.getParameter("txt_usuarionuevo"));
+                    String nuev=obj.NuevoAd(request.getParameter("txt_usuarionuevo"));
                     HttpSession actual = request.getSession(true);
                     actual.setAttribute("Logueado", request.getParameter("txt_usuarionuevo"));
                     actual.setAttribute("T", tipo);
                     actual.setAttribute("nom", nombre);
-                    actual.setAttribute("em", email);
+                    actual.setAttribute("emai", email);
                     actual.setAttribute("Ft", profile);
-                    actual.setAttribute("Men", Lista);
+                   actual.setAttribute("mar", marcas);
+                    actual.setAttribute("pr", prod);
+                    actual.setAttribute("cl", cliente);
+                    actual.setAttribute("cd", compras_detalle);
+                    actual.setAttribute("em", emple);
+                    actual.setAttribute("pro", prove);
+                    actual.setAttribute("pues", puest);
+                    actual.setAttribute("vende", vendet);
+                    actual.setAttribute("nu", nuev);
                     response.sendRedirect("Principal.jsp");
                 }
                 }
@@ -114,14 +130,30 @@ public class sr_login extends HttpServlet {
                     String email=obj.Email(usuario);
                     String profile=obj.Foto(usuario);
                     String tipo=obj.tipe(usuario);
-                    HashMap<String,String> Lista=obj.Menu(usuario);
+                   String marcas=obj.Marcas(usuario);
+                    String prod=obj.Productos(usuario);
+                    String cliente=obj.Clientes(usuario);
+                    String compras_detalle=obj.ComprasDetalle(usuario);
+                    String emple=obj.Empleado(usuario);
+                    String prove=obj.Proveedores(usuario);
+                    String puest=obj.Puestos(usuario);
+                    String vendet=obj.VentasDetalles(usuario);
+                    String nuev=obj.NuevoAd(usuario);
                     HttpSession actual = request.getSession(true);
                     actual.setAttribute("Logueado", usuario);
                     actual.setAttribute("T", tipo);
                     actual.setAttribute("nom", nombre);
-                    actual.setAttribute("em", email);
+                    actual.setAttribute("emai", email);
                     actual.setAttribute("Ft", profile);
-                    actual.setAttribute("Men", Lista);
+                     actual.setAttribute("mar", marcas);
+                    actual.setAttribute("pr", prod);
+                    actual.setAttribute("cl", cliente);
+                    actual.setAttribute("cd", compras_detalle);
+                    actual.setAttribute("em", emple);
+                    actual.setAttribute("pro", prove);
+                    actual.setAttribute("pues", puest);
+                    actual.setAttribute("vende", vendet);
+                    actual.setAttribute("nu", nuev);
                     response.sendRedirect("Principal.jsp");
                 }
                 else {

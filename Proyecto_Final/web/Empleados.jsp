@@ -4,16 +4,24 @@
     Author     : eriki
 --%>
 <%
-      HttpSession actual =request.getSession(true);
-      String usuario = (String) actual.getAttribute("Logueado");
-      String nombres=(String) actual.getAttribute("nom");
-      String email=(String) actual.getAttribute("em");
-      String profile=(String) actual.getAttribute("Ft");
-      String tipo=(String) actual.getAttribute("T");
-          HashMap<String,String> Menu=(HashMap)actual.getAttribute("Men");
-      session.setMaxInactiveInterval(900);
-      if((actual.getAttribute("Logueado")!=null)&&(tipo.equals("ADMIN"))){
-        %>
+    HttpSession actual = request.getSession(true);
+    String usuario = (String) actual.getAttribute("Logueado");
+    String nombres = (String) actual.getAttribute("nom");
+    String email = (String) actual.getAttribute("emai");
+    String profile = (String) actual.getAttribute("Ft");
+    String Marca = (String) actual.getAttribute("mar");
+    String Produ = (String) actual.getAttribute("pr");
+    String client = (String) actual.getAttribute("cl");
+    String compdet = (String) actual.getAttribute("cd");
+    String Empl = (String) actual.getAttribute("em");
+    String Prove = (String) actual.getAttribute("pro");
+    String Puest = (String) actual.getAttribute("pues");
+     String tipo = (String) actual.getAttribute("T");
+    String Vendde = (String) actual.getAttribute("vende");
+     String nuevo = (String) actual.getAttribute("nu");
+    session.setMaxInactiveInterval(900);
+   if ((actual.getAttribute("Logueado") != null) && ((tipo.equals("ADMIN")||Empl!=null))) {
+%>
 <%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="Modelo.Empleado"%>
 <%@page import="java.util.HashMap"%>
@@ -131,11 +139,33 @@
                     <ul>
                         <%
 
-                            for (String i : Menu.keySet()) {
-                                out.println("<li><a href='" + Menu.get(i) + "'>" + i + "</a></li><br>");
-                            }
-
-
+                           if(Marca!=null){
+                                out.println("<li><a href='Marcas.jsp'>Marcas</a></li><br>");
+                           }
+                           if(Produ!=null){
+                                out.println("<li><a href='Productos.jsp'>Productos</a></li><br>");
+                           }
+                           if(client!=null){
+                                out.println("<li><a href='clientes.jsp'>Clientes</a></li><br>");
+                           }
+                           if(compdet!=null){
+                                out.println("<li><a href='Compras_Detalle.jsp'>Compras Detalle</a></li><br>");
+                           }
+                           if(Empl!=null){
+                                out.println("<li><a href='Empleados.jsp'>Empleados</a></li><br>");
+                           }
+                           if(Prove!=null){
+                                out.println("<li><a href='Proveedores.jsp'>Proveedores</a></li><br>");
+                           }
+                           if(Puest!=null){
+                                out.println("<li><a href='Puestos.jsp'>Puestos</a></li><br>");
+                           }
+                           if(Vendde!=null){
+                                out.println("<li><a href='VentasDetalle.jsp'>Ventas Detalle</a></li><br>");
+                           }
+ if(nuevo!=null){
+                                out.println("<li><a href='NuevoAdmin.jsp'>Nuevo Admin</a></li><br>");
+ }
                         %>
                       
                     </ul>
