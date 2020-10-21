@@ -71,6 +71,8 @@
 
  
          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
+         <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarPuestos();">Nuevo</button>
+         
           <h1>Formulario Puestos</h1>
        
             <form action="sr_Puestos" method="post" class="form-group">

@@ -70,6 +70,8 @@
 
                         <h1>Marcas</h1>
                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
+                     <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarMarcas();">Nuevo</button>
+                     
                         <form action="sr_Marcas" method="POST" class="form-group">
                             <label>ID:</label>
                             <input type="text" name="txt_id_Marcas" id="txt_id_Marcas" class="form-control" value="0" readonly="">

@@ -132,3 +132,66 @@ var entero = function (e){
     $("#txt_idempleado").val('');
     $("#txt_fechaingreso").val('');
 };
+
+ function LimpiarEmpleados() {
+    $("#txt_id").val(0);
+       $("#txt_nombres").val('');
+       $("#txt_apellidos").val('');
+       $("#txt_direccion").val('');
+       $("#txt_telefono").val('');
+       $("#txt_DPI").val('');
+       $("#drop_genero").val(0);
+       $("#txt_fn").val('');
+       $("#txt_fechaInicio").val('');
+       $("#txt_fechaIngreso").val('');       
+       $("#drop_puesto").val(0);
+};
+
+function LimpiarMarcas() {
+    $("#txt_id_Marcas").val(0);
+    $("#txt_Marca").val('');
+};
+
+function LimpiarPuestos() {
+     $("#txt_id").val(0);
+    $("#txt_puestos").val('');
+};
+
+function LimpiarComprasDetalle() {
+    $("#txt_id").val(0);
+    $("#drop_Producto").val(0);
+    $("#txt_PrecioUnitario").val('');
+    $("#txt_Cantidad").val('');
+
+    $("#txt_id_Compra").val(0);
+    $("#ListaProveedores").val(0);
+    $("#txt_No_Orden").val('');
+    $("#txt_Fecha_Orden").val('');
+    $("#txt_Fecha_Ingreso").val('');
+};
+
+function LimpiarVentasDetalle() {
+    $("#txt_id_Ventas").val(0);
+       $("#txt_idventas").val(0);
+       $("#drop_Producto").val(0);
+       $("#txt_PrecioUnitario").val('');
+       $("#txt_Cantidad").val('');
+       $("#txt_nofactura").val('');
+       $("#txt_serie").val('');
+       $("#txt_fechafactura").val('');
+       $("#txt_idcliente").val(0);
+       $("#txt_idempleado").val(0);
+       $("#txt_fechaingreso").val('');
+};
+
+function LimpiarProductos() {
+     $("#txt_id").val(0);
+    $("#box_marcas").val(0);
+   $("#txt_producto").val('');
+   $("#txt_descripcion").val('');
+   $("#txt_preciocosto").val('');
+   $("#txt_precioventa").val('');
+   $("#txt_exitencias").val('');
+   $("#txt_FechaIngreso").val('');
+   $("#txt_Imagen").val('');
+};

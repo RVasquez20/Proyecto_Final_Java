@@ -70,6 +70,8 @@
                     <div class="inner">
                         <h1>Formulario de Ventas</h1>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
+                        <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarVentasDetalle();">Nuevo</button>
+                        
    <form action="sr_VentasDetalle" method="post" class="form-group">
        <label for="lbl_id_Ventas">ID:</label>
                 <input type="text" name="txt_id_Ventas" id="txt_id_Ventas" class="form-control" value ="0" readonly>

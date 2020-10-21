@@ -86,6 +86,8 @@ String variable = (String)request.getAttribute("txt_locale");
 
  
          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
+         <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarProductos();">Nuevo</button>
+         
             <form action="sr_productos" method="POST" class="form-group" enctype="multipart/form-data" class="form-horizontal" role="form" name="formulario">
                   
                 <label><b>id</b></label>
