@@ -79,6 +79,9 @@
         <h1>Empleados</h1>
           <h1>Formulario Empleados</h1>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
+
+<button type="button" name="btn_nuevoe" id="btn_nuevoe" class="btn btn-info btn-lg"  onclick="LimpiarEmpleados();">Nuevo</button>
+
             <form action="sr_empleado" method="post" class="form-group">
                <label for="lbl_id" ><b>ID</b></label>
                 <input type="text" name="txt_id" id="txt_id" class="form-control" value="0" readonly> 

@@ -80,6 +80,8 @@
                     <div class="inner">
             <h1>Compras Detalle</h1>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
+          <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarComprasDetalle();">Nuevo</button>
+          
        <form action="sr_ComprasDetalle" method="POST" class="form-group">
                <label for="lbl_id" ><b>ID</b></label>
                <input type="text" name="txt_id" id="txt_id" class="form-control" value="0" readonly><br>
