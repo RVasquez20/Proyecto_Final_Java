@@ -161,7 +161,15 @@ out.println("<h1> cli: "+NA);   */
                }else{
                     out.println("<h1>Error al registrar...</h1>");
                }
-           }else {
+           }  else if (request.getParameter("Eliminar") != null) {
+                obj2.setIdUsuario(Integer.parseInt(request.getParameter("txt_id")));
+              if(obj2.EliminarUsuario()>0){
+                   response.sendRedirect("NuevoAdmin.jsp");
+          }else{
+               out.println("<h1>Error al registrar...</h1>");
+          }
+        }
+            else {
                     out.println("<h1>Error al registrar...</h1>");
                 }
             out.println("</body>");

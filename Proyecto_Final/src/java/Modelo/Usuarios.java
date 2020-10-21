@@ -305,7 +305,7 @@ public class Usuarios {
             String sqlinsert;
             cn = new Conexion();
             cn.abrirconexion();
-            sqlinsert = "Update from usuarios where idUsuarios=?";
+            sqlinsert = "delete from usuarios where idUsuarios=?";
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
             parametro.setInt(1, getIdUsuario());
             

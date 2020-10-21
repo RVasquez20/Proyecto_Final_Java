@@ -15,13 +15,14 @@
     String client = (String) actual.getAttribute("cl");
     String compdet = (String) actual.getAttribute("cd");
     String Empl = (String) actual.getAttribute("em");
-    
+        HashMap<String, String> Menu = (HashMap) actual.getAttribute("Men");
+        
     String Prove = (String) actual.getAttribute("pro");
     String Puest = (String) actual.getAttribute("pues");
     String Vendde = (String) actual.getAttribute("vende");
      String nuevo = (String) actual.getAttribute("nu");
     session.setMaxInactiveInterval(900);
-    if ((actual.getAttribute("Logueado") != null)) {
+    if (usuario != null) {
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -37,6 +38,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
         <script src="https://kit.fontawesome.com/d34e9eb680.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap" rel="stylesheet"> 
         <title>JSP Page</title>
     </head>
     <body class="is-preload">
@@ -66,7 +68,9 @@
                 <div class="content">
                     <div class="inner">
                         <h1>Menú Principal</h1>
-                        <p></p>
+                        <button data-toggle="collapse" data-target="#demo">Ubicacion</button>
+
+
                     </div>
                 </div>
                 <nav>

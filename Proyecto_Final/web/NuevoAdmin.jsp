@@ -44,9 +44,8 @@
         <script src="JS/AllInOne.js"></script>
         <script>
             $(document).ready(function () {
-                $("#permisos").hide();
-                $("#btn_modificar").hide();
-                $("#btn_eliminar").hide();
+                $("#Modificar").hide();
+                $("#Eliminar").hide();
                 $("#txt_id").hide();
                 $("#lbl_id").hide();
                  $("#demo").hide();
@@ -56,7 +55,7 @@
                 $("#Titulo").show();
                 $("#Titulo2").hide();
                 $("#btn_agregar").show();
-                   $("#formulario").show();
+         
             });
         </script>
         <title>Agregar Admin</title>
@@ -91,7 +90,7 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
                         <h5 id="Titulo" class="text-center">NUEVO REGISTRO</h5>
                         <h5 id="Titulo2" class="text-center">Modificacion Usuario</h5>
-                        <form action="sr_Admin" method="post" class="form-group" enctype="multipart/form-data" name="formulario" class="form-horizontal" role="form">
+                        <form action="sr_Admin" method="post" class="form-group" enctype="multipart/form-data" name="formulario"  class="form-horizontal" role="form">
                             <label id="lbl_id">ID</label>                                    <br>
                             <input type="text" id="txt_id" class="form-control" name="txt_id" value="0" readonly>
                             <br>
@@ -117,20 +116,20 @@
                             <label>Codigo de validacion</label>                                    <br>
                             <input type="text" id="text_codigo" class="form-control" name="txt_codigo" required="" maxlength="7">
                             <br>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal22" id="permisos">Permisos</button><br/>
+                            
                             <input type="hidden" name="nombre" id="file">
                              <br><button type="button" class="btn btn-info" id="demo1" data-toggle="collapse" data-target="#demo"><svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                 <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                 <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
                                 <circle cx="8" cy="4.5" r="1"/>
-                                </svg>&ensp;Ayuda</button>
+                                </svg>&ensp;Permisos Para menus</button>
                            
                             <div id="demo" class="collapse " >
                                  <table class="table table-dark table-hover text-center">
                             <thead>
                                 <tr>  
-                                    <th>Clienes</th>
+                                    <th>Clientes</th>
                                     <th>Compras Detalle</th>
                                     <th>Empleado</th>
                                     <th>Marcas</th>
@@ -194,8 +193,8 @@
                     </div>
                             <input id ="Registrar" name="Registrar" value="Registrar" class="btn btn-success" type ="submit" onclick="return ValidarCodigo();">
                              <input id ="Modificar" name="Modificar" value="Modificar" class="btn btn-success" type ="submit">
-                            <button type="submit" class="btn btn-primary" name="btn_eliminar" id="btn_eliminar" value="eliminar" onclick="javascript:if (!confirm('¿Desea Eliminar?'))
-                        return false" >Eliminar</button>
+                            <input type="submit" class="btn btn-primary" name="Eliminar" id="Eliminar" value="Eliminar" onclick="javascript:if (!confirm('¿Desea Eliminar?'))
+                        return false" >
                         </form>
                          
                         
@@ -387,12 +386,11 @@
                    ;
                    target = $(event.target);
                    $("#txt_id").show();
-                   $("#lbl_id").show();
-                   $("#permisos").show();
-                   $("#btn_modificar").show();
-                   $("#btn_eliminar").show();
+                   $("#lbl_id").show(); 
+                   $("#Modificar").show();
+                   $("#Eliminar").show();
                    $("#Registrar").hide();
-                   $("#formulario").hide();
+                   $(".form-contol").hide();
                    $("#t1").hide();
                    $("#t2").hide();
                    $("#Titulo").hide();
@@ -465,13 +463,22 @@
                    }
     
                    $("#txt_id").val(idUsuario);
+                   $("#txt_id").attr('readonly',true);
                    $("#imagenes").val(Foto);
+                   $("#imagenes").attr('readonly',true);
                    $("#text_usuario").val(Usuario);
+                   $("#text_usuario").attr('readonly',true);
                    $("#text_nombre").val(Nombres);
+                   $("#text_nombre").attr('readonly',true);
                    $("#text_apellidos").val(Apellidos);
+                   $("#text_apellidos").attr('readonly',true);
                    $("#text_correo").val(Correo);
+                   $("#text_correo").attr('readonly',true);
                    $("#text_pass").val(Pass);
+                   $("#text_pass").attr('readonly',true);
                    $("#text_codigo").val(Codigo);
+                   $("#text_codigo").attr('readonly',true);
+   $('#myModal').modal('hide');
 
                });
         </script>

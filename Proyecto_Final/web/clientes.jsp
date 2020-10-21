@@ -113,7 +113,7 @@
                 </select>
 <br>
                 <br>
-                <button name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-success">Agregar</button>
+                <button name="btn_agregar" id="btn_agregar" value="agregar" class="btn btn-success" onclick="return ValidarCorreo(document.getElementById('txt_correo').value);">Agregar</button>
                 <button name="btn_modificar" id="btn_modificar" value="modificar" class="btn btn-primary">Modificar</button>
                 <button name="btn_eliminar" id="btn_eliminar" value="eliminar" class="btn btn-danger btn-danger" onclick="javasript:if (!confirm('Desea Eliminar?'))
                             return false">Eliminar</button>
@@ -314,6 +314,16 @@
                     }
                     );
 
+        </script>
+         <script type="text/javascript">
+                    function ValidarCorreo(correo){
+                     var expReg= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+var valido=expReg.test(correo);
+if(!valido){
+    alert("Correo no valido");
+    return false;
+}
+                    }
         </script>
  <script>
         $(document).ready(function () {

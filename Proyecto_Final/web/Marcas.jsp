@@ -73,7 +73,7 @@
                 <div class="logo">
                     <span ><img src="CSS/Logos/eme.svg" style="max-width: 60px; max-height: 60px;margin-right:5px; "></span>
                 </div>
-                <div class="content">
+                <div class="content" id="content">
                     <div class="inner">
 
                         <h1>Marcas</h1>
@@ -85,12 +85,13 @@
                             <input type="text" name="txt_Marca" id="txt_Marca" class="form-control" placeholder="Ejemplo: Pepsi" onkeypress="return text(event);" required>
 
                             <br>
-                            <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg">Agregar</button>
+                            <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg" >Agregar</button>
                             <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success btn-lg">Modificar</button>
                             <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger btn-lg" onclick="javascript:if (!confirm('¿Desea Eliminar?'))
                                         return false" >Eliminar</button>
                         </form>
                     </div>
+                        <iframe src="Marcas.jsp" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
                 <nav>
                     <ul>
@@ -140,7 +141,7 @@
         <br>
  
         <!-- BG -->
-
+  
   	</div>
 
 		
@@ -225,9 +226,10 @@
                                     $("#txt_id_Marcas").val(id);
                                     $("#txt_Marca").val(Marcas);
    $('#myModal').modal('hide');
+   
                                 });
         </script>
- 
+       
         <script>
         $(document).ready(function () {
             
