@@ -39,7 +39,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
-       
+        <link rel="stylesheet" type="text/css" href="CSS/NuevoAdmin.css">
 
         <script src="JS/AllInOne.js"></script>
         <script>
@@ -107,7 +107,7 @@
                             <input type="email" id="text_correo" class="form-control" name="txt_correo" required="">
                             <br>
                             <label>Password</label>                                    <br>
-                            <input type="text" id="text_pass" class="form-control" name="txt_passnueva" required="">
+                            <input type="password" id="text_pass" class="form-control" name="txt_passnueva" required="">
                             <br>
                             <label>Foto De Perfil</label>  
                             <input type="file" id="imagen" name="archivo" onchange="cargarFotodeperfil(this)">
@@ -125,7 +125,7 @@
                                 <circle cx="8" cy="4.5" r="1"/>
                                 </svg>&ensp;Permisos Para menus</button>
                            
-                            <div id="demo" class="collapse " >
+                            <div id="demo" class="collapse" >
                                  <table class="table table-dark table-hover text-center">
                             <thead>
                                 <tr>  
@@ -138,11 +138,12 @@
                                     <th>Puestos</th>
                                     <th>Ventas Detalle</th>
                                     <th>Nuevo Admin</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
-                             <td><select name="drop_clientes" id="drop_clientes" class="form-control">  
-                                    <option value="on">✔</option>
+                             <td><select name="drop_clientes" id="drop_clientes" class="form-control" >  
+                                    <option value="on">✔    </option>
                                     <option value="off">✖</option>    
                                 </select>
                              </td>
@@ -183,6 +184,11 @@
                                 </select>
                                </td>
                                <td> <select name="drop_NuevoAdmin" id="drop_NuevoAdmin" class="form-control">  
+                                    <option value="on">✔</option>
+                                    <option value="off">✖</option>    
+                                </select>
+                                </td>
+                                <td> <select name="drop_Status" id="drop_Status" class="form-control">  
                                     <option value="on">✔</option>
                                     <option value="off">✖</option>    
                                 </select>
@@ -288,6 +294,7 @@
                                     <th>puestos</th>
                                     <th>ventas_detalle</th>
                                     <th>NuevoAdmin</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody id="tbl_usuarios">
@@ -349,6 +356,11 @@
                                         } else {
                                             out.println("<td>OFF</td>");
                                         }
+                                         if (tabla.getValueAt(t, 18)!= null) {
+                                            out.println("<td>ON</td>");
+                                        } else {
+                                            out.println("<td>OFF</td>");
+                                        }
                                         out.println("</tr>");
 
                                     }
@@ -382,7 +394,7 @@
                $('#tbl_usuarios').on('click', 'tr td', function (evt) {
 
                    var target, idUsuario, Usuario, Pass, Nombres, Apellidos, Correo, Codigo, Foto, clientes, compras_detalle, empleados, marcas,
-                           productos, proveedores, puestos, ventas_detalle, NuevoAdmin;
+                           productos, proveedores, puestos, ventas_detalle, NuevoAdmin,Status1;
                    ;
                    target = $(event.target);
                    $("#txt_id").show();
@@ -415,6 +427,7 @@
                    puestos = target.parents("tr").find("td").eq(14).html();
                    ventas_detalle = target.parents("tr").find("td").eq(15).html();
                    NuevoAdmin = target.parents("tr").find("td").eq(16).html();
+                   Status1 = target.parents("tr").find("td").eq(17).html();
                    if(clientes==="ON"){
                        $("#drop_clientes").val("on");
                    }else{
@@ -460,6 +473,13 @@
                        $("#drop_proveedores").val("on");
                    }else{
                        $("#drop_NuevoAdmin").val("off");
+                   }
+                     
+                   if(Status1==="ON"){
+                       $("#drop_Status").val("on");
+                    
+                   }else{
+                       $("#drop_Status").val("off");
                    }
     
                    $("#txt_id").val(idUsuario);

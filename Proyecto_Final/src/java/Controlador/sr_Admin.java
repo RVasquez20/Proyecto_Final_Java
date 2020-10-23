@@ -145,6 +145,12 @@ public class sr_Admin extends HttpServlet {
                   NA="1";
               }
               obj2.setNuevoAdmin(NA);
+              
+              String statuss=null;
+              if(request.getParameter("drop_Status").equals("on")){
+                  statuss="1";
+              }
+              obj2.setStatus(statuss);
 /*out.println("<h1> cli: "+clientes);    
 out.println("<h1> compd: "+cd);    
 out.println("<h1> emp: "+emp);    

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,7 +20,8 @@
 <link rel="stylesheet" href="CSS/EstilosIndex.css" type="text/css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="fuentes/iconic/css/material-design-iconic-font.min.css">
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
 <title>JSP Page</title>
     </head>
     <body>
@@ -48,12 +50,14 @@
                          
                         </div>
                          <a style="color: #000000" data-toggle="modal" data-target="#myModal" href="#myModal">No tienes cuenta?</a>
+                         &ensp;&ensp;<div class="g-recaptcha" data-sitekey="6Ld-c9oZAAAAAN8razvpyRennrBmLU-L5CR4uJW6" name="capt"></div>
                       
                         <div class="container-login-form-btn">
                             <div class="wrap-login-form-btn">
                                 <div class="login-form-bgbtn"></div>
                        
                         <input type="submit" value="Ingresar" class="btn login-form-btn" name="Ingresar" id="Ingresar" >
+                        
                         <!--<input type="submit" name="accion" value="Ingresar" class="btn btn-primary btn-b">-->
                     </div>
                 </div>
@@ -112,16 +116,12 @@
                                 <span class="focus-efecto"></span>
                                 </div>
                                      
-                                     <div class="wrap-input100">
-                                    <label class="input110">Codigo de validacion</label>                               
-                                    <input type="text" id="text_codigo" class="input100" name="txt_codigo" required="" maxlength="7">
-                                    <span class="focus-efecto"></span>
-                                    </div>
+                                     
                                     
                               
                                      <input type="hidden" name="nombre" id="file">
                                       <div class="modal-footer">
-                                     <input id ="Registrar" name="Registrar" value="Registrar" class="btn btn-success" type ="submit" onclick="return ValidarCodigo();">
+                                     <input id ="Registrar" name="Registrar" value="Registrar" class="btn btn-success" type ="submit">
         <button  class="btn btn-danger" data-dismiss="modal">Close</button>
                        </div>
                         </form>
@@ -133,6 +133,6 @@
       </div>
     </div>
   </div>
-
+ 
     </body>
 </html>

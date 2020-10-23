@@ -39,11 +39,13 @@
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
         <script src="https://kit.fontawesome.com/d34e9eb680.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap" rel="stylesheet"> 
+        
         <title>JSP Page</title>
     </head>
     <body class="is-preload">
         <!-- Wrapper -->
         <div id="wrapper">
+           <!--     Agregar en cada jsp <script src="//code.tidio.co/ys9dsoww40rdgio9e7hv6vrjyieumr48.js" async></script>-->
             <!-- Header -->
             <header id="header">
                 <div class="dropdown">
@@ -126,6 +128,7 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+
 </body >
 </html>
 <%    } else {

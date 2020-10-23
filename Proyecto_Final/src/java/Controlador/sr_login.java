@@ -13,8 +13,16 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -64,9 +72,18 @@ public class sr_login extends HttpServlet {
            obj.setApellidos(request.getParameter("txt_apellidos"));
           obj.setCorreo(request.getParameter("txt_correo"));
             obj.setPass(request.getParameter("txt_passnueva"));
-            obj.setCodigo(request.getParameter("txt_codigo"));
-
-            if (request.getParameter("Registrar") != null) {
+            obj.setCodigo(obj.Generador());
+            if(request.getParameter("Activar")!=null){
+                Usuarios obj2=new Usuarios();
+                obj2.setCodigo(request.getParameter("txt_codac"));
+                if(obj2.ActivacionDeCuenta()>0){
+                    response.sendRedirect("ActivacionCorrecta.jsp");
+                }else{
+                   response.sendRedirect("ErrorActivacion.jsp");
+                   
+                }
+            }else
+           if (request.getParameter("Registrar") != null) {
                 Part archivo = request.getPart("archivo");
                     InputStream is = archivo.getInputStream();
                     File f = new File("C:/Users/rodri/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/sources/"+n);
@@ -80,38 +97,50 @@ public class sr_login extends HttpServlet {
                     ous.close();
                     is.close();
                 if (obj.NuevoUsuario() > 0) {
-                    if(obj.ValidarUS(request.getParameter("txt_passnueva"),request.getParameter("txt_usuarionuevo"),request.getParameter("txt_codigo")) > 0) {
-                    String nombre=obj.Name(request.getParameter("txt_usuarionuevo"));
-                    String email=obj.Email(request.getParameter("txt_usuarionuevo"));
-                    String profile=obj.Foto(request.getParameter("txt_usuarionuevo"));
-                    String tipo=obj.tipe(request.getParameter("txt_usuarionuevo"));
-                     String marcas=obj.Marcas(request.getParameter("txt_usuarionuevo"));
-                    String prod=obj.Productos(request.getParameter("txt_usuarionuevo"));
-                    String cliente=obj.Clientes(request.getParameter("txt_usuarionuevo"));
-                    String compras_detalle=obj.ComprasDetalle(request.getParameter("txt_usuarionuevo"));
-                    String emple=obj.Empleado(request.getParameter("txt_usuarionuevo"));
-                    String prove=obj.Proveedores(request.getParameter("txt_usuarionuevo"));
-                    String puest=obj.Puestos(request.getParameter("txt_usuarionuevo"));
-                    String vendet=obj.VentasDetalles(request.getParameter("txt_usuarionuevo"));
-                    String nuev=obj.NuevoAd(request.getParameter("txt_usuarionuevo"));
-                    HttpSession actual = request.getSession(true);
-                    actual.setAttribute("Logueado", request.getParameter("txt_usuarionuevo"));
-                    actual.setAttribute("T", tipo);
-                    actual.setAttribute("nom", nombre);
-                    actual.setAttribute("emai", email);
-                    actual.setAttribute("Ft", profile);
-                   actual.setAttribute("mar", marcas);
-                    actual.setAttribute("pr", prod);
-                    actual.setAttribute("cl", cliente);
-                    actual.setAttribute("cd", compras_detalle);
-                    actual.setAttribute("em", emple);
-                    actual.setAttribute("pro", prove);
-                    actual.setAttribute("pues", puest);
-                    actual.setAttribute("vende", vendet);
-                    actual.setAttribute("nu", nuev);
-                    response.sendRedirect("Principal.jsp");
+          Properties propiedad = new Properties();
+        propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
+        propiedad.setProperty("mail.smtp.starttls.enable", "true");
+        propiedad.setProperty("mail.smtp.port", "587");
+        propiedad.setProperty("mail.smtp.auth", "true");
+        
+        Session sesion = Session.getDefaultInstance(propiedad);
+        
+        String correoEnvia = "rodrigovasquez201@gmail.com";
+        String contrasena = "rodrigo20junio2001";
+        String destinatario = request.getParameter("txt_correo");
+        String asunto = "Creacion de cuenta ";
+        String mensaje ="Su cuenta esta siendo procesada  ingrese a http://localhost:4444/Proyecto_Final/Activacion.jsp e ingrese el siguiente codigo: "+obj.getCodigo();
+        
+        
+        MimeMessage mail = new MimeMessage(sesion);
+        
+        try {
+            mail.setFrom(new InternetAddress (correoEnvia));
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            mail.setSubject(asunto);
+            mail.setText(mensaje);
+            
+            
+            Transport transporte = sesion.getTransport("smtp");
+            transporte.connect(correoEnvia,contrasena);
+            transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+            transporte.close();
+            
+           
+            
+             response.sendRedirect("Correo.jsp");
+            
+            
+            
+        } catch (AddressException ex) {
+            System.out.println("Error->"+ex.getMessage());
+        } catch (MessagingException ex) {
+              System.out.println("Error->"+ex.getMessage());
+        }
+        
+                   
                 }
-                }
+                
                 else {
                     out.println("<h1>Error al registrar...</h1>");
                 }

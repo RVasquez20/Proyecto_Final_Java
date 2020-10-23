@@ -123,15 +123,7 @@ var entero = function (e){
        
        
     };
-    function LimpiarVentas() {
-    $("#txt_id").val(0);
-    $("#txt_nofactura").val('');
-    $("#txt_serie").val('');
-    $("#txt_fechafactura").val('');
-    $("#txt_idcliente").val(0);
-    $("#txt_idempleado").val('');
-    $("#txt_fechaingreso").val('');
-};
+ 
 
  function LimpiarEmpleados() {
     $("#txt_id").val(0);
@@ -142,19 +134,31 @@ var entero = function (e){
        $("#txt_DPI").val('');
        $("#drop_genero").val(0);
        $("#txt_fn").val('');
-       $("#txt_fechaInicio").val('');
-       $("#txt_fechaIngreso").val('');       
+      $("#txt_fechaInicio").val('');
+        $("#lbl_fechaIngreso").hide();
+                        $("#txt_fechaIngreso").hide();
        $("#drop_puesto").val(0);
+        $("#btn_agregar").show();
+    $("#btn_modificar").hide();
+    $("#btn_eliminar").hide();
 };
 
 function LimpiarMarcas() {
     $("#txt_id_Marcas").val(0);
     $("#txt_Marca").val('');
+
+    $("#btn_agregar").show();
+    $("#btn_modificar").hide();
+    $("#btn_eliminar").hide();
+   
 };
 
 function LimpiarPuestos() {
      $("#txt_id").val(0);
     $("#txt_puestos").val('');
+     $("#btn_agregar").show();
+    $("#btn_modificar").hide();
+    $("#btn_eliminar").hide();
 };
 
 function LimpiarComprasDetalle() {
@@ -167,7 +171,12 @@ function LimpiarComprasDetalle() {
     $("#ListaProveedores").val(0);
     $("#txt_No_Orden").val('');
     $("#txt_Fecha_Orden").val('');
-    $("#txt_Fecha_Ingreso").val('');
+    
+ $("#lbl_Fecha_Ingreso").hide();
+                        $("#txt_Fecha_Ingreso").hide();
+    $("#btn_agregar").show();
+                        $("#btn_modificar").hide();
+                        $("#btn_eliminar").hide();
 };
 
 function LimpiarVentasDetalle() {
@@ -181,7 +190,12 @@ function LimpiarVentasDetalle() {
        $("#txt_fechafactura").val('');
        $("#txt_idcliente").val(0);
        $("#txt_idempleado").val(0);
-       $("#txt_fechaingreso").val('');
+       $("#btn_agregar").show();
+    $("#btn_modificar").hide();
+    $("#btn_eliminar").hide();
+    
+ $("#lbl_fechaingreso").hide();
+                        $("#txt_fechaingreso").hide();
 };
 
 function LimpiarProductos() {
@@ -192,6 +206,12 @@ function LimpiarProductos() {
    $("#txt_preciocosto").val('');
    $("#txt_precioventa").val('');
    $("#txt_exitencias").val('');
-   $("#txt_FechaIngreso").val('');
    $("#txt_Imagen").val('');
+     $("#btn_agregar").show();
+      $("#lbl_fecha").hide();
+                        $("#txt_FechaIngreso").hide();
+     $("#btn_actualizar").hide();
+                        $("#btn_modificar").hide();
+                        $("#btn_eliminar").hide();
+                        
 };

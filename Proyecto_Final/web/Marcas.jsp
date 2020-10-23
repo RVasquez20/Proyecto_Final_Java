@@ -38,7 +38,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
-        <script src="JS/AllInOne.js"></script>
+        <script src="JS/AllInOne.js" type="text/javascript"></script>
         <script>
         $(document).ready(function () {
             
@@ -78,7 +78,7 @@
 
                         <h1>Marcas</h1>
                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
-                     <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarMarcas();">Nuevo</button>
+                     <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg" onclick="LimpiarMarcas();">Nuevo</button>
                      
                         <form action="sr_Marcas" method="POST" class="form-group">
                             <label>ID:</label>

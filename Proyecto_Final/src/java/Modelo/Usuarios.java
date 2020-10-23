@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Random;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Usuarios {
     private int idUsuario;
-    private String Usuario,Pass,Nombres,Apellidos,Correo,Codigo,Foto,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin;
+    private String Usuario,Pass,Nombres,Apellidos,Correo,Codigo,Foto,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin,Status;
     private Conexion cn;
     
        public String getFoto() {
@@ -81,12 +82,12 @@ public class Usuarios {
             cn = new Conexion();
             cn.abrirconexion();
             PreparedStatement parametro;
-            String Query = "select * from usuarios where Usuario='"+usuario+"' and Pass='"+pass+"' and Codigo='"+codigo+"';";
+            String Query = "select * from usuarios where Usuario='"+usuario+"' and Pass='"+pass+"' and Codigo='"+codigo+"' and Estado='1';";
             parametro = cn.conexionbd.prepareStatement(Query);
             ResultSet rs = parametro.executeQuery();
       
             if (rs.next()) {
-                if (rs.getString(1).equals(pass)||rs.getString(2).equals(usuario)||rs.getString(3).equals(codigo)) {
+                if (rs.getString(1).equals(pass)||rs.getString(2).equals(usuario)||rs.getString(3).equals(codigo)||rs.getString(4).equals("Activo")) {
                     retorno=1;
                 }
                 else {
@@ -208,7 +209,7 @@ public class Usuarios {
             String sqlinsert;
             cn = new Conexion();
             cn.abrirconexion();
-            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo) values(?,?,?,?,?,?,?,?)";
+            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin,Estado) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
             parametro.setString(1, getUsuario());
             parametro.setString(2, getNombres());
@@ -218,6 +219,16 @@ public class Usuarios {
             parametro.setString(6, getFoto());
             parametro.setString(7, getCodigo());
             parametro.setString(8, "USER");
+            parametro.setString(9, "1");
+            parametro.setString(10, "1");
+            parametro.setString(11, null);
+            parametro.setString(12, null);
+            parametro.setString(13, null);
+            parametro.setString(14, null);
+            parametro.setString(15, null);
+            parametro.setString(16, "1");
+            parametro.setString(17, null);
+            parametro.setString(18, "Inactivo");
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }
@@ -235,7 +246,7 @@ public class Usuarios {
             cn = new Conexion();
             cn.abrirconexion();
       
-            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin,Estado) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
             parametro.setString(1, getUsuario());
             parametro.setString(2, getNombres());
@@ -254,7 +265,7 @@ public class Usuarios {
             parametro.setString(15, "1");
             parametro.setString(16, "1");
             parametro.setString(17, "1");
-            
+            parametro.setString(18  , "Activo");
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }
@@ -273,7 +284,7 @@ public class Usuarios {
             String sqlinsert;
             cn = new Conexion();
             cn.abrirconexion();
-            sqlinsert = "Update usuarios set clientes=?,compras_detalle=?,empleados=?,marcas=?,productos=?,proveedores=?,puestos=?,ventas_detalle=?,NuevoAdmin=? where idUsuarios=?";
+            sqlinsert = "Update usuarios set clientes=?,compras_detalle=?,empleados=?,marcas=?,productos=?,proveedores=?,puestos=?,ventas_detalle=?,NuevoAdmin=?,Estado=? where idUsuarios=?";
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
             
             parametro.setString(1, getClientes());
@@ -285,7 +296,8 @@ public class Usuarios {
             parametro.setString(7, getPuestos());
             parametro.setString(8, getVentas_detalle());
             parametro.setString(9, getNuevoAdmin());
-            parametro.setInt(10, getIdUsuario());
+            parametro.setString(10, getStatus());
+            parametro.setInt(11, getIdUsuario());
             
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
@@ -317,7 +329,29 @@ public class Usuarios {
         }
         return retorno; 
     } 
+                public int ActivacionDeCuenta() {
+        int retorno = 0;
+        
+        try {
+            PreparedStatement parametro;
+            String sqlinsert;
+            cn = new Conexion();
+            cn.abrirconexion();
+            sqlinsert = "update usuarios set Estado='Activo' where Codigo=?; ";
+            parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
             
+            parametro.setString(1, getCodigo());
+           
+            
+            retorno = parametro.executeUpdate();
+            cn.cerrarconexion();
+        }
+        catch (Exception ex) {
+            System.out.println("error ptm-->"+ex.getMessage());
+            retorno=0;
+        }
+        return retorno; 
+    } 
          
           public String Marcas(String usuario) throws SQLException{
         String retorno = null;
@@ -492,11 +526,11 @@ public class Usuarios {
      cn = new Conexion();
      cn.abrirconexion();
      String Tipe="USER";
-      String query = "SELECT idUsuarios,Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin FROM usuarios where Tipo='"+Tipe+"';";
+      String query = "SELECT idUsuarios,Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin,Estado FROM usuarios where Tipo='"+Tipe+"';";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-      String encabezado[] = {"idUsuarios","Usuario","Nombre","Apellidos","Correo","Pass","Foto","Codigo","Tipo","clientes","compras_detalle","empleados","marcas","productos","proveedores","puestos","ventas_detalle","NuevoAdmin"};
+      String encabezado[] = {"idUsuarios","Usuario","Nombre","Apellidos","Correo","Pass","Foto","Codigo","Tipo","clientes","compras_detalle","empleados","marcas","productos","proveedores","puestos","ventas_detalle","NuevoAdmin","Estado"};
       tabla.setColumnIdentifiers(encabezado);
-      String datos[] = new String[18];
+      String datos[] = new String[19];
       while (consulta.next()){
           datos[0] = consulta.getString("idUsuarios");
           datos[1] = consulta.getString("Usuario");
@@ -516,6 +550,7 @@ public class Usuarios {
           datos[15] = consulta.getString("puestos");
           datos[16] = consulta.getString("ventas_detalle");
           datos[17] = consulta.getString("NuevoAdmin");
+          datos[18] = consulta.getString("Estado");
           tabla.addRow(datos);
       
       }
@@ -527,6 +562,27 @@ public class Usuarios {
  return tabla;
  }
 
+            
+             public String Generador(){
+        String[] strArr= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
+        "P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8" +
+                "9"};
+        String codigo="U2020";
+        for (int i = 0; i < 2; i++) {
+            Random rand = new Random();
+            int res = rand.nextInt(strArr.length);
+          codigo+=strArr[res];
+        }
+        return codigo;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }
     public String getClientes() {
         return clientes;
     }
@@ -606,6 +662,8 @@ public class Usuarios {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+    
+   
 }
                 
 
