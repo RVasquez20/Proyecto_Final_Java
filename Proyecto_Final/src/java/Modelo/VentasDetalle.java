@@ -89,7 +89,7 @@ public class VentasDetalle {
           datos[5] = consulta.getString("idClientes");
           datos[6] = consulta.getString("nombres");
           datos[7] = consulta.getString("nit");
-          datos[8] = consulta.getString("nombres");
+          datos[8] = consulta.getString("e.nombres");
           datos[9] = consulta.getString("idempleado");
           datos[10] = consulta.getString("fechaingreso");
           datos[11] = consulta.getString("idproducto");
