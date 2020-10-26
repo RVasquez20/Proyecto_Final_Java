@@ -68,7 +68,7 @@ public class sr_Admin extends HttpServlet {
                     }
                     ous.close();
                     is.close();
-                    if (obj.NuevoAdmin() > 0) {
+                    if ((obj.NuevoAdmin() > 0)&&(obj.EncriptarPass()>0)) {
                         out.print("<script>alert('Agregado Correctamente');</script>");
                         response.sendRedirect("NuevoAdmin.jsp");
                     }

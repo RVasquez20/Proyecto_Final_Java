@@ -96,7 +96,7 @@ public class sr_login extends HttpServlet {
                     }
                     ous.close();
                     is.close();
-                if (obj.NuevoUsuario() > 0) {
+                if ((obj.NuevoUsuario() > 0)&&(obj.EncriptarPass()>0)) {
           Properties propiedad = new Properties();
         propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
         propiedad.setProperty("mail.smtp.starttls.enable", "true");
@@ -189,10 +189,10 @@ public class sr_login extends HttpServlet {
                     out.println("<!DOCTYPE html>");
                     out.println("<html>");
                     out.println("<head>");
-                    out.println("<title>USUARIO NO ENCONTRADO</title>");            
+                    out.println("<title>USUARIO NO ENCONTRADO/ACTIVADO</title>");            
                     out.println("</head>");
                     out.println("<body>");
-                    out.println("<h1>USUARIO NO ENCONTRADO</h1>");
+                    out.println("<h1>USUARIO NO ENCONTRADO/ACTIVADO</h1>");
                     out.println("</body>");
                     out.println("</html>");
                 }

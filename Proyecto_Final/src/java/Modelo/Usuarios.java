@@ -82,7 +82,7 @@ public class Usuarios {
             cn = new Conexion();
             cn.abrirconexion();
             PreparedStatement parametro;
-            String Query = "select * from usuarios where Usuario='"+usuario+"' and Pass='"+pass+"' and Codigo='"+codigo+"' and Estado='1';";
+            String Query = "select * from usuarios where Usuario='"+usuario+"' and aes_decrypt(Pass,'AES')='"+pass+"' and Codigo='"+codigo+"' and Estado='1';";
             parametro = cn.conexionbd.prepareStatement(Query);
             ResultSet rs = parametro.executeQuery();
       
@@ -215,7 +215,7 @@ public class Usuarios {
             parametro.setString(2, getNombres());
             parametro.setString(3, getApellidos());
             parametro.setString(4, getCorreo());
-            parametro.setString(5, getPass());
+            parametro.setString(5, null);
             parametro.setString(6, getFoto());
             parametro.setString(7, getCodigo());
             parametro.setString(8, "USER");
@@ -228,7 +228,7 @@ public class Usuarios {
             parametro.setString(15, null);
             parametro.setString(16, "1");
             parametro.setString(17, null);
-            parametro.setString(18, "Inactivo");
+            parametro.setString(18, null);
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }
@@ -252,7 +252,7 @@ public class Usuarios {
             parametro.setString(2, getNombres());
             parametro.setString(3, getApellidos());
             parametro.setString(4, getCorreo());
-            parametro.setString(5, getPass());
+            parametro.setString(5, null);
             parametro.setString(6, getFoto());
             parametro.setString(7, getCodigo());
             parametro.setString(8, "ADMIN");
@@ -265,7 +265,7 @@ public class Usuarios {
             parametro.setString(15, "1");
             parametro.setString(16, "1");
             parametro.setString(17, "1");
-            parametro.setString(18  , "Activo");
+            parametro.setString(18  , "1");
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }
@@ -337,7 +337,7 @@ public class Usuarios {
             String sqlinsert;
             cn = new Conexion();
             cn.abrirconexion();
-            sqlinsert = "update usuarios set Estado='Activo' where Codigo=?; ";
+            sqlinsert = "update usuarios set Estado='1' where Codigo=?; ";
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
             
             parametro.setString(1, getCodigo());
@@ -575,7 +575,28 @@ public class Usuarios {
         }
         return codigo;
     }
+public int EncriptarPass(){
+         int retorno=0;
+        try {
+            cn=new Conexion();
 
+            PreparedStatement parametro;
+            String query="update usuarios set Pass=aes_encrypt(?,'AES') where Usuario=?;";
+            cn.abrirconexion();
+            parametro=cn.conexionbd.prepareStatement(query);
+            parametro.setString(1, getPass());
+            
+            parametro.setString(2, getUsuario());
+    
+           
+                    retorno=parametro.executeUpdate();
+            cn.cerrarconexion(); 
+            return retorno;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        } 
+    }
     public String getStatus() {
         return Status;
     }

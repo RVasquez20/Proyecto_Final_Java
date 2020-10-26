@@ -42,9 +42,9 @@
         
         <title>JSP Page</title>
     </head>
-    <body class="is-preload">
+    <body class="is-preload responsive" >
         <!-- Wrapper -->
-        <div id="wrapper">
+        <div id="wrapper" >
            <!--     Agregar en cada jsp <script src="//code.tidio.co/ys9dsoww40rdgio9e7hv6vrjyieumr48.js" async></script>-->
             <!-- Header -->
             <header id="header">
@@ -70,7 +70,7 @@
                 <div class="content">
                     <div class="inner">
                         <h1>Menú Principal</h1>
-                        <button data-toggle="collapse" data-target="#demo">Ubicacion</button>
+                        
 
 
                     </div>
@@ -116,10 +116,7 @@
 
         </div>
 
-        <!-- Footer -->
-        <footer id="footer">
-            <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-        </footer>
+       
 
     <!-- BG -->
     <div id="bg"></div>
