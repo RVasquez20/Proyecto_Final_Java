@@ -106,7 +106,7 @@ public class sr_login extends HttpServlet {
         Session sesion = Session.getDefaultInstance(propiedad);
         
         String correoEnvia = "rodrigovasquez201@gmail.com";
-        String contrasena = "rodrigo20junio2001";
+        String contrasena = "prye";
         String destinatario = request.getParameter("txt_correo");
         String asunto = "Creacion de cuenta ";
         String mensaje ="Su cuenta esta siendo procesada  ingrese a http://localhost:4444/Proyecto_Final/Activacion.jsp e ingrese el siguiente codigo: "+obj.getCodigo();
