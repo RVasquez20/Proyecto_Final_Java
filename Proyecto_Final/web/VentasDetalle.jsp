@@ -3,6 +3,7 @@
     Created on : 4/10/2020, 01:04:24 PM
     Author     : rodri
 --%>
+
 <%
     HttpSession actual = request.getSession(true);
     String usuario = (String) actual.getAttribute("Logueado");
@@ -142,7 +143,35 @@
                  </select>
                 <label id="lbl_fechaingreso">Fecha Ingreso:</label>
                 <input type="text" name="txt_fechaingreso" id="txt_fechaingreso" value="0" class="form-control" required>
+      <table class="table table-bordered" id="tabla55">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+      </tr>
+    </thead>
+    <tbody>
+       <%
+                    VentasDetalle vdp = new VentasDetalle();
+                    DefaultTableModel tabladvp = new DefaultTableModel();
+                    
+                    tabladvp = vdp.Listadeproductos(1);
+                    for (int t=0;t<tabladvp.getRowCount();t++){
+                        out.println("<tr data-idvd="+ tabladvp.getValueAt(t, 0)+">");
+                        out.println("<td>"+ tabladvp.getValueAt(t, 1) +"</td>");
+                        out.println("<td>"+ tabladvp.getValueAt(t, 2) +"</td>");
+                        out.println("<td>"+ tabladvp.getValueAt(t, 3) +"</td>");
+                       
 
+                        out.println("</tr>");
+                        
+                        
+                    }
+                    %>
+                </tbody>
+    </tbody>
+  </table>
 
                 <br>
                 
@@ -152,7 +181,7 @@
                 <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger btn-lg" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
                 
             </form>
-                
+           
                </div>
                 </div>
                 <nav>
@@ -279,6 +308,10 @@
     </div>
   </div>
 </div>
+            
+          
+ 
+
                     <!-- BG -->
 			<div id="bg"></div>
     
@@ -289,7 +322,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
- 
+
                  <script type="text/javascript">
             $(document).ready(function () {
             $("#lbl_fechafactura").hide();

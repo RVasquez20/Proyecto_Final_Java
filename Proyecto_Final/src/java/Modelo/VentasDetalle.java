@@ -107,6 +107,34 @@ public class VentasDetalle {
   return tabla;
       
     }
+       
+              public DefaultTableModel Listadeproductos(int idventa){
+ DefaultTableModel tabla = new DefaultTableModel();
+ try{
+     cn = new Conexion();
+     cn.abrirconexion();
+      String query = "select vd.idProducto as ID,p.Producto,vd.cantidad,vd.precio_unitario from ventas_detalle as vd inner join productos as p on vd.idProducto=p.idProducto where idventa='"+idventa+"';";
+      ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+      String encabezado[] = {"ID","Productos","Cantidad","Precio unitario"};
+      tabla.setColumnIdentifiers(encabezado);
+      String datos[] = new String[4];
+      while (consulta.next()){
+          datos[0] = consulta.getString("ID");
+          datos[1] = consulta.getString("producto");
+          datos[2] = consulta.getString("cantidad");
+          datos[3] = consulta.getString("precio_unitario");
+          tabla.addRow(datos);
+      
+      }
+      
+     cn.cerrarconexion();
+ }catch(SQLException ex){
+     System.out.println(ex.getMessage());
+ }
+  return tabla;
+      
+    }
+       
     public int agregar(){
         int retorno =0;
         try{

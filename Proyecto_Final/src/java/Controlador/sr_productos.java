@@ -118,13 +118,16 @@ public class sr_productos extends HttpServlet {
               }
           }
         else if("eliminar".equals(request.getParameter("btn_eliminar"))){
-              if(producto.eliminar()>0){
+
+             if(producto.eliminar()>0){
                    response.sendRedirect("Productos.jsp");
           }else{
                out.println("<script>alert('Error');</scrpt>");
           }
         }
-          
+          else{
+               out.println("<script>alert('Error');</script>");
+          }
           
             out.println("</body>");
             out.println("</html>");
