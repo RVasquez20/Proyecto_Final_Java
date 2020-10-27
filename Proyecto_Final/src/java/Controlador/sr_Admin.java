@@ -56,7 +56,7 @@ public class sr_Admin extends HttpServlet {
             if (request.getParameter("Registrar") != null) {
                 Part archivo = request.getPart("archivo");
                     InputStream is = archivo.getInputStream();
-                    File f = new File("C:/Users/rodri/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/sources/"+n);
+                    File f = new File("C:\\Users\\jeron\\Documents\\GitHub\\Proyecto_Final_Java\\Proyecto_Final\\web\\sources\\"+n);
                     FileOutputStream ous = new FileOutputStream(f);
                     
                     int dato = is.read();
@@ -67,8 +67,14 @@ public class sr_Admin extends HttpServlet {
                     ous.close();
                     is.close();
                     if (obj.NuevoAdmin() > 0) {
+                        if(obj.EncriptarPass()>0){
                         out.print("<script>alert('Agregado Correctamente');</script>");
-                        response.sendRedirect("NuevoAdmin.jsp");
+                        
+                        response.sendRedirect("NuevoAdmin.jsp");}else{
+                            out.println("<h1>Error al registrar.encriptacion..</h1>");
+                        }
+                    }else{
+                        out.println("<h1>Error al registrar agregar...</h1>");
                     }
             } else {
                     out.println("<h1>Error al registrar...</h1>");

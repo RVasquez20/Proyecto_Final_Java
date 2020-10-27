@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  *
@@ -79,7 +80,7 @@ public class Usuarios {
             cn = new Conexion();
             cn.abrirconexion();
             PreparedStatement parametro;
-            String Query = "select * from usuarios where Usuario='"+usuario+"' and Pass='"+pass+"' and Codigo='"+codigo+"';";
+            String Query = "select * from usuarios where Usuario='"+usuario+"' and aes_decrypt(Pass,'AES')='"+pass+"' and Codigo='"+codigo+"';";
             parametro = cn.conexionbd.prepareStatement(Query);
             ResultSet rs = parametro.executeQuery();
       
@@ -98,7 +99,18 @@ public class Usuarios {
         }
         return retorno;
     }
-     
+       public String Generador(){
+        String[] strArr= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
+        "P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8" +
+                "9"};
+        String codigo="U2020";
+        for (int i = 0; i < 2; i++) {
+            Random rand = new Random();
+            int res = rand.nextInt(strArr.length);
+          codigo+=strArr[res];
+        }
+        return codigo;
+    }
         public String Name(String usuario) throws SQLException{
         String retorno = null;
         
@@ -206,7 +218,7 @@ public class Usuarios {
             String sqlinsert;
             cn = new Conexion();
             cn.abrirconexion();
-            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo) values(?,?,?,?,?,?,?,?)";
+            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,aes_encrypt(Pass,'AES'),Foto,Codigo,Tipo) values(?,?,?,?,?,?,?,?)";
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
             parametro.setString(1, getUsuario());
             parametro.setString(2, getNombres());
@@ -232,16 +244,26 @@ public class Usuarios {
             String sqlinsert;
             cn = new Conexion();
             cn.abrirconexion();
-            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo) values(?,?,?,?,?,?,?,?)";
+            sqlinsert = "insert into Usuarios(Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             parametro = (PreparedStatement) cn.conexionbd.prepareStatement(sqlinsert);
             parametro.setString(1, getUsuario());
             parametro.setString(2, getNombres());
             parametro.setString(3, getApellidos());
             parametro.setString(4, getCorreo());
-            parametro.setString(5, getPass());
+            parametro.setString(5, null);
             parametro.setString(6, getFoto());
             parametro.setString(7, getCodigo());
             parametro.setString(8, "ADMIN");
+            parametro.setString(9, "1");
+            parametro.setString(10, "1");
+            parametro.setString(11, "1");
+            parametro.setString(12, "1");
+            parametro.setString(13, "1");
+            parametro.setString(14, "1");
+            parametro.setString(15, "1");
+            parametro.setString(16, "1");
+
+             
             retorno = parametro.executeUpdate();
             cn.cerrarconexion();
         }
@@ -249,6 +271,28 @@ public class Usuarios {
             retorno=0;
         }
         return retorno; 
+    }
+         public int EncriptarPass(){
+         int retorno=0;
+        try {
+            cn=new Conexion();
+
+            PreparedStatement parametro;
+            String query="update usuarios set Pass=aes_encrypt(?,'AES') where Usuario=?;";
+            cn.abrirconexion();
+            parametro=cn.conexionbd.prepareStatement(query);
+            parametro.setString(1, getPass());
+            
+            parametro.setString(2, getUsuario());
+    
+           
+                    retorno=parametro.executeUpdate();
+            cn.cerrarconexion(); 
+            return retorno;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        } 
     }
 }
                 

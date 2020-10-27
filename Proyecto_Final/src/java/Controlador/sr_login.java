@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,7 +23,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 /**
  *
  * @author rodri
@@ -64,12 +72,12 @@ public class sr_login extends HttpServlet {
            obj.setApellidos(request.getParameter("txt_apellidos"));
           obj.setCorreo(request.getParameter("txt_correo"));
             obj.setPass(request.getParameter("txt_passnueva"));
-            obj.setCodigo(request.getParameter("txt_codigo"));
+            obj.setCodigo(obj.Generador());
 
-            if (request.getParameter("Registrar") != null) {
+             if (request.getParameter("Registrar") != null) {
                 Part archivo = request.getPart("archivo");
                     InputStream is = archivo.getInputStream();
-                    File f = new File("C:/Users/rodri/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/sources/"+n);
+                    File f = new File("C:/Users/jeron/Documents/GitHub/Proyecto_Final_Java/Proyecto_Final/web/sources/"+n);
                     FileOutputStream ous = new FileOutputStream(f);
                     
                     int dato = is.read();
@@ -80,22 +88,50 @@ public class sr_login extends HttpServlet {
                     ous.close();
                     is.close();
                 if (obj.NuevoUsuario() > 0) {
-                    if(obj.ValidarUS(request.getParameter("txt_passnueva"),request.getParameter("txt_usuarionuevo"),request.getParameter("txt_codigo")) > 0) {
-                    String nombre=obj.Name(request.getParameter("txt_usuarionuevo"));
-                    String email=obj.Email(request.getParameter("txt_usuarionuevo"));
-                    String profile=obj.Foto(request.getParameter("txt_usuarionuevo"));
-                    String tipo=obj.tipe(request.getParameter("txt_usuarionuevo"));
-                    HashMap<String,String> Lista=obj.Menu(request.getParameter("txt_usuarionuevo"));
-                    HttpSession actual = request.getSession(true);
-                    actual.setAttribute("Logueado", request.getParameter("txt_usuarionuevo"));
-                    actual.setAttribute("T", tipo);
-                    actual.setAttribute("nom", nombre);
-                    actual.setAttribute("em", email);
-                    actual.setAttribute("Ft", profile);
-                    actual.setAttribute("Men", Lista);
-                    response.sendRedirect("Principal.jsp");
+          Properties propiedad = new Properties();
+        propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
+        propiedad.setProperty("mail.smtp.starttls.enable", "true");
+        propiedad.setProperty("mail.smtp.port", "587");
+        propiedad.setProperty("mail.smtp.auth", "true");
+        
+        Session sesion = Session.getDefaultInstance(propiedad);
+        
+        String correoEnvia = "jeronimovillalta1997@gmail.com";
+        String contrasena = "jero.1997";
+        String destinatario = request.getParameter("txt_correo");
+        String asunto = "Creacion de cuenta ";
+        String mensaje ="Su cuenta esta siendo procesada su codigo es "+obj.getCodigo();
+        
+        
+        MimeMessage mail = new MimeMessage(sesion);
+        
+        try {
+            mail.setFrom(new InternetAddress (correoEnvia));
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            mail.setSubject(asunto);
+            mail.setText(mensaje);
+            
+            
+            Transport transporte = sesion.getTransport("smtp");
+            transporte.connect(correoEnvia,contrasena);
+            transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+            transporte.close();
+            
+           
+            
+             response.sendRedirect("Correo.jsp");
+            
+            
+            
+        } catch (AddressException ex) {
+            System.out.println("Error->"+ex.getMessage());
+        } catch (MessagingException ex) {
+              System.out.println("Error->"+ex.getMessage());
+        }
+        
+                   
                 }
-                }
+                
                 else {
                     out.println("<h1>Error al registrar...</h1>");
                 }

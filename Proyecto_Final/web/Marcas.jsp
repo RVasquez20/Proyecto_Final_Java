@@ -31,6 +31,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
         <script src="JS/AllInOne.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.js">
         <script>
         $(document).ready(function () {
             
@@ -39,6 +40,7 @@
        $("#btn_agregar").show();
         });
     </script>
+    
         <title>JSP Page</title>
     </head>
     <body class="is-preload">
@@ -62,6 +64,7 @@
 
 
                 </div>
+                        
                 <div class="logo">
                     <span ><img src="CSS/Logos/eme.svg" style="max-width: 60px; max-height: 60px;margin-right:5px; "></span>
                 </div>
@@ -77,7 +80,7 @@
                             <input type="text" name="txt_Marca" id="txt_Marca" class="form-control" placeholder="Ejemplo: Pepsi" onkeypress="return text(event);" required>
 
                             <br>
-                            <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg">Agregar</button>
+                            <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg" >Agregar</button>
                             <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success btn-lg">Modificar</button>
                             <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger btn-lg" onclick="javascript:if (!confirm('¿Desea Eliminar?'))
                                         return false" >Eliminar</button>

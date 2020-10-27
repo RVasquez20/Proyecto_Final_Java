@@ -42,9 +42,9 @@ public class sr_Marcas extends HttpServlet {
             out.println("<body>");
             marca=new marcas(Integer.parseInt(request.getParameter("txt_id_Marcas")),request.getParameter("txt_Marca"));
             if("agregar".equals(request.getParameter("btn_agregar"))){
-               
+               String nombre = request.getParameter("txt_Marca");
                if(marca.agregar()>0){
-                    response.sendRedirect("Marcas.jsp"); 
+                   getServletContext().getRequestDispatcher("/Marcas.jsp").forward(request, response); 
                }else{
                    out.println("<script>alert('Error');</scrpt>");
                }
