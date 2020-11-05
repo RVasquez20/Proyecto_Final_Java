@@ -1,8 +1,13 @@
 <%-- 
-    Document   : Compras_Detalle
-    Created on : 2/10/2020, 03:56:40 PM
+    Document   : Compras_Detalle_Productos
+    Created on : 31/10/2020, 10:54:27 PM
     Author     : rodri
 --%>
+<%@page import="Modelo.productos"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="Modelo.Proveedores"%>
+<%@page import="javax.swing.table.DefaultTableModel"%>
+<%@page import="Modelo.ComprasDetalle"%>
 <%
     HttpSession actual = request.getSession(true);
     String usuario = (String) actual.getAttribute("Logueado");
@@ -19,15 +24,10 @@
     String Puest = (String) actual.getAttribute("pues");
     String Vendde = (String) actual.getAttribute("vende");
      String nuevo = (String) actual.getAttribute("nu");
+         Integer as=(Integer)request.getAttribute("q");
     session.setMaxInactiveInterval(900);
-     if ((actual.getAttribute("Logueado") != null) && ((tipo.equals("ADMIN")||compdet!=null))) {
+     if ((actual.getAttribute("Logueado") != null) && ((tipo.equals("ADMIN")||compdet!=null))&&(as!=null)) {
 %>
-<%@page import="Modelo.Proveedores"%>
-<%@page import="Modelo.ComprasDetalle"%>
-<%@page import="javax.swing.table.DefaultTableModel"%>  
-<%@page import="Modelo.productos"%>
-<%@page import="Modelo.Compras"%>
-<%@page import="java.util.HashMap"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -45,9 +45,9 @@
         <script>
         $(document).ready(function () {
             
-              $("#btn_modificar").hide();
-       $("#btn_eliminar").hide();
-       $("#btn_next").show();
+              $("#btn_modificarp").hide();
+       $("#btn_eliminarp").hide();
+       $("#btn_agregar").show();
         });
     </script>
         <title>Compras Detalle</title>
@@ -79,41 +79,78 @@
                 <div class="content">
                     <div class="inner">
             <h1>Compras Detalle</h1>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Listado</button>
           <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarComprasDetalle();">Nuevo</button>
           
        <form action="sr_ComprasDetalle" method="POST" class="form-group">
-             
-           <label>ID:</label>
-           <input type="text" name="txt_id_Compra" id="txt_id_Compra" class="form-control" value="0"  readonly>
-           <label for="lbl_No_Orden" ><b>Numero de Orden</b></label>
-           <input type="text" name="txt_No_Orden" id="txt_No_Orden" class="form-control" placeholder="Ejemplo: 120"  onkeypress="return entero(event);" required>
-               <label for="lbl_Proveedor" ><b>Proveedor</b></label>
-                <select name="ListaProveedores" id="ListaProveedores" class="form-control">
+           <input type="hidden" name="txt_id_Compra" id="txt_id_Compra" class="form-control" value =<%=as%> readonly>   
+           <label for="lbl_id" ><b>ID</b></label>
+               <input type="text" name="txt_id" id="txt_id" class="form-control" value="0" readonly><br>
+                <label for="lbl_Producto" ><b>Producto</b></label>
+                <select name="drop_Producto" id="drop_Producto" class="form-control">
                     <% 
-                        Proveedores proveedor = new Proveedores();
-                        HashMap<String,String> drop2 = proveedor.ListaProveedor();
+                        productos producto = new productos();
+                        HashMap<String,String> lista = producto.ListaProductos();
                         out.println("<option value='0'>Seleccione</option>");
-                         for (String i:drop2.keySet()){
-                             out.println("<option value='" + i + "'>" + drop2.get(i) + "</option>");
+                         for (String i:lista.keySet()){
+                             out.println("<option value='" + i + "'>" + lista.get(i) + "</option>");
                          }
                          
                     
                     %>
                 </select>
+                
+                <label for="lbl_Cantidad" ><b>Cantidad</b></label>
+                <input type="number"  name="txt_Cantidad" id="txt_Cantidad" class="form-control"  onkeypress="return entero(event);" required>
+                 <label for="lbl_PrecioUnitario" ><b>Precio Unitario</b></label>
+                <input type="money"  name="txt_PrecioUnitario" id="txt_PrecioUnitario" class="form-control" onkeypress="return decimal(event);" required>
                 <br>
-           <label for="lbl_Fecha_Orden" ><b>Fecha_Orden</b></label>
-           <input type="Date" name="txt_Fecha_Orden" id="txt_Fecha_Orden" class="form-control" placeholder="Ejemplo:12/12/2020" required>
-           <label id="lbl_Fecha_Ingreso" ><b>Fecha De Ingreso</b></label>
-           <input type="DateTime" name="txt_Fecha_Ingreso" id="txt_Fecha_Ingreso" class="form-control" placeholder="Ejemplo: 12/12/2000 2:2:2" value="0" required>
-           
+                
            <br>
-  <button name="btn_next" id="btn_next"  value="next" class="btn btn-success btn-lg">Ingresar Productos</button>
-   <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success btn-lg">Modificar</button>
-    
+   <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-success btn-lg">Agregar Producto</button>
+                 <button name="btn_fin" id="btn_fin"  value="fin" class="btn btn-success btn-lg" onclick="finaliza();">Finalizar Compra</button>
+                <button name="btn_modificarp" id="btn_modificarp"  value="modificarp" class="btn btn-success btn-lg">Modificar</button>
+                <button name="btn_eliminarp" id="btn_eliminarp"  value="eliminarp" class="btn btn-danger btn-lg" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
+                
                 
             </form>
        </div>
+                             <table>
+                         <thead>
+                             <tr>
+                                 <th>No.</th>
+                                 <th>Producto</th>
+                                 <th>Cantidad</th>
+                                 <th>Precio unitario</th>
+                                 <th>Subtotal</th>
+                             </tr>
+                         </thead>
+                         <tbody id="tbl_comprasp" style="color:white;">
+                        <%
+                        ComprasDetalle lp = new ComprasDetalle();
+                        DefaultTableModel tablalp = new DefaultTableModel();
+                        tablalp = lp.ListaDeProductos(as);
+                        for (int t=0;t<tablalp.getRowCount();t++){
+                            out.println("<tr data-idp="+ tablalp.getValueAt(t, 0) +" data-idcd="+ tablalp.getValueAt(t, 1) +">");
+                            out.println("<td>"+(t+1)+"</td>");
+                            out.println("<td>"+ tablalp.getValueAt(t, 2) +"</td>");
+                            out.println("<td>"+ tablalp.getValueAt(t, 3) +"</td>");
+                            out.println("<td>"+ tablalp.getValueAt(t, 4) +"</td>");
+                            out.println("<td>"+ tablalp.getValueAt(t, 5) +"</td>");
+                            out.println("</tr>");
+                        
+                        
+                    }
+                    %>
+                         </tbody>
+                     </table>
+               
+                        
+                        <%
+                        ComprasDetalle t = new ComprasDetalle();
+                        Double tot=t.Total(as);
+                        out.println("<input type='decimal'  name='total' id='total' class='form-control' value='"+tot+"'>");
+                    %>
+                     
                 </div>
                 <nav>
                     <ul>
@@ -165,66 +202,7 @@
 
   	</div>
 
-		        <div class="modal" id="myModal">
-   <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header text-center">
-        <h4 class="modal-title text-center">Lasta de las Compras y sus Detalles </h4>
- <form class="mr-sm-2">
-                            <input class="form-control" id="myInput" type="text" placeholder="Buscar">
-                            <br><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                                <circle cx="8" cy="4.5" r="1"/>
-                                </svg>&ensp;Ayuda</button>
-                            <div id="demo" class="collapse">
-                                <br><b>Esta busqueda esta basada en cada tipo de columna de la tabla
-                                Si desea regresar a la lista completa de empleados solo debe borrar lo
-                                    buscado :D.</b>
-
-                            </div>
-                        </form>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body text-center">
-
-         <table class="table table-dark table-hover text-center">
-    <thead>
-      <tr>
-        <th>No. Orden</th>
-        <th>Proveedor</th>
-        <th>Fecha De Orden</th>
-        <th>Fecha De Ingreso</th>
-      </tr>
-      </thead>
-      <tbody id="tbl_CompraDetalle">
-        <% 
-        ComprasDetalle Detalle = new ComprasDetalle();
-        DefaultTableModel tabla = new DefaultTableModel();
-        tabla = Detalle.ListaDeCompras();
-        for (int t=0;t<tabla.getRowCount();t++){
-            out.println("<tr data-id=" + tabla.getValueAt(t,0) + " data-idpr="+ tabla.getValueAt(t,2) + ">");
-            out.println("<td>" + tabla.getValueAt(t,1) + "</td>");
-            out.println("<td>" + tabla.getValueAt(t,3) + "</td>");
-            out.println("<td>" + tabla.getValueAt(t,4) + "</td>");
-            out.println("<td>" + tabla.getValueAt(t,5) + "</td>");
-            out.println("</tr>");
-        
-        }
-        %>  
-    </tbody>
-  </table>
-       </div>
-
- 
-
-    </div>
-  </div>
-</div>
+	
                     <!-- BG -->
 			<div id="bg"></div>
     
@@ -235,36 +213,42 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+                            <script type="text/javascript">
+            function finaliza() {
+         document.getElementById("txt_Cantidad").required = false;
+         document.getElementById("txt_PrecioUnitario").required = false;
+         document.getElementById("drop_Producto").required = false;
+    };
+            
+            </script>
          <script type="text/javascript">
             $(document).ready(function () {
-            $("#lbl_Fecha_Ingreso").hide();
-                        $("#txt_Fecha_Ingreso").hide();
-                        $("#btn_next").show();
-                        $("#btn_modificar").hide();
-                        $("#btn_eliminar").hide();
+
+                        $("#btn_agregarp").show();
+                        $("#btn_modificarp").hide();
+                        $("#btn_eliminarp").hide();
     });
             
             </script>
          <script type="text/javascript">
-    $('#tbl_CompraDetalle').on('click','tr td',function(evt){
-       var target,id,idc,idc,NumeroDeOrden,FechaDeOrden,FechaDeIngreso,idProveedor; ; 
+    $('#tbl_comprasp').on('click','tr td',function(evt){
+       var target,idc,idp,precio,cantidad,idc; 
        target = $(event.target);
-       $("#lbl_Fecha_Ingreso").show();
-                        $("#txt_Fecha_Ingreso").show();
-                        $("#btn_next").hide();
-                        $("#btn_modificar").show();
-                        $("#btn_eliminar").show();
-       id = target.parent().data('id');
-        idProveedor = target.parent().data('idpr'); 
-        NumeroDeOrden = target.parent("tr").find("td").eq(0).html();
-       FechaDeOrden = target.parent("tr").find("td").eq(2).html();
-       FechaDeIngreso= target.parent("tr").find("td").eq(3).html();
+
+                        $("#btn_agregar").hide();
+                        $("#btn_modificarp").show();
+                        $("#btn_eliminarp").show();
+       idc = target.parent().data('idcd'); 
+       idp = target.parent().data('idp'); 
+       cantidad=target.parent("tr").find("td").eq(2).html();
+       precio = target.parent("tr").find("td").eq(3).html();
        
-       $("#txt_id_Compra").val(id);
- $("#ListaProveedores").val(idProveedor);
-       $("#txt_No_Orden").val(NumeroDeOrden);
-       $("#txt_Fecha_Orden").val(FechaDeOrden);
-       $("#txt_Fecha_Ingreso").val(FechaDeIngreso);
+
+$("#txt_id").val(idc);
+         $("#drop_Producto").val(idp);
+       $("#txt_PrecioUnitario").val(precio);
+       $("#txt_Cantidad").val(cantidad);
+
            $('#myModal').modal('hide');
        
     });
@@ -287,7 +271,7 @@
 <%
    }
 else{
-response.sendRedirect("index.jsp");
+response.sendRedirect("ErrorP.jsp");
 
 }
 %>

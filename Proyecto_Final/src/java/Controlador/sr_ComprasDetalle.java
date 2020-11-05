@@ -33,7 +33,7 @@ public class sr_ComprasDetalle extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    ComprasDetalle detalle,detalleantiguo;  
+    ComprasDetalle detalle,detalleantiguo,c;  
     Compras compra;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -61,63 +61,99 @@ public class sr_ComprasDetalle extends HttpServlet {
             out.println("<h1>ingreso "+request.getParameter("txt_Fecha_Ingreso")+"</h1>");
             out.println("<h1>Id compra "+idc+"</h1>");
        
-            */detalleantiguo=new ComprasDetalle();
+            */
+              if("next".equals(request.getParameter("btn_next"))){
+                  compra=new Compras(Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("ListaProveedores")),request.getParameter("txt_Fecha_Orden"),request.getParameter("txt_Fecha_Ingreso"));
+                  if(compra.agregar()>0){
+                  c=new ComprasDetalle();
+               int q=c.lastid();
+               request.setAttribute("q", q);
+                  request.getRequestDispatcher("Compras_Detalle_Productos.jsp").forward(request, response);
+                  }else{
+                    out.println("<h1> xxxxxxx No se Ingreso venta xxxxxxxxxxxx </h1>");
+             out.println("<a href='Compras_Detalle_Productos.jsp'>Regresar...</a>");
+              }
+              }else if("modificarp".equals(request.getParameter("btn_modificarp"))){
+                  detalleantiguo=new ComprasDetalle();
             int x=detalleantiguo.cantidadantigua(Integer.parseInt(request.getParameter("txt_id")));
-             
-            compra=new Compras(Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("ListaProveedores")),request.getParameter("txt_Fecha_Orden"),request.getParameter("txt_Fecha_Ingreso"));
-            if ("agregar".equals(request.getParameter("btn_agregar"))){
-                
-             if ((compra.agregar()>0)){
-                 Compras obj1=new Compras();
-            int idc;
-            idc=obj1.idfordetalle(Integer.parseInt(request.getParameter("txt_No_Orden")));
-                 detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),idc,Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
-                 if ((detalle.agregar()>0)&&(detalle.ActualizarExistencias()>0)&&(detalle.ActualizarPrecioCosto()>0)&&(detalle.ActualizarPrecioventa()>0)){ 
-             response.sendRedirect("Compras_Detalle.jsp");
-                 }
-             }else{
-             out.println("<h1> xxxxxxx No se Ingreso xxxxxxxxxxxx </h1>");
-             out.println("<a href='Compras_Detalle.jsp'>Regresar...</a>");
-             }
-             }
-           if ("modificar".equals(request.getParameter("btn_modificar"))){
-             if (compra.Modificar()>0){
-                
-                 detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
-                  if (detalle.Modificar()>0){
-                      if(Integer.parseInt(request.getParameter("txt_Cantidad"))>x){
+                               detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));
+              if(detalle.Modificar()>0){
+                          if(Integer.parseInt(request.getParameter("txt_Cantidad"))>x){
                      detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),(Integer.parseInt(request.getParameter("txt_Cantidad"))-x),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));    
                       }else if(Integer.parseInt(request.getParameter("txt_Cantidad"))<x){
                      detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),(Integer.parseInt(request.getParameter("txt_Cantidad"))-x),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));    
                       }else{
                       detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad"))-x,Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
                       }
-                      if((detalle.ActualizarExistencias()>0)&&(detalle.ActualizarPrecioCosto()>0)&&(detalle.ActualizarPrecioventa()>0)){ 
-             response.sendRedirect("Compras_Detalle.jsp");
-                 }
-                  }
-             
-             }else{
-             out.println("<h1> xxxxxxx No se Ingreso xxxxxxxxxxxx </h1>");
-             out.println("<a href='Compras_Detalle.jsp'>Regresar...</a>");
-             }
-             }
-            if ("eliminar".equals(request.getParameter("btn_eliminar"))){
-             if (detalle.Eliminar()>0){
-               
-                 detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),(0-Integer.parseInt(request.getParameter("txt_Cantidad"))),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
+                    if((detalle.ActualizarExistencias()>0)&&(detalle.ActualizarPrecioCosto()>0)&&(detalle.ActualizarPrecioventa()>0)){
+                    c=new ComprasDetalle();
+               int q=c.lastid();
+               request.setAttribute("q", q);
+                  request.getRequestDispatcher("Compras_Detalle_Productos.jsp").forward(request, response);
+                    }
                 
-                 detalle.ActualizarExistencias();
-                  if ((compra.Eliminar()>0)){ 
-             response.sendRedirect("Compras_Detalle.jsp");
-                 }
-            
-             
-             }else{
-             out.println("<h1> xxxxxxx No se Ingreso xxxxxxxxxxxx </h1>");
+                   
+              }else{
+                    out.println("<h1> xxxxxxx No se modifico xxxxxxxxxxxx </h1>");
+              c=new ComprasDetalle();
+               int q=c.lastid();
+               request.setAttribute("q", q);
+                  request.getRequestDispatcher("Compras_Detalle_Productos.jsp").forward(request, response);
+              }
+              }
+              else if("eliminarp".equals(request.getParameter("btn_eliminarp"))){
+                 detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
+              if(detalle.Eliminar()>0){
+              detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),(0-Integer.parseInt(request.getParameter("txt_Cantidad"))),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
+                  if(detalle.ActualizarExistencias()>0){
+               c=new ComprasDetalle();
+               int q=c.lastid();
+               request.setAttribute("q", q);
+                  request.getRequestDispatcher("Compras_Detalle_Productos.jsp").forward(request, response);
+                    }
+                
+                   
+              }else{
+                    out.println("<h1> xxxxxxx No se modifico xxxxxxxxxxxx </h1>");
+        c=new ComprasDetalle();
+               int q=c.lastid();
+               request.setAttribute("q", q);
+                  request.getRequestDispatcher("Compras_Detalle_Productos.jsp").forward(request, response);
+              }
+              }
+              else
+             if("agregar".equals(request.getParameter("btn_agregar"))){
+              detalle=new ComprasDetalle(Integer.parseInt(request.getParameter("txt_id")),Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));   
+           if((detalle.agregar()>0)&&(detalle.ActualizarExistencias()>0)&&(detalle.ActualizarPrecioCosto()>0)&&(detalle.ActualizarPrecioventa()>0)){
+                   
+                 
+                 int q=c.lastid();
+              
+               request.setAttribute("q", q);
+                  request.getRequestDispatcher("Compras_Detalle_Productos.jsp").forward(request, response);
+                  }else{
+                    out.println("<h1> xxxxxxx No se Ingreso vd xxxxxxxxxxxx </h1>");
+             out.println("<a href='Compras_Detalle_Productos.jsp'>Regresar...</a>");
+              }
+              
+             } 
+             else if("fin".equals(request.getParameter("btn_fin"))){
+                 response.sendRedirect("Compras_Detalle.jsp");
+             }else if ("modificar".equals(request.getParameter("btn_modificar"))){
+                  compra=new Compras(Integer.parseInt(request.getParameter("txt_id_Compra")),Integer.parseInt(request.getParameter("txt_No_Orden")),Integer.parseInt(request.getParameter("ListaProveedores")),request.getParameter("txt_Fecha_Orden"),request.getParameter("txt_Fecha_Ingreso"));
+              if(compra.Modificar()>0){
+                 
+                   response.sendRedirect("Compras_Detalle.jsp");
+              }else{
+                    out.println("<h1> xxxxxxx No se modifico xxxxxxxxxxxx </h1>");
              out.println("<a href='Compras_Detalle.jsp'>Regresar...</a>");
-             }
-             }
+              }
+                 
+             }else{
+                    out.println("<h1> xxxxxxx No se Ingreso producto xxxxxxxxxxxx </h1>");
+             out.println("<a href='Compras_Detalle.jsp'>Regresar...</a>");
+              }
+              
             out.println("</body>");
             out.println("</html>");
         }

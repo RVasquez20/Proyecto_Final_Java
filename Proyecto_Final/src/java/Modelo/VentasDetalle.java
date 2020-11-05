@@ -69,15 +69,48 @@ public class VentasDetalle {
     public void setPrecioUnitario(double PrecioUnitario) {
         this.PrecioUnitario = PrecioUnitario;
     }
-       public DefaultTableModel ListaDeVentasDetalle(){
+       public DefaultTableModel ListaDeVentas(){
  DefaultTableModel tabla = new DefaultTableModel();
  try{
      cn = new Conexion();
      cn.abrirconexion();
-      String query = "select dv.idVentas_detalle as ID,v.idVentas,v.nofactura,v.serie,v.fechafactura,c.idClientes,c.nombres,"
-              + "c.nit,e.nombres,e.idempleado,v.fechaingreso,p.idProducto,p.producto,dv.cantidad,dv.precio_unitario  from ventas_detalle as dv inner join ventas as v inner join productos as p inner join clientes as c inner join empleados as e on dv.idProducto=p.idProducto and dv.idventa=v.idVentas and v.idcliente=c.idClientes and v.idempleado=e.idEmpleado order by ID;";
+      String query = "select v.idVentas as ID,v.nofactura,v.serie,v.fechafactura,c.idClientes,c.nombres,c.nit,e.nombres,e.idempleado,v.fechaingreso  from  ventas as v  inner join clientes as c inner join empleados as e on v.idcliente=c.idClientes and v.idempleado=e.idEmpleado order by ID;";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-      String encabezado[] = {"ID","idVentas","no Factura","Serie","Fecha de Factura","ID Clientes", "Nombre Cliente", "NIT","Nombre empleado", "ID Empleado", "fechaingreso","idProducto","Productos","Cantidad","Precio unitario"};
+      String encabezado[] = {"ID","no Factura","Serie","Fecha de Factura","ID Clientes", "Nombre Cliente", "NIT","Nombre empleado", "ID Empleado", "fechaingreso"};
+      tabla.setColumnIdentifiers(encabezado);
+      String datos[] = new String[10];
+      while (consulta.next()){
+          datos[0] = consulta.getString("ID");
+          datos[1] = consulta.getString("nofactura");
+          datos[2] = consulta.getString("serie");
+          datos[3] = consulta.getString("fechafactura");
+          datos[4] = consulta.getString("idClientes");
+          datos[5] = consulta.getString("nombres");
+          datos[6] = consulta.getString("nit");
+          datos[7] = consulta.getString("e.nombres");
+          datos[8] = consulta.getString("idempleado");
+          datos[9] = consulta.getString("fechaingreso");
+          tabla.addRow(datos);
+      
+      }
+      
+     cn.cerrarconexion();
+ }catch(SQLException ex){
+     System.out.println(ex.getMessage());
+ }
+  return tabla;
+      
+    }
+       
+ public DefaultTableModel ListaDeVentasDetalle(int id){
+ DefaultTableModel tabla = new DefaultTableModel();
+ try{
+     cn = new Conexion();
+     cn.abrirconexion();
+      String query = "select dv.idVentas_detalle as ID,v.idVentas,v.nofactura,v.serie,v.fechafactura,c.idClientes,c.nombres,c.nit,e.nombres,"
+              + "e.idempleado,v.fechaingreso,p.idProducto,p.producto,dv.cantidad,dv.precio_unitario  from ventas_detalle as dv inner join ventas as v inner join productos as p inner join clientes as c inner join empleados as e on dv.idProducto=p.idProducto and dv.idventa=v.idVentas and v.idcliente=c.idClientes and v.idempleado=e.idEmpleado where idVentas="+id+" order by ID;";
+      ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+      String encabezado[] = {"ID","idVenta","no Factura","serie","Fecha Factura","ID Clientes", "Nombre Cliente", "NIT","Nombre empleado", "ID Empleado", "fechaingreso","id Producto","Producto","cantidad","Precio Unitario"};
       tabla.setColumnIdentifiers(encabezado);
       String datos[] = new String[15];
       while (consulta.next()){
@@ -92,37 +125,10 @@ public class VentasDetalle {
           datos[8] = consulta.getString("e.nombres");
           datos[9] = consulta.getString("idempleado");
           datos[10] = consulta.getString("fechaingreso");
-          datos[11] = consulta.getString("idproducto");
+          datos[11] = consulta.getString("idProducto");
           datos[12] = consulta.getString("producto");
           datos[13] = consulta.getString("cantidad");
           datos[14] = consulta.getString("precio_unitario");
-          tabla.addRow(datos);
-      
-      }
-      
-     cn.cerrarconexion();
- }catch(SQLException ex){
-     System.out.println(ex.getMessage());
- }
-  return tabla;
-      
-    }
-       
-              public DefaultTableModel Listadeproductos(int idventa){
- DefaultTableModel tabla = new DefaultTableModel();
- try{
-     cn = new Conexion();
-     cn.abrirconexion();
-      String query = "select vd.idProducto as ID,p.Producto,vd.cantidad,vd.precio_unitario from ventas_detalle as vd inner join productos as p on vd.idProducto=p.idProducto where idventa='"+idventa+"';";
-      ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-      String encabezado[] = {"ID","Productos","Cantidad","Precio unitario"};
-      tabla.setColumnIdentifiers(encabezado);
-      String datos[] = new String[4];
-      while (consulta.next()){
-          datos[0] = consulta.getString("ID");
-          datos[1] = consulta.getString("producto");
-          datos[2] = consulta.getString("cantidad");
-          datos[3] = consulta.getString("precio_unitario");
           tabla.addRow(datos);
       
       }
@@ -268,5 +274,89 @@ public class VentasDetalle {
               return retorno;
         }
  }
+    
+     public int lastid() throws SQLException{
+          int retorno=0;
+          int exi=0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="SELECT max(idVentas) FROM ventas;";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getInt("max(idVentas)");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+ }
 
+     public Double Total(int id) throws SQLException{
+          Double retorno=0.0;
+          Double exi=0.0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="select sum((precio_unitario*cantidad)) from ventas_detalle where idventa="+id+";";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getDouble("sum((precio_unitario*cantidad))");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+ }
+     
+     
+         public DefaultTableModel ListaDeProductos(int idventa){
+ DefaultTableModel tabla = new DefaultTableModel();
+ try{
+     cn = new Conexion();
+     cn.abrirconexion();
+      String query = "select vd.idProducto as id,vd.idVentas_detalle,p.Producto,vd.cantidad,vd.precio_unitario,(vd.precio_unitario*vd.cantidad)as subtotal from ventas_detalle as vd inner join productos as p on vd.idProducto=p.idProducto  where vd.idventa="+idventa+" order by id;";
+      ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+      String encabezado[] = {"id","idventadetalle","Producto","Cantidad","Precio_Unitario","Subtotal"};
+      tabla.setColumnIdentifiers(encabezado);
+      String datos[] = new String[6];
+      while (consulta.next()){
+          datos[0] = consulta.getString("id");
+          datos[1] = consulta.getString("idVentas_detalle");
+          datos[2] = consulta.getString("Producto");
+          datos[3] = consulta.getString("cantidad");
+          datos[4] = consulta.getString("precio_unitario");
+          datos[5] = consulta.getString("subtotal");
+          
+          tabla.addRow(datos);
+      
+      }
+      
+     cn.cerrarconexion();
+ }catch(SQLException ex){
+     System.out.println(ex.getMessage());
+ }
+  return tabla;
+      
+    }
 }

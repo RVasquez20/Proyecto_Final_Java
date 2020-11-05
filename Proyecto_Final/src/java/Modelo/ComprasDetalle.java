@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -69,28 +69,23 @@ public class ComprasDetalle {
     public void setPrecioUnitario(double PrecioUnitario) {
         this.PrecioUnitario = PrecioUnitario;
     }
-    public DefaultTableModel ListaDeComprasDetalle(){
+    public DefaultTableModel ListaDeCompras(){
  DefaultTableModel tabla = new DefaultTableModel();
  try{
      cn = new Conexion();
      cn.abrirconexion();
-      String query = "select dc.idcompra_detalle as ID,c.idcompra,c.no_orden_compra,p.idproducto,p.producto,dc.cantidad,dc.precio_costo_unitario,c.idproveedor,pr.proveedor,c.fecha_orden,c.fechaingreso from compras_detalle as dc inner join compras as c inner join productos as p inner join proveedores as pr where dc.idcompra=c.idcompra and dc.idproducto=p.idProducto and pr.idproveedor=c.idproveedor order by ID;";
+      String query = "select c.idcompra as id,c.no_orden_compra,pr.idproveedor,pr.proveedor,c.fecha_orden,c.fechaingreso from compras as c inner join proveedores as pr on c.idproveedor=pr.idproveedor order by id;";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-      String encabezado[] = {"ID","idCompras","no Orden","idProducto","Productos","Cantidad","Precio unitario","idProveedor","Proveedor","Fecha De Orden","Fecha de Ingreso"};
+      String encabezado[] = {"ID","idCompras","no Orden","idProveedor","Proveedor","Fecha De Orden","Fecha de Ingreso"};
       tabla.setColumnIdentifiers(encabezado);
-      String datos[] = new String[11];
+      String datos[] = new String[6];
       while (consulta.next()){
           datos[0] = consulta.getString("ID");
-          datos[1] = consulta.getString("idcompra");
-          datos[2] = consulta.getString("no_orden_compra");
-          datos[3] = consulta.getString("idproducto");
-          datos[4] = consulta.getString("producto");
-          datos[5] = consulta.getString("cantidad");
-          datos[6] = consulta.getString("precio_costo_unitario");
-          datos[7] = consulta.getString("idproveedor");
-          datos[8] = consulta.getString("proveedor");
-          datos[9] = consulta.getString("fecha_orden");
-          datos[10] = consulta.getString("fechaingreso");
+          datos[1] = consulta.getString("no_orden_compra");
+          datos[2] = consulta.getString("idproveedor");
+          datos[3] = consulta.getString("proveedor");
+          datos[4] = consulta.getString("fecha_orden");
+          datos[5] = consulta.getString("fechaingreso");
           tabla.addRow(datos);
       
       }
@@ -102,6 +97,8 @@ public class ComprasDetalle {
   return tabla;
       
     }
+    /*****************************************************/
+     
     public int agregar(){
         int retorno =0;
         try{
@@ -188,11 +185,9 @@ public class ComprasDetalle {
     }
     public int ActualizarExistencias(){
          int retorno=0;
-         int antigua=0;
         try {
             cn=new Conexion();
             productos p1=new productos();
-            ComprasDetalle c1=new ComprasDetalle();
             PreparedStatement parametro;
             String query="UPDATE  productos SET existencia=?+? WHERE idProducto=?;";
             cn.abrirconexion();
@@ -251,5 +246,90 @@ public class ComprasDetalle {
             System.out.println("Error->"+e.getMessage());
               return retorno;
         } 
+    }
+     
+          public int lastid() throws SQLException{
+          int retorno=0;
+          int exi=0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="SELECT max(idcompra) FROM compras;";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getInt("max(idcompra)");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+ }
+
+     public Double Total(int id) throws SQLException{
+          Double retorno=0.0;
+          Double exi=0.0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="select sum((precio_costo_unitario*cantidad)) from compras_detalle where idcompra="+id+";";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getDouble("sum((precio_costo_unitario*cantidad))");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+ }
+     
+     
+         public DefaultTableModel ListaDeProductos(int idCompra){
+ DefaultTableModel tabla = new DefaultTableModel();
+ try{
+     cn = new Conexion();
+     cn.abrirconexion();
+      String query = "select cd.idProducto as id,cd.idcompra_detalle,p.Producto,cd.cantidad,cd.precio_costo_unitario,(cd.precio_costo_unitario*cd.cantidad)as subtotal from compras_detalle as cd inner join productos as p on cd.idproducto=p.idProducto  where cd.idcompra='"+idCompra+"' order by id;";
+      ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+      String encabezado[] = {"id","idcompradetalle","Producto","Cantidad","Precio_Unitario","Subtotal"};
+      tabla.setColumnIdentifiers(encabezado);
+      String datos[] = new String[6];
+      while (consulta.next()){
+          datos[0] = consulta.getString("id");
+          datos[1] = consulta.getString("idcompra_detalle");
+          datos[2] = consulta.getString("Producto");
+          datos[3] = consulta.getString("cantidad");
+          datos[4] = consulta.getString("precio_costo_unitario");
+          datos[5] = consulta.getString("subtotal");
+          
+          tabla.addRow(datos);
+      
+      }
+      
+     cn.cerrarconexion();
+ }catch(SQLException ex){
+     System.out.println(ex.getMessage());
+ }
+  return tabla;
+      
     }
 }

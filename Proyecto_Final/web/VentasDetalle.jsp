@@ -3,7 +3,6 @@
     Created on : 4/10/2020, 01:04:24 PM
     Author     : rodri
 --%>
-
 <%
     HttpSession actual = request.getSession(true);
     String usuario = (String) actual.getAttribute("Logueado");
@@ -20,9 +19,12 @@
     String Puest = (String) actual.getAttribute("pues");
     String Vendde = (String) actual.getAttribute("vende");
     String nuevo = (String) actual.getAttribute("nu");
+    String prueba=(String)request.getAttribute("pr");
+    
     session.setMaxInactiveInterval(900);
     if ((actual.getAttribute("Logueado") != null) && ((tipo.equals("ADMIN")||Vendde!=null))) {
 %>
+
 <%@page import="Modelo.VentasDetalle"%>
 <%@page import="Modelo.productos"%>
 <%@page import="Modelo.Empleado"%>
@@ -42,14 +44,7 @@
         <link rel="stylesheet" type="text/css" href="CSS/comun.css">
        
         <script src="JS/AllInOne.js"></script>
-        <script>
-        $(document).ready(function () {
-            
-              $("#btn_modificar").hide();
-       $("#btn_eliminar").hide();
-       $("#btn_agregar").show();
-        });
-    </script>
+        
         <title>Ventas Detalle</title>
     </head>
       <body class="is-preload">
@@ -64,7 +59,7 @@
                     </button>
                     <div id="dropdown_menu" class="dropdown-menu text-center" style="font-size: 22px;">
 
-                        <span class="dropdown-item"><%=usuario%></span>
+                        <span class="dropdown-item"><%=usuario%>     prueba:<%=prueba%></span>
                         <span class="dropdown-item"><%=email%></span>
                         <form action="sr_login" method="post">
                             <h6 class="text-muted"><input type="submit" value="Cerrar Sesion" class="btn btn-dark" id="cerrarsesion" name="cerrarsesion"/></h6>
@@ -83,29 +78,15 @@
                         <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarVentasDetalle();">Nuevo</button>
                         
    <form action="sr_VentasDetalle" method="post" class="form-group">
-       <label for="lbl_id_Ventas">ID:</label>
-                <input type="text" name="txt_id_Ventas" id="txt_id_Ventas" class="form-control" value ="0" readonly>
-                <label for="lbl_Producto" ><b>Producto</b></label>
-                <select name="drop_Producto" id="drop_Producto" class="form-control" required="">
-                    <% 
-                        productos producto = new productos();
-                        HashMap<String,String> lista = producto.ListaProductos();
-                        out.println("<option value='0'>Seleccione</option>");
-                         for (String i:lista.keySet()){
-                             out.println("<option value='" + i + "'>" + lista.get(i) + "</option>");
-                         }
-                         
+       
+
+
                     
-                    %>
-                </select>
-                <label for="lbl_Cantidad" ><b>Cantidad</b></label>
-                <input type="number"  name="txt_Cantidad" id="txt_Cantidad" class="form-control"  onkeypress="return entero(event);" required>
-                 <label for="lbl_PrecioUnitario" ><b>Precio Unitario</b></label>
-                <input type="money"  name="txt_PrecioUnitario" id="txt_PrecioUnitario" class="form-control" onkeypress="return decimal(event);" required>
-                <br>
+              
+                
                
                 <!--ventas-->
-       
+
                 <label for="lbl_idventas">ID:</label>
                 <input type="text" name="txt_idventas" id="txt_idventas" class="form-control" value ="0" readonly>
                 <label for="lbl_nofactura">No.Factura:</label>
@@ -143,45 +124,17 @@
                  </select>
                 <label id="lbl_fechaingreso">Fecha Ingreso:</label>
                 <input type="text" name="txt_fechaingreso" id="txt_fechaingreso" value="0" class="form-control" required>
-      <table class="table table-bordered" id="tabla55">
-    <thead>
-      <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Precio Unitario</th>
-      </tr>
-    </thead>
-    <tbody>
-       <%
-                    VentasDetalle vdp = new VentasDetalle();
-                    DefaultTableModel tabladvp = new DefaultTableModel();
-                    
-                    tabladvp = vdp.Listadeproductos(1);
-                    for (int t=0;t<tabladvp.getRowCount();t++){
-                        out.println("<tr data-idvd="+ tabladvp.getValueAt(t, 0)+">");
-                        out.println("<td>"+ tabladvp.getValueAt(t, 1) +"</td>");
-                        out.println("<td>"+ tabladvp.getValueAt(t, 2) +"</td>");
-                        out.println("<td>"+ tabladvp.getValueAt(t, 3) +"</td>");
-                       
 
-                        out.println("</tr>");
-                        
-                        
-                    }
-                    %>
-                </tbody>
-    </tbody>
-  </table>
 
                 <br>
                 
-      
-                 <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-success btn-lg">Agregar</button>
-                <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success btn-lg">Modificar</button>
-                <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger btn-lg" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
+   <button name="btn_next" id="btn_next"  value="next" class="btn btn-success btn-lg">Ingresar Productos</button>
+   <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success btn-lg">Modificar</button>
+            
+                
                 
             </form>
-           
+            
                </div>
                 </div>
                 <nav>
@@ -266,33 +219,29 @@
                     <tr>
                         <th>No. Factura</th>
                         <th>Serie</th>
-                        <th>Fecha Factura</th>
-                        <th>Nombre Cliente</th>
-                        <th>Nit</th>
-                        <th>Nombre Empleado</th>
-                        <th>Fecha Ingreso</th>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                    </tr>
-                </thead>
-                <tbody id="tbl_ventasDetalle">
-                    <%
-                    VentasDetalle vd = new VentasDetalle();
-                    DefaultTableModel tabladv = new DefaultTableModel();
-                    tabladv = vd.ListaDeVentasDetalle();
-                    for (int t=0;t<tabladv.getRowCount();t++){
-                        out.println("<tr data-idvd="+ tabladv.getValueAt(t, 0) +" data-idv="+ tabladv.getValueAt(t, 1) +" data-idcl="+ tabladv.getValueAt(t, 5) +" data-ide="+ tabladv.getValueAt(t, 9) +" data-idp="+ tabladv.getValueAt(t, 11) +">");
-                        out.println("<td>"+ tabladv.getValueAt(t, 2) +"</td>");
-                        out.println("<td>"+ tabladv.getValueAt(t, 3) +"</td>");
-                        out.println("<td>"+ tabladv.getValueAt(t, 4) +"</td>");
+                            <th>Fecha Factura</th>
+                            <th>Nombre Cliente</th>
+                            <th>Nit</th>
+                            <th>Nombre Empleado</th>
+                            <th>Fecha Ingreso</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_ventasDetalle">
+                        <%
+                        VentasDetalle vd = new VentasDetalle();
+                        DefaultTableModel tabladv = new DefaultTableModel();
+                        tabladv = vd.ListaDeVentas();
+                        for (int t=0;t<tabladv.getRowCount();t++){
+                            out.println("<tr data-idv="+ tabladv.getValueAt(t, 0) +" data-idcl="+ tabladv.getValueAt(t, 4) +" data-ide="+ tabladv.getValueAt(t, 8) +">");
+                            out.println("<td>"+ tabladv.getValueAt(t, 1) +"</td>");
+                            out.println("<td>"+ tabladv.getValueAt(t, 2) +"</td>");
+                            out.println("<td>"+ tabladv.getValueAt(t, 3) +"</td>");
+                        out.println("<td>"+ tabladv.getValueAt(t, 5) +"</td>");
                         out.println("<td>"+ tabladv.getValueAt(t, 6) +"</td>");
                         out.println("<td>"+ tabladv.getValueAt(t, 7) +"</td>");
-                        out.println("<td>"+ tabladv.getValueAt(t, 8) +"</td>");
-                        out.println("<td>"+ tabladv.getValueAt(t, 10) +"</td>");
-                        out.println("<td>"+ tabladv.getValueAt(t, 12) +"</td>");
-                        out.println("<td>"+ tabladv.getValueAt(t, 13) +"</td>");
-                        out.println("<td>"+ tabladv.getValueAt(t, 14) +"</td>");
+                        out.println("<td>"+ tabladv.getValueAt(t, 9) +"</td>");
+
 
                         out.println("</tr>");
                         
@@ -308,10 +257,6 @@
     </div>
   </div>
 </div>
-            
-          
- 
-
                     <!-- BG -->
 			<div id="bg"></div>
     
@@ -322,48 +267,43 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+ 
                  <script type="text/javascript">
             $(document).ready(function () {
             $("#lbl_fechafactura").hide();
                         $("#txt_fechafactura").hide();
                                  $("#lbl_fechaingreso").hide();
                         $("#txt_fechaingreso").hide();
-                        $("#btn_agregar").show();
+                        $("#btn_next").show();
                         $("#btn_modificar").hide();
-                        $("#btn_eliminar").hide();
+                       
     });
             
             </script>
                     <script type="text/javascript">
     $('#tbl_ventasDetalle').on('click','tr td',function(evt){
-       var target,idvd,idv,idc,idpr,idem,precio,cantidad; 
+       var target,idv,idc,idem,noFactura,serie;
        
-       $("#lbl_fechafactura").show();
+      $("#lbl_fechafactura").show();
                         $("#txt_fechafactura").show();
                                  $("#lbl_fechaingreso").show();
                         $("#txt_fechaingreso").show();
-                        $("#btn_agregar").hide();
+                        $("#btn_next").hide();
                         $("#btn_modificar").show();
-                        $("#btn_eliminar").show();
+                       
+                       
        target = $(event.target);
-       idvd = target.parent().data('idvd');
        idv = target.parent().data('idv'); 
-       idpr = target.parent().data('idp'); 
        idc = target.parent().data('idcl');
        idem = target.parent().data('ide');
-       nofactura = target.parent("tr").find("td").eq(0).html();
+       noFactura = target.parent("tr").find("td").eq(0).html();
        serie = target.parent("tr").find("td").eq(1).html();
        fechafactura = target.parent("tr").find("td").eq(2).html();
        fechaingreso = target.parent("tr").find("td").eq(6).html();
-       cantidad=target.parent("tr").find("td").eq(8).html();
-       precio = target.parent("tr").find("td").eq(9).html();
-       $("#txt_id_Ventas").val(idvd);
+      
        $("#txt_idventas").val(idv);
-       $("#drop_Producto").val(idpr);
-       $("#txt_PrecioUnitario").val(precio);
-       $("#txt_Cantidad").val(cantidad);
-       $("#txt_nofactura").val(nofactura);
+       
+       $("#txt_nofactura").val(noFactura);
        $("#txt_serie").val(serie);
        $("#txt_fechafactura").val(fechafactura);
        $("#txt_idcliente").val(idc);
@@ -390,7 +330,7 @@
 <%
    }
 else{
-response.sendRedirect("index.jsp");
+response.sendRedirect("Error.jsp");
 
 }
 %>

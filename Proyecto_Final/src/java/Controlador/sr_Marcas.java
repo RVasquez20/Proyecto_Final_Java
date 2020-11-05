@@ -44,7 +44,7 @@ public class sr_Marcas extends HttpServlet {
             if("agregar".equals(request.getParameter("btn_agregar"))){
                
                if(marca.agregar()>0){
-                    response.sendRedirect("Marcas.jsp"); 
+                    request.getRequestDispatcher("Marcas.jsp").forward(request, response); 
                }else{
                    out.println("<script>alert('Error');</scrpt>");
                }
