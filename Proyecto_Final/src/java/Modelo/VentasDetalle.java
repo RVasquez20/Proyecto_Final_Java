@@ -8,6 +8,7 @@ package Modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -248,21 +249,47 @@ public class VentasDetalle {
               return retorno;
         } 
     }
-    public int idforventasdetalle(int nofactura) throws SQLException{
+    public int nofact(int id) throws SQLException{
           int retorno=0;
           int exi=0;
      
         try {
             cn=new Conexion();
        
-            String query="select idVentas from ventas where nofactura="+nofactura+";";
+            String query="select nofactura from ventas where idVentas="+id+";";
             cn.abrirconexion();
            
             
            
              ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
              while (consulta.next()) {
-                exi=consulta.getInt("idVentas");
+                exi=consulta.getInt("nofactura");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+ }
+     public int nofactnew() throws SQLException{
+          int retorno=0;
+          int exi=0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="SELECT max(nofactura)as id FROM dbempresa.ventas;";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getInt("id");
                
                 }
                    
@@ -359,4 +386,35 @@ public class VentasDetalle {
   return tabla;
       
     }
+       public DefaultTableModel datoscliente(int idventa){
+ DefaultTableModel tabla = new DefaultTableModel();
+ try{
+     cn = new Conexion();
+     cn.abrirconexion();
+      String query = "select v.idcliente as id,c.nombres,c.apellidos,c.NIT,c.telefono,c.correo_electronico from ventas as v inner join clientes as c on c.idClientes=v.idcliente where idVentas='"+idventa+"';";
+      ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+      String encabezado[] = {"id","nombre","apellido","nit","telefono","correo electronico"};
+      tabla.setColumnIdentifiers(encabezado);
+      String datos[] = new String[6];
+      while (consulta.next()){
+          datos[0] = consulta.getString("id");
+          datos[1] = consulta.getString("nombres");
+          datos[2] = consulta.getString("apellidos");
+          datos[3] = consulta.getString("NIT");
+          datos[4] = consulta.getString("telefono");
+          datos[5] = consulta.getString("correo_electronico");
+          
+          tabla.addRow(datos);
+      
+      }
+      
+     cn.cerrarconexion();
+ }catch(SQLException ex){
+     System.out.println(ex.getMessage());
+ }
+  return tabla;
+      
+    }   
+            
+ 
 }

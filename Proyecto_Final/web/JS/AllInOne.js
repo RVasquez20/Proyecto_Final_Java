@@ -215,3 +215,20 @@ function LimpiarProductos() {
                         $("#btn_eliminar").hide();
                         
 };
+
+
+
+
+function LimpiarVentasDetalleprod() {
+    $("#txt_id_Ventas").val(0);
+
+       $("#drop_Producto").val(0);
+       $("#txt_PrecioUnitario").val('');
+       $("#txt_Cantidad").val('');
+
+       $("#btn_agregar").show();
+    $("#btn_modificarp").hide();
+    $("#btn_eliminarp").hide();
+    
+
+};

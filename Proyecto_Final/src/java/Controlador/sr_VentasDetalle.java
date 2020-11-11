@@ -8,6 +8,7 @@ package Controlador;
 
 import Modelo.Ventas;
 import Modelo.VentasDetalle;
+import Modelo.productos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -68,10 +69,15 @@ public class sr_VentasDetalle extends HttpServlet {
                               detalle=new VentasDetalle(Integer.parseInt(request.getParameter("txt_id_Ventas")),Integer.parseInt(request.getParameter("txt_idventas")),
                           Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),
                           Double.parseDouble(request.getParameter("txt_PrecioUnitario")));
+                               productos obj1=new productos();
+              int ex=obj1.ex(Integer.parseInt(request.getParameter("drop_Producto")));
+               
+           if((ex>=(Integer.parseInt(request.getParameter("txt_Cantidad")))-x)){
               if(detalle.Modificar()>0){
                  if(Integer.parseInt(request.getParameter("txt_Cantidad"))>x){
+                      
                         detalle=new VentasDetalle(Integer.parseInt(request.getParameter("txt_id_Ventas")),Integer.parseInt(request.getParameter("txt_idventas")),Integer.parseInt(request.getParameter("drop_Producto")),(Integer.parseInt(request.getParameter("txt_Cantidad"))-x),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));
-                    } else if(x>Integer.parseInt(request.getParameter("txt_Cantidad"))){
+            } else if(x>Integer.parseInt(request.getParameter("txt_Cantidad"))){
                         detalle=new VentasDetalle(Integer.parseInt(request.getParameter("txt_id_Ventas")),Integer.parseInt(request.getParameter("txt_idventas")),Integer.parseInt(request.getParameter("drop_Producto")),(Integer.parseInt(request.getParameter("txt_Cantidad"))-x),Double.parseDouble(request.getParameter("txt_PrecioUnitario")));
                     }else{
                         if(Integer.parseInt(request.getParameter("txt_Cantidad"))==x){
@@ -92,6 +98,10 @@ public class sr_VentasDetalle extends HttpServlet {
                int q=v.lastid();
                request.setAttribute("q", q);
                   request.getRequestDispatcher("VentasDetalleProductos.jsp").forward(request, response);
+              }
+              }  else{
+                    out.println("<h1> xxxxxxx No se Ingreso , Inventario Insuficiente xxxxxxxxxxxx </h1>");
+             out.println("<a href='VentasDetalle.jsp'>Regresar...</a>");
               }
               }
               else if("eliminarp".equals(request.getParameter("btn_eliminarp"))){
@@ -124,7 +134,11 @@ public class sr_VentasDetalle extends HttpServlet {
               detalle=new VentasDetalle(Integer.parseInt(request.getParameter("txt_id_Ventas")),Integer.parseInt(request.getParameter("txt_idventas")),
                           Integer.parseInt(request.getParameter("drop_Producto")),Integer.parseInt(request.getParameter("txt_Cantidad")),
                           Double.parseDouble(request.getParameter("txt_PrecioUnitario")));
-           if((detalle.agregar()>0)&&(detalle.ActualizarExistencias()>0)){
+              productos obj1=new productos();
+              int ex=obj1.ex(Integer.parseInt(request.getParameter("drop_Producto")));
+               
+           if((ex>=(Integer.parseInt(request.getParameter("txt_Cantidad"))))){
+               if((detalle.agregar()>0)&&(detalle.ActualizarExistencias()>0)){
                    
                  
                   v=new VentasDetalle();
@@ -133,10 +147,14 @@ public class sr_VentasDetalle extends HttpServlet {
                   request.getRequestDispatcher("VentasDetalleProductos.jsp").forward(request, response);
                   }else{
                     out.println("<h1> xxxxxxx No se Ingreso vd xxxxxxxxxxxx </h1>");
-             out.println("<a href='VentasDetalle.jsp'>Regresar...</a>");
+             out.println("<a href='VentasDetalleProductos.jsp'>Regresar...</a>");
               }
               
-             } 
+             }  else{
+                    out.println("<h1> xxxxxxx No se Ingreso , Inventario Insuficiente xxxxxxxxxxxx </h1>");
+             out.println("<a href='VentasDetalle.jsp'>Regresar...</a>");
+              }
+             }
              else if("fin".equals(request.getParameter("btn_fin"))){
                  response.sendRedirect("VentasDetalle.jsp");
              }else if ("modificar".equals(request.getParameter("btn_modificar"))){

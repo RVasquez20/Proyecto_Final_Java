@@ -80,11 +80,12 @@
                     
                         <h1>Formulario de Ventas</h1>
                         
-                        <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarVentasDetalle();">Nuevo</button>
+                        <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarVentasDetalleprod();">Nuevo</button>
                         
    <form action="sr_VentasDetalle" method="post" class="form-group">
-       
-                <input type="hidden" name="txt_idventas" id="txt_idventas" class="form-control" value =<%=as%> readonly>
+ 
+       <input type="hidden" name="txt_idventas" id="txt_idventas" class="form-control" value =<%=as%> readonly><br>
+            <label for="lbl_Cantidad" ><b>ID Detalle:</b></label>
                 <input type="text" name="txt_id_Ventas" id="txt_id_Ventas" class="form-control" value ="0" readonly>
                     
                 <label for="lbl_Producto" ><b>Producto</b></label>
@@ -118,10 +119,65 @@
                 <button name="btn_eliminarp" id="btn_eliminarp"  value="eliminarp" class="btn btn-danger btn-lg" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" >Eliminar</button>
                 
             </form>
-                 
+                <div  style="
+    border-color: white;
+    border: white;
+    border-style: solid;
+">
+                      <div class="cliente" style="">
+                    <br>
+                       <%
+       VentasDetalle obj=new VentasDetalle();
+       int no=0;
+       no=obj.nofact(as);
+       out.println("<label><b>Numero De Factura</b></label>");
+       out.println(" <input type='text' name='txt_nf' id='txt_nf' class='form-control' value ="+no+" style='text-align:center;' readonly>");
+       %>
+         <br>
+         <label><b>Datos Del Cliente:</b></label>
+           <br>
+           <br>
+           <table>
+                         <thead >
+                             <tr class="text-center">
+                                 <th>Nombres</th>
+                                 <th>Apellidos</th>
+                                 <th>NIT</th>
+                                 <th>Telefono</th>
+                                 <th>Correo Electronico</th>
+                             </tr>
+                         </thead>
+                         <tbody id="clientes" style="color:white;">
+                        <%
+                        VentasDetalle cl = new VentasDetalle();
+                        DefaultTableModel tablacl = new DefaultTableModel();
+                        tablacl = cl.datoscliente(as);
+                        for (int t=0;t<tablacl.getRowCount();t++){
+                            out.println("<tr data-idcliente="+ tablacl.getValueAt(t, 0) +">");
+                            out.println("<td>"+ tablacl.getValueAt(t, 1) +"</td>");
+                            out.println("<td>"+ tablacl.getValueAt(t, 2) +"</td>");
+                            out.println("<td>"+ tablacl.getValueAt(t, 3) +"</td>");
+                            out.println("<td>"+ tablacl.getValueAt(t, 4) +"</td>");
+                            out.println("<td>"+ tablacl.getValueAt(t, 5) +"</td>");
+                            out.println("</tr>");
+                        
+                        
+                    }
+                    %>
+                         </tbody>
+                     </table>
+                           </div>
+                           
+      <hr style="
+    border-color: white;
+    /* border: white; */
+    border-style: solid;
+">
+<label><b>Productos:</b></label><br><br>
+   
                      <table>
-                         <thead>
-                             <tr>
+                         <thead >
+                             <tr class="text-center">
                                  <th>No.</th>
                                  <th>Producto</th>
                                  <th>Cantidad</th>
@@ -140,7 +196,7 @@
                             out.println("<td>"+ tablalp.getValueAt(t, 2) +"</td>");
                             out.println("<td>"+ tablalp.getValueAt(t, 3) +"</td>");
                             out.println("<td>"+ tablalp.getValueAt(t, 4) +"</td>");
-                            out.println("<td>"+ tablalp.getValueAt(t, 5) +"</td>");
+                            out.println("<td>Q."+ tablalp.getValueAt(t, 5) +"</td>");
                             out.println("</tr>");
                         
                         
@@ -149,15 +205,15 @@
                          </tbody>
                      </table>
                
-                        
+                        <label><b>Total:</b></label>
                         <%
                         VentasDetalle t = new VentasDetalle();
                         Double tot=t.Total(as);
-                        out.println("<input type='decimal'  name='total' id='total' class='form-control' value='"+tot+"'>");
+                        out.println("<input type='decimal'  name='total' id='total' class='form-control' value='Q. "+tot+"' style='background-color:transparent;color:#FFFFFF; aline-text:center;'>");
                     %>
                     
                      
-               
+                </div> 
                 </div>
                 <nav>
                     <ul>

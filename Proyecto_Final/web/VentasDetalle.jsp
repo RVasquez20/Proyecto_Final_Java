@@ -24,7 +24,7 @@
     session.setMaxInactiveInterval(900);
     if ((actual.getAttribute("Logueado") != null) && ((tipo.equals("ADMIN")||Vendde!=null))) {
 %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="Modelo.VentasDetalle"%>
 <%@page import="Modelo.productos"%>
 <%@page import="Modelo.Empleado"%>
@@ -78,8 +78,6 @@
                         <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarVentasDetalle();">Nuevo</button>
                         
    <form action="sr_VentasDetalle" method="post" class="form-group">
-       
-
 
                     
               
@@ -89,8 +87,14 @@
 
                 <label for="lbl_idventas">ID:</label>
                 <input type="text" name="txt_idventas" id="txt_idventas" class="form-control" value ="0" readonly>
-                <label for="lbl_nofactura">No.Factura:</label>
-                <input type="number" name="txt_nofactura" id="txt_nofactura" class="form-control"  onkeypress="return entero(event);" required>
+                  <%
+       VentasDetalle obj=new VentasDetalle();
+       int no=0;
+       no=obj.nofactnew();
+       no+=1;
+       out.println("<label><b>Numero De Factura</b></label>");
+       out.println(" <input type='text' name='txt_nofactura' id='txt_nofactura' class='form-control' value ="+no+" onkeypress='return entero(event);' readonly>");
+       %>
                 <label for="lbl_serie">Serie:</label>
                 <input type="text" name="txt_serie" id="txt_serie" class="form-control" maxlength="1" required>
                 <label id="lbl_fechafactura">Fecha Factura:</label>
