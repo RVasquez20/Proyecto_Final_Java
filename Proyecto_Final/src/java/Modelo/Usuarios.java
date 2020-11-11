@@ -526,31 +526,30 @@ public class Usuarios {
      cn = new Conexion();
      cn.abrirconexion();
      String Tipe="USER";
-      String query = "SELECT idUsuarios,Usuario,Nombre,Apellidos,Correo,Pass,Foto,Codigo,Tipo,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin,Estado FROM usuarios where Tipo='"+Tipe+"';";
+      String query = "SELECT idUsuarios,Usuario,Nombre,Apellidos,Correo,Foto,Codigo,Tipo,clientes,compras_detalle,empleados,marcas,productos,proveedores,puestos,ventas_detalle,NuevoAdmin,Estado FROM usuarios where Tipo='"+Tipe+"';";
       ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
-      String encabezado[] = {"idUsuarios","Usuario","Nombre","Apellidos","Correo","Pass","Foto","Codigo","Tipo","clientes","compras_detalle","empleados","marcas","productos","proveedores","puestos","ventas_detalle","NuevoAdmin","Estado"};
+      String encabezado[] = {"idUsuarios","Usuario","Nombre","Apellidos","Correo","Foto","Codigo","Tipo","clientes","compras_detalle","empleados","marcas","productos","proveedores","puestos","ventas_detalle","NuevoAdmin","Estado"};
       tabla.setColumnIdentifiers(encabezado);
-      String datos[] = new String[19];
+      String datos[] = new String[18];
       while (consulta.next()){
           datos[0] = consulta.getString("idUsuarios");
           datos[1] = consulta.getString("Usuario");
           datos[2] = consulta.getString("Nombre");
           datos[3] = consulta.getString("Apellidos");
           datos[4] = consulta.getString("Correo");
-          datos[5] = consulta.getString("Pass");
-          datos[6] = consulta.getString("Foto");
-          datos[7] = consulta.getString("Codigo");
-          datos[8] = consulta.getString("Tipo");
-          datos[9] = consulta.getString("clientes");
-          datos[10] = consulta.getString("compras_detalle");
-          datos[11] = consulta.getString("empleados");
-          datos[12] = consulta.getString("marcas");
-          datos[13] = consulta.getString("productos");
-          datos[14] = consulta.getString("proveedores");
-          datos[15] = consulta.getString("puestos");
-          datos[16] = consulta.getString("ventas_detalle");
-          datos[17] = consulta.getString("NuevoAdmin");
-          datos[18] = consulta.getString("Estado");
+          datos[5] = consulta.getString("Foto");
+          datos[6] = consulta.getString("Codigo");
+          datos[7] = consulta.getString("Tipo");
+          datos[8] = consulta.getString("clientes");
+          datos[9] = consulta.getString("compras_detalle");
+          datos[10] = consulta.getString("empleados");
+          datos[11] = consulta.getString("marcas");
+          datos[12] = consulta.getString("productos");
+          datos[13] = consulta.getString("proveedores");
+          datos[14] = consulta.getString("puestos");
+          datos[15] = consulta.getString("ventas_detalle");
+          datos[16] = consulta.getString("NuevoAdmin");
+          datos[17] = consulta.getString("Estado");
           tabla.addRow(datos);
       
       }

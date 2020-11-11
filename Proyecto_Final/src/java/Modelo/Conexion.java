@@ -28,9 +28,9 @@ public class Conexion {
     
     public Connection conexionbd;
     public final String nombre="dbempresa";
-    public final String url=String.format("jdbc:mysql://backendnetcore.westus2.cloudapp.azure.com:3306/%s?useTimezone=true&serverTimezone=UTC",nombre);
-    public final String usuario="user1";
-    public final String contraseña="";
+    public final String url=String.format("jdbc:mysql://miproyecto.westus2.cloudapp.azure.com:3306/%s?useTimezone=true&serverTimezone=UTC",nombre);
+    public final String usuario="usuario1";
+    public final String contraseña="hola";
     public final String jdbc="com.mysql.cj.jdbc.Driver";
     public void abrirconexion(){
         try{

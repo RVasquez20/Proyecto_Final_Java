@@ -281,7 +281,6 @@
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
                                     <th>Correo</th>
-                                    <th>Pass</th>
                                     <th>Foto</th>
                                     <th>Codigo</th>
                                     <th>Tipo</th>
@@ -302,15 +301,19 @@
                                     DefaultTableModel tabla = new DefaultTableModel();
                                     tabla = usuari.ListaUsuarios();
                                     for (int t = 0; t < tabla.getRowCount(); t++) {
-                                        out.println("<tr data-id=" + tabla.getValueAt(t, 0) + " data-idimagen=" + tabla.getValueAt(t, 6) + ">");
+                                        out.println("<tr data-id=" + tabla.getValueAt(t, 0) + " data-idimagen=" + tabla.getValueAt(t, 5) + ">");
                                         out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
                                         out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
                                         out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
                                         out.println("<td>" + tabla.getValueAt(t, 4) + "</td>");
-                                        out.println("<td>" + tabla.getValueAt(t, 5) + "</td>");
-                                        out.println("<td><img src='sources/" + tabla.getValueAt(t, 6) + "' style='width:100px; height:100px; cursor:pointer' value=" + tabla.getValueAt(t, 6) + " title=" + tabla.getValueAt(t, 6) + " </td>");
+                                        out.println("<td><img src='sources/" + tabla.getValueAt(t, 5) + "' style='width:100px; height:100px; cursor:pointer' value=" + tabla.getValueAt(t, 5) + " title=" + tabla.getValueAt(t, 5) + " </td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 6) + "</td>");
                                         out.println("<td>" + tabla.getValueAt(t, 7) + "</td>");
-                                        out.println("<td>" + tabla.getValueAt(t, 8) + "</td>");
+                                        if (tabla.getValueAt(t, 8) != null) {
+                                            out.println("<td>ON</td>");
+                                        } else {
+                                            out.println("<td>OFF</td>");
+                                        }
                                         if (tabla.getValueAt(t, 9) != null) {
                                             out.println("<td>ON</td>");
                                         } else {
@@ -351,12 +354,7 @@
                                         } else {
                                             out.println("<td>OFF</td>");
                                         }
-                                        if (tabla.getValueAt(t, 17) != null) {
-                                            out.println("<td>ON</td>");
-                                        } else {
-                                            out.println("<td>OFF</td>");
-                                        }
-                                         if (tabla.getValueAt(t, 18)!= null) {
+                                         if (tabla.getValueAt(t, 17)!= null) {
                                             out.println("<td>ON</td>");
                                         } else {
                                             out.println("<td>OFF</td>");

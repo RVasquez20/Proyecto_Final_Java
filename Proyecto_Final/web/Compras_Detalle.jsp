@@ -86,9 +86,16 @@
              
            <label>ID:</label>
            <input type="text" name="txt_id_Compra" id="txt_id_Compra" class="form-control" value="0"  readonly>
-           <label for="lbl_No_Orden" ><b>Numero de Orden</b></label>
-           <input type="text" name="txt_No_Orden" id="txt_No_Orden" class="form-control" placeholder="Ejemplo: 120"  onkeypress="return entero(event);" required>
-               <label for="lbl_Proveedor" ><b>Proveedor</b></label>
+            <%
+       ComprasDetalle obj=new ComprasDetalle();
+       int no=0;
+       no=obj.noorden();
+       no+=1;
+       out.println("<label><b>Numero De Orden</b></label>");
+       out.println(" <input type='hidden' name='txt_No_Ordenh' id='txt_No_Ordenh' class='form-control' value ="+no+" onkeypress='return entero(event);' readonly>");
+       out.println(" <input type='text' name='txt_No_Orden' id='txt_No_Orden' class='form-control' value ="+no+" onkeypress='return entero(event);' readonly>");
+       %>
+                <label for="lbl_Proveedor" ><b>Proveedor</b></label>
                 <select name="ListaProveedores" id="ListaProveedores" class="form-control">
                     <% 
                         Proveedores proveedor = new Proveedores();

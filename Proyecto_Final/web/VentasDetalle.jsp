@@ -93,6 +93,7 @@
        no=obj.nofactnew();
        no+=1;
        out.println("<label><b>Numero De Factura</b></label>");
+        out.println(" <input type='hidden' name='txt_nofacturah' id='txt_nofacturah' class='form-control' value ="+no+" onkeypress='return entero(event);' readonly>");
        out.println(" <input type='text' name='txt_nofactura' id='txt_nofactura' class='form-control' value ="+no+" onkeypress='return entero(event);' readonly>");
        %>
                 <label for="lbl_serie">Serie:</label>

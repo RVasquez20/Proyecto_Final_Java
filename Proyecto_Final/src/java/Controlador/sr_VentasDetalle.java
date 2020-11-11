@@ -72,7 +72,7 @@ public class sr_VentasDetalle extends HttpServlet {
                                productos obj1=new productos();
               int ex=obj1.ex(Integer.parseInt(request.getParameter("drop_Producto")));
                
-           if((ex>=(Integer.parseInt(request.getParameter("txt_Cantidad")))-x)){
+           if((ex>=(Integer.parseInt(request.getParameter("txt_Cantidad")))-x)&&(Integer.parseInt(request.getParameter("txt_Cantidad")))>0){
               if(detalle.Modificar()>0){
                  if(Integer.parseInt(request.getParameter("txt_Cantidad"))>x){
                       

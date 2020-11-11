@@ -274,7 +274,32 @@ public class ComprasDetalle {
               return retorno;
         }
  }
-
+ public int noorden() throws SQLException{
+          int retorno=0;
+          int exi=0;
+     
+        try {
+            cn=new Conexion();
+       
+            String query="SELECT max(no_orden_compra) FROM compras;";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta=cn.conexionbd.createStatement().executeQuery(query);
+             while (consulta.next()) {
+                exi=consulta.getInt("max(no_orden_compra)");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return exi;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+ }
      public Double Total(int id) throws SQLException{
           Double retorno=0.0;
           Double exi=0.0;
@@ -332,4 +357,35 @@ public class ComprasDetalle {
   return tabla;
       
     }
+         
+         
+       public DefaultTableModel datosProveedor(int idcompra){
+ DefaultTableModel tabla = new DefaultTableModel();
+ try{
+     cn = new Conexion();
+     cn.abrirconexion();
+      String query = "select v.idcompra as id,c.proveedor,c.nit,c.direccion,c.telefono from compras as v inner join proveedores as c on c.idproveedor=v.idproveedor where idcompra='"+idcompra+"';";
+      ResultSet consulta = cn.conexionbd.createStatement().executeQuery(query);
+      String encabezado[] = {"id","proveedor","nit","direccion","telefono"};
+      tabla.setColumnIdentifiers(encabezado);
+      String datos[] = new String[5];
+      while (consulta.next()){
+          datos[0] = consulta.getString("id");
+          datos[1] = consulta.getString("proveedor");
+          datos[2] = consulta.getString("nit");
+          datos[3] = consulta.getString("direccion");
+          datos[4] = consulta.getString("telefono");
+          
+          tabla.addRow(datos);
+      
+      }
+      
+     cn.cerrarconexion();
+ }catch(SQLException ex){
+     System.out.println(ex.getMessage());
+ }
+  return tabla;
+      
+    }   
+           
 }

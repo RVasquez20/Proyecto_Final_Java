@@ -79,7 +79,7 @@
                 <div class="content">
                     <div class="inner">
             <h1>Compras Detalle</h1>
-          <button type="button" name="btn_nuevoc" id="btn_nuevoc" class="btn btn-info btn-lg"  onclick="LimpiarComprasDetalle();">Nuevo</button>
+          <button type="button" name="btn_nuevocp" id="btn_nuevocp" class="btn btn-info btn-lg"  onclick="LimpiarComprasDetallep();">Nuevo</button>
           
        <form action="sr_ComprasDetalle" method="POST" class="form-group">
            <input type="hidden" name="txt_id_Compra" id="txt_id_Compra" class="form-control" value =<%=as%> readonly>   
@@ -114,6 +114,59 @@
                 
             </form>
        </div>
+                <div  style="
+    border-color: white;
+    border: white;
+    border-style: solid;
+">
+                      <div class="cliente" style="">
+                    <br>
+                     <%
+       ComprasDetalle obj=new ComprasDetalle();
+       int no=0;
+       no=obj.noorden();
+       out.println("<label><b>Numero De Orden</b></label>");
+       out.println(" <input type='text' name='txt_nf' id='txt_nf' class='form-control' value ="+no+" style='text-align:center;' readonly>");
+       %>
+         <br>
+         <label><b>Datos Del Proveedor:</b></label>
+           <br>
+           <br>
+           <table>
+                         <thead >
+                             <tr class="text-center">
+                                 <th>Proveedor</th>
+                                 <th>NIT</th>
+                                 <th>Direccion</th>
+                                 <th>Telefono</th>
+                             </tr>
+                         </thead>
+                         <tbody id="clientes" style="color:white;">
+                        <%
+                        ComprasDetalle cl = new ComprasDetalle();
+                        DefaultTableModel tablacl = new DefaultTableModel();
+                        tablacl = cl.datosProveedor(as);
+                        for (int t=0;t<tablacl.getRowCount();t++){
+                            out.println("<tr data-idPro="+ tablacl.getValueAt(t, 0) +">");
+                            out.println("<td>"+ tablacl.getValueAt(t, 1) +"</td>");
+                            out.println("<td>"+ tablacl.getValueAt(t, 2) +"</td>");
+                            out.println("<td>"+ tablacl.getValueAt(t, 3) +"</td>");
+                            out.println("<td>"+ tablacl.getValueAt(t, 4) +"</td>");
+                            out.println("</tr>");
+                        
+                        
+                    }
+                    %>
+                         </tbody>
+                     </table>
+                           </div>
+                           
+      <hr style="
+    border-color: white;
+    /* border: white; */
+    border-style: solid;
+">
+<label><b>Productos:</b></label><br><br>
                              <table>
                          <thead>
                              <tr>
@@ -144,13 +197,13 @@
                          </tbody>
                      </table>
                
-                        
+                          <label><b>Total:</b></label>
                         <%
                         ComprasDetalle t = new ComprasDetalle();
                         Double tot=t.Total(as);
-                        out.println("<input type='decimal'  name='total' id='total' class='form-control' value='"+tot+"'>");
+                        out.println("<input type='decimal'  name='total' id='total' class='form-control' value='Q. "+tot+"' style='background-color:transparent;color:#FFFFFF; aline-text:center;'>");
                     %>
-                     
+                              </div> 
                 </div>
                 <nav>
                     <ul>

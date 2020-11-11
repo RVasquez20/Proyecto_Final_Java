@@ -163,37 +163,50 @@ function LimpiarPuestos() {
 
 function LimpiarComprasDetalle() {
     $("#txt_id").val(0);
-    $("#drop_Producto").val(0);
-    $("#txt_PrecioUnitario").val('');
-    $("#txt_Cantidad").val('');
-
+  var porNombre=document.getElementsByName("txt_No_Ordenh")[0].value;
+ $("#txt_No_Orden").val(porNombre);
+ $("#txt_id_Compra").val(0);
     $("#txt_id_Compra").val(0);
     $("#ListaProveedores").val(0);
-    $("#txt_No_Orden").val('');
+
     $("#txt_Fecha_Orden").val('');
     
  $("#lbl_Fecha_Ingreso").hide();
                         $("#txt_Fecha_Ingreso").hide();
-    $("#btn_agregar").show();
+    $("#btn_next").show();
                         $("#btn_modificar").hide();
-                        $("#btn_eliminar").hide();
+};
+function LimpiarComprasDetallep() {
+    $("#txt_id").val(0);
+  
+
+ $("#drop_Producto").val(0);
+    $("#txt_Cantidad").val('');
+    $("#txt_PrecioUnitario").val('');
+
+    $("#txt_Fecha_Orden").val('');
+    
+ $("#lbl_Fecha_Ingreso").hide();
+$("#txt_Fecha_Ingreso").hide();
+$("#btn_fin").show();
+$("#btn_modificarp").hide();
+$("#btn_eliminarp").hide();
+ $("#btn_agregar").show();
 };
 
 function LimpiarVentasDetalle() {
-    $("#txt_id_Ventas").val(0);
+
        $("#txt_idventas").val(0);
-       $("#drop_Producto").val(0);
-       $("#txt_PrecioUnitario").val('');
-       $("#txt_Cantidad").val('');
-       $("#txt_nofactura").val('');
+  var porNombre=document.getElementsByName("txt_nofacturah")[0].value;
+ $("#txt_nofactura").val(porNombre);
        $("#txt_serie").val('');
-       $("#txt_fechafactura").val('');
        $("#txt_idcliente").val(0);
        $("#txt_idempleado").val(0);
-       $("#btn_agregar").show();
+       $("#btn_next").show();
     $("#btn_modificar").hide();
-    $("#btn_eliminar").hide();
     
+     $("#lbl_fechafactura").hide();
+              $("#txt_fechafactura").hide();
  $("#lbl_fechaingreso").hide();
                         $("#txt_fechaingreso").hide();
 };
