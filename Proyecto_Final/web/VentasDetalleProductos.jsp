@@ -134,6 +134,12 @@
        out.println(" <input type='text' name='txt_nf' id='txt_nf' class='form-control' value ="+no+" style='text-align:center;' readonly>");
        %>
          <br>
+       
+       
+       
+       
+       
+       
          <label><b>Datos Del Cliente:</b></label>
            <br>
            <br>
@@ -152,6 +158,7 @@
                         VentasDetalle cl = new VentasDetalle();
                         DefaultTableModel tablacl = new DefaultTableModel();
                         tablacl = cl.datoscliente(as);
+                       
                         for (int t=0;t<tablacl.getRowCount();t++){
                             out.println("<tr data-idcliente="+ tablacl.getValueAt(t, 0) +">");
                             out.println("<td>"+ tablacl.getValueAt(t, 1) +"</td>");
@@ -319,6 +326,7 @@
       idv = target.parent().data('idv'); 
        cantidad=target.parent("tr").find("td").eq(2).html();
        precio = target.parent("tr").find("td").eq(3).html();
+  
   
        $("#drop_Producto").val(idpr);
        $("#txt_id_Ventas").val(idv);

@@ -416,5 +416,30 @@ public class VentasDetalle {
       
     }   
             
- 
+  public String correocliente(int id){
+          String retorno=null;
+          String cant=null;
+     
+        try {
+            cn=new Conexion();
+       
+            String query2="select c.correo_electronico from ventas as v inner join clientes as c on c.idClientes=v.idcliente where idVentas="+id+";";
+            cn.abrirconexion();
+           
+            
+           
+             ResultSet consulta2=cn.conexionbd.createStatement().executeQuery(query2);
+             while (consulta2.next()) {
+                cant=consulta2.getString("correo_electronico");
+               
+                }
+                   
+                    
+            cn.cerrarconexion(); 
+            return cant;
+        } catch (SQLException e) {
+            System.out.println("Error->"+e.getMessage());
+              return retorno;
+        }
+    }
 }

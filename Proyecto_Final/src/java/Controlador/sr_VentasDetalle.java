@@ -14,12 +14,21 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -139,8 +148,7 @@ public class sr_VentasDetalle extends HttpServlet {
                
            if((ex>=(Integer.parseInt(request.getParameter("txt_Cantidad"))))){
                if((detalle.agregar()>0)&&(detalle.ActualizarExistencias()>0)){
-                   
-                 
+
                   v=new VentasDetalle();
                int q=v.lastid();
                request.setAttribute("q", q);
@@ -156,7 +164,65 @@ public class sr_VentasDetalle extends HttpServlet {
               }
              }
              else if("fin".equals(request.getParameter("btn_fin"))){
-                 response.sendRedirect("VentasDetalle.jsp");
+     v=new VentasDetalle();
+               int q=v.lastid();
+               VentasDetalle ob=new VentasDetalle();
+               String email="";
+               Double total=0.0;
+               email=ob.correocliente(q);
+               total=ob.Total(q);
+
+ 
+               
+
+              Properties propiedad = new Properties();
+        propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
+        propiedad.setProperty("mail.smtp.starttls.enable", "true");
+        propiedad.setProperty("mail.smtp.port", "587");
+        propiedad.setProperty("mail.smtp.auth", "true");
+        
+        Session sesion = Session.getDefaultInstance(propiedad);
+        
+        String correoEnvia = "rodrigovasquez201@gmail.com";
+        String contrasena = "rodrigo20junio2001";
+        String destinatario = email;
+        String mensaje = "Factura \n Agradecemos su compra, su total fue de Q."+total;
+        
+        
+        
+        
+        
+        
+        
+        String asunto ="Factura";
+        
+        
+        MimeMessage mail = new MimeMessage(sesion);
+        
+        try {
+            mail.setFrom(new InternetAddress (correoEnvia));
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            mail.setSubject(asunto);
+            mail.setText(mensaje);
+            
+            
+            Transport transporte = sesion.getTransport("smtp");
+            transporte.connect(correoEnvia,contrasena);
+            transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+            transporte.close();
+            
+           
+            
+             response.sendRedirect("VentasDetalle.jsp");
+            
+            
+            
+        } catch (AddressException ex) {
+            System.out.println("Error->"+ex.getMessage());
+        } catch (MessagingException ex) {
+              System.out.println("Error->"+ex.getMessage());
+        }
+         
              }else if ("modificar".equals(request.getParameter("btn_modificar"))){
                   ventas = new Ventas(Integer.parseInt(request.getParameter("txt_idventas")), Integer.parseInt(request.getParameter("txt_nofactura")), Integer.parseInt(request.getParameter("txt_idcliente")), Integer.parseInt(request.getParameter("txt_idempleado")), request.getParameter("txt_serie"),request.getParameter("txt_fechafactura"), request.getParameter("txt_fechaingreso"));
               if(ventas.modificar()>0){

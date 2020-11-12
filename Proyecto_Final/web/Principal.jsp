@@ -45,7 +45,7 @@
     <body class="is-preload responsive" >
         <!-- Wrapper -->
         <div id="wrapper" >
-           <!--     Agregar en cada jsp <script src="//code.tidio.co/ys9dsoww40rdgio9e7hv6vrjyieumr48.js" async></script>-->
+          <script src="//code.tidio.co/d8ipvm98jajzeh4xydviesl213g21mia.js" async></script>
             <!-- Header -->
             <header id="header">
                 <div class="dropdown">
