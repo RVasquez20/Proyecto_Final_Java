@@ -414,19 +414,19 @@
                    Nombres = target.parents("tr").find("td").eq(1).html();
                    Apellidos = target.parents("tr").find("td").eq(2).html();
                    Correo = target.parents("tr").find("td").eq(3).html();
-                   Pass = target.parents("tr").find("td").eq(4).html();
-                   Codigo = target.parents("tr").find("td").eq(6).html();
-                   Tipo = target.parents("tr").find("td").eq(7).html();
-                   clientes = target.parents("tr").find("td").eq(8).html();
-                   compras_detalle = target.parents("tr").find("td").eq(9).html();
-                   empleados = target.parents("tr").find("td").eq(10).html();
-                   marcas = target.parents("tr").find("td").eq(11).html();
-                   productos = target.parents("tr").find("td").eq(12).html();
-                   proveedores = target.parents("tr").find("td").eq(13).html();
-                   puestos = target.parents("tr").find("td").eq(14).html();
-                   ventas_detalle = target.parents("tr").find("td").eq(15).html();
-                   NuevoAdmin = target.parents("tr").find("td").eq(16).html();
-                   Status1 = target.parents("tr").find("td").eq(17).html();
+                  
+                   Codigo = target.parents("tr").find("td").eq(5).html();
+                   Tipo = target.parents("tr").find("td").eq(6).html();
+                   clientes = target.parents("tr").find("td").eq(7).html();
+                   compras_detalle = target.parents("tr").find("td").eq(8).html();
+                   empleados = target.parents("tr").find("td").eq(9).html();
+                   marcas = target.parents("tr").find("td").eq(10).html();
+                   productos = target.parents("tr").find("td").eq(11).html();
+                   proveedores = target.parents("tr").find("td").eq(12).html();
+                   puestos = target.parents("tr").find("td").eq(13).html();
+                   ventas_detalle = target.parents("tr").find("td").eq(14).html();
+                   NuevoAdmin = target.parents("tr").find("td").eq(15).html();
+                   Status1 = target.parents("tr").find("td").eq(16).html();
                    if(clientes==="ON"){
                        $("#drop_clientes").val("on");
                    }else{
@@ -493,7 +493,6 @@
                    $("#text_apellidos").attr('readonly',true);
                    $("#text_correo").val(Correo);
                    $("#text_correo").attr('readonly',true);
-                   $("#text_pass").val(Pass);
                    $("#text_pass").attr('readonly',true);
                    $("#text_codigo").val(Codigo);
                    $("#text_codigo").attr('readonly',true);

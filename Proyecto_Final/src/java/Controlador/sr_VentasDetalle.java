@@ -146,7 +146,7 @@ public class sr_VentasDetalle extends HttpServlet {
               productos obj1=new productos();
               int ex=obj1.ex(Integer.parseInt(request.getParameter("drop_Producto")));
                
-           if((ex>=(Integer.parseInt(request.getParameter("txt_Cantidad"))))){
+           if((ex>=(Integer.parseInt(request.getParameter("txt_Cantidad"))))&&((Integer.parseInt(request.getParameter("txt_Cantidad"))))>0){
                if((detalle.agregar()>0)&&(detalle.ActualizarExistencias()>0)){
 
                   v=new VentasDetalle();
